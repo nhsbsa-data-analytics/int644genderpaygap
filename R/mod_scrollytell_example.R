@@ -116,6 +116,8 @@ mod_scrollytell_example_ui <- function(id) {
 mod_scrollytell_example_server <- function(id) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
+    
+    group_lvl = point_col = NULL
 
     # create the chart object
     output$example_scroll_chart <- highcharter::renderHighchart({
