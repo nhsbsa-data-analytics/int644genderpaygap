@@ -5,3 +5,13 @@
 .DS_Store
 rsconnect
 .Renviron
+# Ignore data files of various formats.
+# A non-exaustive list. 
+# Common text files that may contain data #
+###########################################
+*.[cC][sS][vV]
+*.[tT][xX][tT]
+*.[sS][qQ][lL]
+# Excel files (including macros and templates) #
+################################################
+*.[xX][lL][sS][xXmMtT]?
