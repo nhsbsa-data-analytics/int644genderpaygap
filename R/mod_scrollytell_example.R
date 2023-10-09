@@ -158,8 +158,8 @@ mod_scrollytell_example_server <- function(id) {
         highcharter::hchart(
           type = "scatter",
           highcharter::hcaes(
-            x = Sepal.Length,
-            y = Sepal.Width,
+            x = .data$Sepal.Length,
+            y = .data$Sepal.Width,
             group = group_lvl,
             color = point_col
           )
