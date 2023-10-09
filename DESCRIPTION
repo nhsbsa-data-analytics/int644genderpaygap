@@ -1,10 +1,11 @@
 Package: nhsbsaGPG
 Title: NHSBSA Gender Pay Gap Report
 Version: 0.0.0.9000
-Authors@R: person("Kayoung", "Goffe", 
-          "Kayoung.Goffe@nhsbsa.nhs.uk", 
-           role = c("aut", "cre"))
-Maintainer: Kayoung Goffe <kayoung.goffe@nhsbsa.nhs.uk>
+Authors@R: c(person("Kayoung", "Goffe", role = c("aut", "cre"),
+                     email = "Kayoung.Goffe@nhsbsa.nhs.uk"),
+              person("Kayoung", "Goffe", role = "ctb",
+                     email = "Kayoung.Goffe@nhsbsa.nhs.uk"))
+Maintainer: Kayoung Goffe <Kayoung.Goffe@nhsbsa.nhs.uk>
 Description: NHSBSA gender pay gap report template.
 License: Apache License (>= 2)
 Depends:
