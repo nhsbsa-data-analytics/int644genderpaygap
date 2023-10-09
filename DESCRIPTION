@@ -4,6 +4,7 @@ Version: 0.0.0.9000
 Authors@R: person("Kayoung", "Goffe", 
           "Kayoung.Goffe@nhsbsa.nhs.uk", 
            role = c("aut", "cre"))
+Maintainer: Kayoung Goffe <kayoung.goffe@nhsbsa.nhs.uk>
 Description: NHSBSA gender pay gap report template.
 License: Apache License (>= 2)
 Depends:
