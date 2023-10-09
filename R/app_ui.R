@@ -60,7 +60,7 @@ golem_add_external_resources <- function() {
 
   tags$head(
     favicon("assets/favicons/favicon"),
-    tags$title("nhsbsaShinyR"),
+    tags$title("nhsbsaGPG"),
 
     # Add here other external resources
     # for example, you can add shinyalert::useShinyalert()
