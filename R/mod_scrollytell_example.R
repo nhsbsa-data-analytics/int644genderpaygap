@@ -117,8 +117,9 @@ mod_scrollytell_example_server <- function(id) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
     
-    group_lvl = point_col = NULL
-
+    group_lvl <- NULL
+    point_col <- NULL
+    
     # create the chart object
     output$example_scroll_chart <- highcharter::renderHighchart({
       # require the scroll input to prevent errors on initialisation
