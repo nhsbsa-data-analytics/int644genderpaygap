@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(nhsbsaShinyR)
+library(nhsbsaGPG)
 
 test_check("nhsbsaGPG")

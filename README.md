@@ -20,7 +20,7 @@ There are also github actions to check that code conforms to `lintr` (https://li
 The package is structured as below. See the "Using this template" section for further details of the files.
 
 ```
-nhsbsaShinyR
+nhsbsaGPGR
 ├── .git                                    # Git folder, should never need to even look in here!
 ├── .github                                 # Workflows for github actions - lintr and R CMD check
 ├── .gitignore                              # Ensure that you ignore the data folder once template is reused
@@ -49,7 +49,7 @@ nhsbsaShinyR
 ├── LICENSE.md                              # Apache
 ├── man                                     # Package documentation, created automatically by roxygen2 from your initial comment blocks
 ├── NAMESPACE                               # Automatically generated documentation by roxygen2
-├── nhsbsaShinyR.Rproj                      # R Project file
+├── nhsbsaGPG.Rproj                      # R Project file
 ├── R                                       # R code for the dashboard
 │   ├── _disable_autoload.R                 # Golem file (no modification)
 │   ├── app_config.R                        # Golem file
@@ -58,7 +58,7 @@ nhsbsaShinyR
 │   ├── golem_utils_ui.R                    # Useful utility functions for UI
 │   ├── mod_*.R                             # Example Shiny modules
 |   ├── nhs_*.R                             # NHS styled UI components
-|   ├── nhsbsaShinyR.R                      # Package documentation file
+|   ├── nhsbsaGPG.R                      # Package documentation file
 │   ├── run_app.R                           # Golem file (no modification)
 │   ├── utils_accessibility.R               # Custom NHSBSA highcharter theme
 │   └── utils-pipe.R                        # Magrittr %>% operator
@@ -154,7 +154,7 @@ Don't ever modify these, `roxygen2` will take care of these for you. If you want
 
 Don't ever modify this, `roxygen2` will take care of this for you. To import a package, make sure it is added to the `Imports` field of `DESCRIPTION`. You should be namespacing any functions you use that are not in the `base` package, with the package added to `DESCRIPTION` `Imports`. If you need to add something that is not suited to namespacing, e.g. `rlang` `:=` and `.data` operators, add it to the package documentation file in `R/your_package_name.R`, like `@importFrom rlang := .data`.
 
-### `nhsbsaShinyR.Rproj`
+### `nhsbsaGPG.Rproj`
 
 RStudio R project file, should be renamed to your package name.
 

@@ -54,7 +54,7 @@ mod_chart_example_server <- function(id) {
     mod_nhs_download_server(
       id = "download_test",
       filename = "test.csv",
-      export_data = nhsbsaShinyR::faithful
+      export_data = nhsbsaGPG::faithful
     )
   })
 }
