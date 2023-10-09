@@ -44,7 +44,7 @@ usethis::use_test( "app" )
 # Documentation
 
 ## Vignette ----
-usethis::use_vignette("nhsbsaShinyR")
+usethis::use_vignette("nhsbsaGPG")
 devtools::build_vignettes()
 
 ## Code Coverage----

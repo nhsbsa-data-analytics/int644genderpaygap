@@ -9,4 +9,4 @@
 library(testthat)
 library(nhsbsaShinyR)
 
-test_check("nhsbsaShinyR")
+test_check("nhsbsaGPG")
