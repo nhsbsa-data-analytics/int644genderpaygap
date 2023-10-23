@@ -26,7 +26,8 @@ Imports:
     forcats (>= 1.0.0),
     futile.logger (>= 1.4.3),
     stringr,
-    formatR
+    formatR,
+    tidyr
 Suggests:
     pkgload,
     testthat (>= 3.0.0),
