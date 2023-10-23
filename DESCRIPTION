@@ -27,7 +27,8 @@ Imports:
     futile.logger (>= 1.4.3),
     stringr,
     formatR,
-    tidyr
+    tidyr,
+    purrr
 Suggests:
     pkgload,
     testthat (>= 3.0.0),
