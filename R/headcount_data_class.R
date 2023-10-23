@@ -1,26 +1,29 @@
-#' @title tidy data set for first headcount related two graphs.
+#' @title S3 headcount class to create number of headcount by gender and also 
+#' gender and AFC pay band.#' 
 #'
 #' @description \code{headcount_data} is the class used for the creation of
-#' #' first two headcount related figures.
+#' first two headcount related figures in the GPG report.
 #'
 #' @details The \code{headcount_data} class expects a \code{data.frame} with at
 #' least five columns: FINANCIAL_YEAR, GENDER, PAY_GRADE_NAME, FTE_GROUP, HEADCOUNT. Each
 #' row represents aggregated headcount by four columns.
 #'
-#' Once initiated, the class has five slots: \code{df}: the basic \code{data.frame},
-#' \code{colnames}: a character vector containing the column names from the
-#' \code{df}, \code{reporting_headcount}: a numeric vector containing
-#' reporting financial year's headcount, \code{diffs}: a numeric vector
-#' containing differences from previous financial year headcount
-#' to current reporting financial year headcount, \code{ending_fy}: a character
-#' vector containing ending reporting period (e.g. 31 March 2022)
+#' Once initiated, the class has seven slots: 
+#' \code{df}: data frame \n
+#' \code{overview_gender}: data frame \n
+#' \code{overview_afc}: data frame \n
+#' \code{overview_fte}: data frame \n
+#' \code{reporting_headcount}: a numeric vector containing reporting financial
+#' year's headcount \n
+#' \code{diffs}: a numeric vector containing differences from previous \n
+#' financial year headcount to current reporting financial year headcount \n
+#' \code{ending_fy}: a character vector containing ending reporting period  
+#' (e.g. 31 March 2022). This uses for introduction paragraph
 #'
 #'
 #' @param x Input data frame.
-#' @param log_level The severity level at which log messages are written from
-#' least to most serious: TRACE, DEBUG, INFO, WARN, ERROR, FATAL. Default is
-#' level is INFO. See \code{?flog.threshold()} for additional details.
-#' @param eda If TRUE an graphical data analysis is conducted for a human to check.
+#' @param log_level keep it WARN
+#' @param eda If TRUE base R plot shows in the Viewer
 #'
 #' @return If the class is not instantiated correctly, nothing is returned.
 #'
@@ -33,29 +36,23 @@
 #' @export
 
 
-headcount_data <- function(x, log_level = futile.logger::WARN,
+headcount_data <- function(x, 
+                           log_level = futile.logger::WARN,
                            eda = FALSE) {
+  
   # Set logger severity threshold, defaults to WARN
   futile.logger::flog.threshold(log_level)
 
 
   # Checks
-  futile.logger::flog.info("Initiating HEADCOUNT_data class.
-                           \n\nExpects a data.frame with at
+  futile.logger::flog.info("Initiating headcount_data class.
+                           \n\nIt expects a data.frame with at
                            least five columns: FINANCIAL_YEAR, gender,
                            PAY_GRADE_NAME, FTE_GROUP and HEADCOUNT.
                            Each row represents an aggregated headcount
-                           from four columns.
-                           This class is given by ?headcount_data().")
+                           based on four columns.")
 
-  # Integrity checks on incoming data ----
 
-  # Check the structure of the data is as expected: data.frame containing no
-  # missing values and at least five columns, containing FINANCIAL_YEAR,
-  # gender, PAY_GRADE_NAME, FTE_GROUP and HEADCOUNT.
-
-  futile.logger::flog.info("\n*** Running integrity checks on input dataframe (x):")
-  futile.logger::flog.debug("\nChecking input is properly formatted...")
 
   futile.logger::flog.debug("Checking x is a data.frame...")
   if (!is.data.frame(x)) {
@@ -102,19 +99,15 @@ headcount_data <- function(x, log_level = futile.logger::WARN,
   futile.logger::flog.debug("Checking for the correct number of rows...")
   if (nrow(x) < 260) {
     futile.logger::flog.warn("x does not appear to be well formed. nrow(x) should be
-                             greater than 260 as of 2022/23 report.")
+                             greater than 180 (5 year * gender * fte * afc) 
+                             as of 2021/22 report.")
   }
 
 
 
-  futile.logger::flog.info("...passed")
-
-
   # Check sensible range for year
-
   futile.logger::flog.debug("Checking beginning financial years in a sensible
                             range e.g.(2017:2022)...")
-
 
 
   if (any(as.numeric(stringr::str_sub(x$FINANCIAL_YEAR, 1, 4)) < 2017)) {
@@ -123,21 +116,13 @@ headcount_data <- function(x, log_level = futile.logger::WARN,
   }
 
 
-
-  futile.logger::flog.info("...passed")
-
-  # Reset threshold to package default
-  futile.logger::flog.threshold(futile.logger::INFO)
-  # Reset so that log is appended to console (the package default)
-  futile.logger::flog.appender(futile.logger::appender.console())
+  futile.logger::flog.info("...check done..")
 
   # Message required to pass a test
-  message("Checks completed successfully:
-          object of 'headcount_data' class produced!")
+  message("Checks completed: 'headcount_data' S3 class created.")
 
   # EDA
-  # some people like to eyeball stuff
-  # number of HEADCOUNT per financial year
+  # number of HEADCOUNT per financial year - expect to increase?
   if (eda == TRUE) {
     agg_data <- aggregate(HEADCOUNT ~ FINANCIAL_YEAR, x, sum)
     barplot(agg_data$HEADCOUNT,
@@ -148,8 +133,6 @@ headcount_data <- function(x, log_level = futile.logger::WARN,
     )
   }
 
-
-  # Calculate the latest and previous years
 
   # Calculate the latest and previous years
   # This values are required to add to the interactive document
@@ -167,10 +150,10 @@ headcount_data <- function(x, log_level = futile.logger::WARN,
 
   # First aggregate by financial year
   agg_data <- x |>
-    filter(FINANCIAL_YEAR %in% c(latest_fy, previous_fy)) |>
-    group_by(FINANCIAL_YEAR) |>
-    summarise(TOTAL_HEADCOUNT = sum(HEADCOUNT, na.rm = TRUE)) |>
-    arrange(FINANCIAL_YEAR)
+    dplyr::filter(FINANCIAL_YEAR %in% c(latest_fy, previous_fy)) |>
+    dplyr::group_by(FINANCIAL_YEAR) |>
+    dplyr::summarise(TOTAL_HEADCOUNT = sum(HEADCOUNT, na.rm = TRUE)) |>
+    dplyr::arrange(FINANCIAL_YEAR)
 
   # Extract the values
   reporting_headcount <-
@@ -182,14 +165,38 @@ headcount_data <- function(x, log_level = futile.logger::WARN,
 
   ending_fy <- as.character(start_latest_year + 1)
 
-
+  # Attach data frame: headcount by GENDER
+  overview_gender <- x |> 
+    dplyr::group_by(FINANCIAL_YEAR, GENDER) |> 
+    dplyr::summarise(HEADCOUNT = sum(HEADCOUNT, na.rm = TRUE),
+                      .groups = "drop") |>
+    tidyr::pivot_wider(names_from = GENDER,
+                       values_from = HEADCOUNT)
+  
+  # Attach data frame: headcount by GENDER & PAY_GRADE_NAME
+  overview_afc <- x |> 
+    dplyr::group_by(FINANCIAL_YEAR, GENDER, PAY_GRADE_NAME) |> 
+    dplyr::summarise(HEADCOUNT = sum(HEADCOUNT, na.rm = TRUE),
+                     .groups = "drop") 
+  
+  # Attach data frame: headcount by GENDER & FTE
+  overview_fte <- x |> 
+    dplyr::group_by(FINANCIAL_YEAR, GENDER, FTE_GROUP) |> 
+    dplyr::summarise(HEADCOUNT = sum(HEADCOUNT, na.rm = TRUE),
+                     .groups = "drop") |> 
+    tidyr::pivot_wider(names_from = c(GENDER, FTE_GROUP),
+                       values_from = HEADCOUNT)
+    
 
   # Define the class here ----
+  # It will use to create highchart line graph
 
   structure(
     list(
       df = x,
-      colnames = colnames(x),
+      overview_gender = overview_gender,
+      overview_afc = overview_afc,
+      overview_fte = overview_fte,
       reporting_headcount = reporting_headcount,
       diffs = diffs,
       ending_fy = ending_fy
