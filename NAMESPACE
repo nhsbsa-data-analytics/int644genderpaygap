@@ -2,6 +2,7 @@
 
 export("%>%")
 export(gender_profile)
+export(gpg_data)
 export(h1_tabstop)
 export(h2_tabstop)
 export(h3_tabstop)

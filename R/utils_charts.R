@@ -1,37 +1,36 @@
 #' @title Highcharter line chart to show the number of headcount by financial
 #' year by gender.
 #'
-#' @description \code{headcount_data} is the S3 class used for gender related
-#' summary of workforce
+#' @description \code{gpg_data} is the S3 class used for trend
 #'
 #'
 #' @return Returns a highchart or htmlwidget object.
 #'
-#' @examples
-#'
-#' workforce <- nhsbsaGPG::headcount_data(nhsbsaGPG::headcount)
-#' nhsbsaGPG::gender_profile(workforce)
+#' @examples \dontrun{
+#' workforce <- nhsbsaGPG::gpg_data(nhsbsaGPG::afc_staff)
+#' nhsbsaGPG::gender_profile(workforce$df_hdcnt_gender)
+#' } 
 #'
 #' @export
-#' @param x Input data frame from \code{headcount_data} S3 class object.
-#' @param xvar "Financial Year", default
+#' @param x Input data frame from \code{gpg_data} S3 class object.
+#' @param xvar "period", default
 #' @param yvars data frame converts to list and each list element to create line
-#' @param series_names If user wants to give different series name for
-#' highchart legend
+#' @param series_names If user wants to give different series name for highchart legend
 #' @param yaxis_title Title of y axis
 #' @param yaxis_label Indication of percentage or number
 #' @param show_legend TRUE default
-#' @param line_style Control line style either Solid or DashDot
-#' @param series_alpha Control opacity
-#'
-#' @import nhsbsa-data-analytics/nhsbsaR
+#' 
+#' @importFrom aggregate
+#' @importFrom barplot 
+#' 
 #'
 gender_profile <- function(x,
-                           xvar = "FINANCIAL_YEAR",
+                           xvar = "period",
                            yvars,
                            series_names,
                            yaxis_title,
-                           yaxis_label 
+                           yaxis_label,
+                           show_legend = TRUE
                            ){
   out <- tryCatch(
     expr = {
@@ -57,7 +56,7 @@ gender_profile <- function(x,
             data = data,
             type = "line",
             highcharter::hcaes(
-              x = .data[[xvar]], # default financial year
+              x = .data[[xvar]], # default period3
               y = .data[[yvar]] # Female for example
             ),
             name = series_name # these labels will show in legend

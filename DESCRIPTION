@@ -16,23 +16,18 @@ Imports:
     highcharter,
     htmltools,
     magrittr,
-    rlang,
     nhsbsaR,
     scrollytell,
     shiny,
     shinyjs,
     dplyr (>= 1.1.3),
-    dbplyr (>= 2.3.3),
-    forcats (>= 1.0.0),
     futile.logger (>= 1.4.3),
-    stringr,
-    formatR,
-    tidyr,
-    purrr
+    stringr
 Suggests:
     pkgload,
     testthat (>= 3.0.0),
-    usethis
+    usethis,
+    tidyr
 Remotes:
     nhsbsa-data-analytics/nhsbsaR,
     statistiekcbs/scrollytell

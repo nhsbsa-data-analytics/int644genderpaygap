@@ -7,43 +7,39 @@ year by gender.}
 \usage{
 gender_profile(
   x,
-  xvar = "FINANCIAL_YEAR",
+  xvar = "period",
   yvars,
   series_names,
   yaxis_title,
-  yaxis_label
+  yaxis_label,
+  show_legend = TRUE
 )
 }
 \arguments{
-\item{x}{Input data frame from \code{headcount_data} S3 class object.}
+\item{x}{Input data frame from \code{gpg_data} S3 class object.}
 
-\item{xvar}{"Financial Year", default}
+\item{xvar}{"period", default}
 
 \item{yvars}{data frame converts to list and each list element to create line}
 
-\item{series_names}{If user wants to give different series name for
-highchart legend}
+\item{series_names}{If user wants to give different series name for highchart legend}
 
 \item{yaxis_title}{Title of y axis}
 
 \item{yaxis_label}{Indication of percentage or number}
 
 \item{show_legend}{TRUE default}
-
-\item{line_style}{Control line style either Solid or DashDot}
-
-\item{series_alpha}{Control opacity}
 }
 \value{
 Returns a highchart or htmlwidget object.
 }
 \description{
-\code{headcount_data} is the S3 class used for gender related
-summary of workforce
+\code{gpg_data} is the S3 class used for trend
 }
 \examples{
-
-workforce <- nhsbsaGPG::headcount_data(nhsbsaGPG::headcount)
-nhsbsaGPG::gender_profile(workforce)
+\dontrun{
+workforce <- nhsbsaGPG::gpg_data(nhsbsaGPG::afc_staff)
+nhsbsaGPG::gender_profile(workforce$df_hdcnt_gender)
+} 
 
 }

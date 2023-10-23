@@ -9,11 +9,12 @@
 #' directorate.
 #'
 #' Once initiated, the class has six slots:
-#' \code{df}: raw data frame \n
-#' \code{df_hdcnt}: data frame contains headcount by period \n
-#' \code{df_hdcnt_afc}: data frame contains headcount by afc band \n
-#' \code{df_hdcnt_dir}: data frame contains headcount by directorate \n
-#' \code{df_hrrate}: data frame contains hourly rate by gender for each grade \n
+#' \code{df}: raw data frame 
+#' \code{df_hdcnt}: data frame contains headcount by period 
+#' \code{df_hdcnt_gender}: data frame contains headcount by gender by period 
+#' \code{df_hdcnt_afc}: data frame contains headcount by afc band 
+#' \code{df_hdcnt_dir}: data frame contains headcount by directorate 
+#' \code{df_hrrate}: data frame contains hourly rate by gender for each grade 
 #' \code{ending_fy}: a character vector containing ending reporting period
 #' (e.g. 31 March 2023). This uses for introduction paragraph
 #'
@@ -25,10 +26,9 @@
 #'
 #' @return If the class is not instantiated correctly, nothing is returned.
 #'
-#' @examples
-#'
+#' @examples 
+#'  
 #' library(nhsbsaGPG)
-#'
 #' df <- gpg_data(afc_staff)
 #'
 #' @export
@@ -157,6 +157,14 @@ gpg_data <- function(x,
     agg_data$headcount[agg_data$period == latest_fy]
 
   ending_fy <- as.character(start_latest_year + 1)
+  
+  # data frame: aggregate headcount by gender by period
+  df_hdcnt_gender <- x |>
+    dplyr::group_by(period,gender) |>
+    dplyr::summarise(headcount = sum(headcount, na.rm = TRUE)) |>
+    dplyr::arrange(period)
+  
+  
 
   # data frame: aggregate headcount by period and AFC band
   df_hdcnt_afc <- x |>
@@ -209,6 +217,7 @@ gpg_data <- function(x,
     list(
       df = x,
       df_hdcnt = df_hdcnt,
+      df_hdcnt_gender = df_hdcnt_gender,
       df_hdcnt_afc = df_hdcnt_afc,
       df_hdcnt_dir = df_hdcnt_dir,
       df_hrrate = df_hrrate,
