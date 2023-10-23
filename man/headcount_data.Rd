@@ -2,18 +2,17 @@
 % Please edit documentation in R/headcount_data_class.R
 \name{headcount_data}
 \alias{headcount_data}
-\title{tidy data set for first headcount related two graphs.}
+\title{S3 headcount class to create number of headcount by gender and also 
+gender and AFC pay band.#'}
 \usage{
 headcount_data(x, log_level = futile.logger::WARN, eda = FALSE)
 }
 \arguments{
 \item{x}{Input data frame.}
 
-\item{log_level}{The severity level at which log messages are written from
-least to most serious: TRACE, DEBUG, INFO, WARN, ERROR, FATAL. Default is
-level is INFO. See \code{?flog.threshold()} for additional details.}
+\item{log_level}{keep it WARN}
 
-\item{eda}{If TRUE an graphical data analysis is conducted for a human to check.}
+\item{eda}{If TRUE base R plot shows in the Viewer}
 }
 \value{
 If the class is not instantiated correctly, nothing is returned.
@@ -27,14 +26,16 @@ The \code{headcount_data} class expects a \code{data.frame} with at
 least five columns: FINANCIAL_YEAR, GENDER, PAY_GRADE_NAME, FTE_GROUP, HEADCOUNT. Each
 row represents aggregated headcount by four columns.
 
-Once initiated, the class has five slots: 
-\code{df}: dataframe
-\code{colnames}: a character vector containing the column names from the {df}
-\code{reporting_headcount}: a numeric vector containing reporting financial 
-year's headcount
-\code{diffs}: a numeric vector containing differences from previous 
-financial year headcount to current reporting financial year headcount
-\code{ending_fy}: a character vector containing ending reporting period 
+Once initiated, the class has seven slots: 
+\code{df}: data frame \n
+\code{overview_gender}: data frame \n
+\code{overview_afc}: data frame \n
+\code{overview_fte}: data frame \n
+\code{reporting_headcount}: a numeric vector containing reporting financial
+year's headcount \n
+\code{diffs}: a numeric vector containing differences from previous \n
+financial year headcount to current reporting financial year headcount \n
+\code{ending_fy}: a character vector containing ending reporting period  
 (e.g. 31 March 2022). This uses for introduction paragraph
 }
 \examples{

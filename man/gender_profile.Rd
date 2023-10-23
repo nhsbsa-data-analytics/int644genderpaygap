@@ -2,18 +2,43 @@
 % Please edit documentation in R/utils_charts.R
 \name{gender_profile}
 \alias{gender_profile}
-\title{line chart to show the number of headcount by financial year by gender.}
+\title{Highcharter line chart to show the number of headcount by financial
+year by gender.}
 \usage{
-gender_profile(x)
+gender_profile(
+  x,
+  xvar = "FINANCIAL_YEAR",
+  yvars,
+  series_names,
+  yaxis_title,
+  yaxis_label
+)
 }
 \arguments{
-\item{x}{Input headcount_data S3 class object.}
+\item{x}{Input data frame from \code{headcount_data} S3 class object.}
+
+\item{xvar}{"Financial Year", default}
+
+\item{yvars}{data frame converts to list and each list element to create line}
+
+\item{series_names}{If user wants to give different series name for
+highchart legend}
+
+\item{yaxis_title}{Title of y axis}
+
+\item{yaxis_label}{Indication of percentage or number}
+
+\item{show_legend}{TRUE default}
+
+\item{line_style}{Control line style either Solid or DashDot}
+
+\item{series_alpha}{Control opacity}
 }
 \value{
 Returns a highchart or htmlwidget object.
 }
 \description{
-\code{headcount_data} is the S3 class used for gender related 
+\code{headcount_data} is the S3 class used for gender related
 summary of workforce
 }
 \examples{

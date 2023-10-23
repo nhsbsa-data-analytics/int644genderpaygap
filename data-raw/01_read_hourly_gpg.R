@@ -84,7 +84,16 @@ afc_staff <- afc |>
   ) |>
   left_join(lookup,
     by = "pay_scale"
-  )
+  ) |> 
+  select(-employee_number) |> 
+# Data quality error July 2013 Archive employee org is wrong, manually edited
+  mutate(org_l3 = ifelse(org_l3 == 'July 2013 Archive', "914 BSA Finance, Commercial and Estates L3", org_l3),
+         directorate = stringr::str_replace_all(
+           org_l3, c("^914 BSA " = "", " L3" = "")),
+         directorate = stringr::str_trim(directorate),
+         headcount = 1) |> 
+  select(period, gender, headcount,hourly_rate, quartile, fte, afc_band, directorate)
+  
 
 # Keep three main data frame and it will be used to create S3 class
 usethis::use_data(paygap, overwrite = TRUE)
@@ -93,4 +102,4 @@ usethis::use_data(afc_staff, overwrite = TRUE)
 
 
 
-rm(c(dfs, afc, staff))
+rm(dfs, afc, staff)
