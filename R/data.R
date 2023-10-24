@@ -1,7 +1,7 @@
-#' NHSBSA employee staff_afc
+#' NHSBSA employee afc_staff
 #'
 #' A dataset containing NHSBSA employee hourly pay
-#' by reporting period split by gender, AFC band, directorate.
+#' by reporting period split by gender, FTE, AFC band, directorate.
 #' \itemize{
 #'   \item period. 2018/19, 2019/20 etc character
 #'   \item gender. Male or Female, character

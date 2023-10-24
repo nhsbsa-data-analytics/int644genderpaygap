@@ -104,6 +104,22 @@ usethis::use_data(paygap, overwrite = TRUE)
 usethis::use_data(quartile, overwrite = TRUE)
 usethis::use_data(afc_staff, overwrite = TRUE)
 
+# delete all the files in data_temp as they only stay in azure storage
 
+# Specify the folder path
+folder_path <- "./data_temp" 
+
+# List all files in the directory
+files_to_delete <- list.files(path = folder_path, full.names = TRUE)
+
+# Remove all files
+result <- file.remove(files_to_delete)
+
+# Check if all files were deleted successfully
+if (all(result)) {
+  cat("All files deleted successfully.\n")
+} else {
+  cat("Some files could not be deleted.\n")
+}
 
 rm(dfs, afc, staff)
