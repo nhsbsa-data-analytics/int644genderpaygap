@@ -67,13 +67,5 @@ mod_introduction_server <- function(id) {
       nhsbsaGPG::gpg_data(afc_staff)$ending_fy
     })
 
-    nhsbsaGPG::paygap
-    nhsbsaGPG::quartile
-
-
-
-
-
-
   })
 }
