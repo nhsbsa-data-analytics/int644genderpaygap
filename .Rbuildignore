@@ -11,3 +11,5 @@
 ^gitleaks.toml$
 ^\.github$
 ^\.lintr$
+^data_temp$
+^\./R/data\.r$
