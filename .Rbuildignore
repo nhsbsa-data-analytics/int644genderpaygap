@@ -12,4 +12,4 @@
 ^\.github$
 ^\.lintr$
 ^data_temp$
-^R\data.R
+^\./R/data\.r$
