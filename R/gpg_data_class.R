@@ -26,10 +26,11 @@
 #'
 #' @return If the class is not instantiated correctly, nothing is returned.
 #'
-#' @examples
+#' @examples \dontrun{
 #'
 #' library(nhsbsaGPG)
 #' df <- gpg_data(afc_staff)
+#' }
 #'
 #' @export
 
