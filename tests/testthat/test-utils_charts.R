@@ -1,7 +1,7 @@
 library(tidyr)
 library(dplyr)
 
-df <- gpg_data(afc_staff)
+df <- gpg_data(nhsbsaGPG::afc_staff)
 x <- df$df_hdcnt_gender |>
   tidyr::pivot_wider(
     names_from = gender,
@@ -11,8 +11,8 @@ x <- df$df_hdcnt_gender |>
 
 y <- nhsbsaGPG::paygap
 
-z <- df$df_hdcnt_afc |>
-  filter(period == "2021/22") |>
+z <- df$df_hdcnt_afc |> 
+  filter(period == '2021/22') |> 
   mutate(headcount = headcount * ifelse(gender == "Male", 1, -1))
 
 testthat::test_that("gpg_trend function runs without errors", {
@@ -47,8 +47,8 @@ testthat::test_that("gpg_trend takes list as an input", {
 
 testthat::test_that("gpg_trend input data frame must contain Female,
                     Male column", {
-                      expect_equal(length(grep("Female|Male", names(x))), 2)
-                    })
+  expect_equal(length(grep("Female|Male", names(x))), 2)
+})
 
 
 testthat::test_that("gpg_trend input data frame must contain period column", {
@@ -69,14 +69,22 @@ testthat::test_that("gpg_trend function runs with paygap dataframe", {
 
 
 testthat::test_that("gpg_pyramid function runs without error", {
-  expect_silent(gpg_pyramid(z, xvar = "afc_band", yvar = "headcount",
-    yaxis_title = "Headcount"
+  expect_silent(gpg_pyramid(z ,
+                          xvar = "afc_band",
+                          yvar = "headcount",
+                          yaxis_title = "Headcount"
   ))
 })
 
 testthat::test_that("gpg_stack function runs without error", {
-  expect_silent(gpg_stack(quartile |> filter(period == "2021/22"),
-    xvar = "quartile", yvar = "percent", groupvar = "ender",
-    yaxis_title = "Males and females in pay quartile"
+  expect_silent(gpg_stack(quartile |> filter(period == "2021/22") ,
+                            xvar = "quartile",
+                            yvar = "percent",
+                            groupvar = "gender",
+                            yaxis_title = "Males and females in pay quartile"
   ))
 })
+
+
+
+

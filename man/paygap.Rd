@@ -12,14 +12,15 @@ paygap
 }
 \description{
 A dataset containing NHSBSA employee paygap
-Directly pulled from ESR dashboard (NHS National Returns) 
+Directly pulled from ESR dashboard (NHS National Returns)
 gender, average hourly rate, median hourly rate and pay gap%
 }
 \details{
 \itemize{
    \item period. 2018/19, 2019/20 etc character
   \item avg_hr_gpg. Mean gender pay gap % based on male full-pay relevant employees
-  \item median_hr_gpg. Median gender pay gap % based on male full-pay relevant employees
-  }
+  \item median_hr_gpg. Median gender pay gap % based
+  on male full-pay relevant employees
+}
 }
 \keyword{datasets}

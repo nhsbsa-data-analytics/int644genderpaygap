@@ -23,7 +23,7 @@ by quartiles
   \item male. number of male employees in each quartile
   \item quartile. split hourly_rate by quartile by gender
  }
- 
+
  @docType data
  @keywords datasets
  @name quartile

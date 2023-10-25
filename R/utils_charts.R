@@ -115,7 +115,7 @@ gpg_trend <- function(x,
 
 gpg_pyramid <- function(x, xvar = "afc_band", yvar, yaxis_title) {
   out <- tryCatch(
-    exp = {
+    expr = {
       data <- x
       # Create chart object
       plt <- data |>
@@ -194,7 +194,7 @@ gpg_pyramid <- function(x, xvar = "afc_band", yvar, yaxis_title) {
 
 gpg_stack <- function(x, xvar, yvar, groupvar, yaxis_title) {
   out <- tryCatch(
-    exp = {
+    expr = {
       data <- x
       # Create chart object
       plt <- data |>

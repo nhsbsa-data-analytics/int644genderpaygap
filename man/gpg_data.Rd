@@ -27,18 +27,20 @@ least seven columns: period, gender, hourly_rate, quartile, fte, afc_band,
 directorate.
 
 Once initiated, the class has six slots:
-\code{df}: raw data frame 
-\code{df_hdcnt}: data frame contains headcount by period 
-\code{df_hdcnt_gender}: data frame contains headcount by gender by period 
-\code{df_hdcnt_afc}: data frame contains headcount by afc band 
-\code{df_hdcnt_dir}: data frame contains headcount by directorate 
-\code{df_hrrate}: data frame contains hourly rate by gender for each grade 
+\code{df}: raw data frame
+\code{df_hdcnt}: data frame contains headcount by period
+\code{df_hdcnt_gender}: data frame contains headcount by gender by period
+\code{df_hdcnt_afc}: data frame contains headcount by afc band
+\code{df_hdcnt_dir}: data frame contains headcount by directorate
+\code{df_hrrate}: data frame contains hourly rate by gender for each grade
 \code{ending_fy}: a character vector containing ending reporting period
 (e.g. 31 March 2023). This uses for introduction paragraph
 }
 \examples{
- 
+\dontrun{
+
 library(nhsbsaGPG)
 df <- gpg_data(afc_staff)
+}
 
 }
