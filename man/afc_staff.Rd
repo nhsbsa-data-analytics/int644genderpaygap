@@ -3,7 +3,7 @@
 \docType{data}
 \name{afc_staff}
 \alias{afc_staff}
-\title{NHSBSA employee staff_afc}
+\title{NHSBSA employee afc_staff}
 \format{
 A data frame with gender pay gap information
 }
@@ -12,14 +12,14 @@ afc_staff
 }
 \description{
 A dataset containing NHSBSA employee hourly pay
-by reporting period split by gender, AFC band, directorate.
+by reporting period split by gender, FTE, AFC band, directorate.
 \itemize{
   \item period. 2018/19, 2019/20 etc character
   \item gender. Male or Female, character
   \item headcount. employee headcount used for aggregation
   \item hourly_rate. hourly rate as shown pay slip
   \item quartile. split hourly_rate by quartile by gender
-  \item fte. employee full time or part time info
+  \item fte. employee full time or part time information
   \item afc_band. AFC band
   \item directorate. NHSBSA directorate
 }

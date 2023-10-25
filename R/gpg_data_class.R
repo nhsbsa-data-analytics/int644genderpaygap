@@ -9,12 +9,12 @@
 #' directorate.
 #'
 #' Once initiated, the class has six slots:
-#' \code{df}: raw data frame 
-#' \code{df_hdcnt}: data frame contains headcount by period 
-#' \code{df_hdcnt_gender}: data frame contains headcount by gender by period 
-#' \code{df_hdcnt_afc}: data frame contains headcount by afc band 
-#' \code{df_hdcnt_dir}: data frame contains headcount by directorate 
-#' \code{df_hrrate}: data frame contains hourly rate by gender for each grade 
+#' \code{df}: raw data frame
+#' \code{df_hdcnt}: data frame contains headcount by period
+#' \code{df_hdcnt_gender}: data frame contains headcount by gender by period
+#' \code{df_hdcnt_afc}: data frame contains headcount by afc band
+#' \code{df_hdcnt_dir}: data frame contains headcount by directorate
+#' \code{df_hrrate}: data frame contains hourly rate by gender for each grade
 #' \code{ending_fy}: a character vector containing ending reporting period
 #' (e.g. 31 March 2023). This uses for introduction paragraph
 #'
@@ -26,8 +26,8 @@
 #'
 #' @return If the class is not instantiated correctly, nothing is returned.
 #'
-#' @examples 
-#'  
+#' @examples
+#'
 #' library(nhsbsaGPG)
 #' df <- gpg_data(afc_staff)
 #'
@@ -149,7 +149,8 @@ gpg_data <- function(x,
   # data frame: aggregate headcount by period
   df_hdcnt <- x |>
     dplyr::group_by(period) |>
-    dplyr::summarise(headcount = sum(headcount, na.rm = TRUE)) |>
+    dplyr::summarise(headcount = sum(headcount, na.rm = TRUE),
+                     .groups = "drop") |>
     dplyr::arrange(period)
 
   # Extract the values
@@ -157,14 +158,15 @@ gpg_data <- function(x,
     agg_data$headcount[agg_data$period == latest_fy]
 
   ending_fy <- as.character(start_latest_year + 1)
-  
+
   # data frame: aggregate headcount by gender by period
   df_hdcnt_gender <- x |>
-    dplyr::group_by(period,gender) |>
-    dplyr::summarise(headcount = sum(headcount, na.rm = TRUE)) |>
+    dplyr::group_by(period, gender) |>
+    dplyr::summarise(headcount = sum(headcount, na.rm = TRUE),
+                     .groups = "drop") |>
     dplyr::arrange(period)
-  
-  
+
+
 
   # data frame: aggregate headcount by period and AFC band
   df_hdcnt_afc <- x |>
@@ -176,7 +178,8 @@ gpg_data <- function(x,
     dplyr::group_by(period, afc_band) |>
     dplyr::mutate(
       perc = headcount / sum(headcount) * 100
-    )
+    ) |>
+    dplyr::ungroup()
 
   # data frame: aggregate headcount by period and directorate
   df_hdcnt_dir <- x |>
@@ -188,7 +191,8 @@ gpg_data <- function(x,
     dplyr::group_by(period, directorate) |>
     dplyr::mutate(
       perc = headcount / sum(headcount) * 100
-    )
+    ) |>
+    dplyr::ungroup()
 
   # data frame: hourly rate by gender for overall, each AFC band
   df_hrrate <- dplyr::bind_rows(

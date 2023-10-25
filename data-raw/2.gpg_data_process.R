@@ -27,15 +27,16 @@ process_file <- function(filepath) {
       paygap = read_excel(filepath, range = cell_rows(3:7), col_names = TRUE) |>
         select(1:3) |>
         janitor::clean_names() |>
-        mutate(period = financial_year) |> 
-        filter(gender == "Pay Gap %") |> 
+        mutate(period = financial_year) |>
+        filter(gender == "Pay Gap %") |>
         select(period,
-               avg_hr_gpg = avg_hourly_rate,
+               mean_hr_gpg = avg_hourly_rate,
                median_hr_gpg = median_hourly_rate),
       quartile = read_excel(filepath, range = cell_rows(3:7), col_names = TRUE) |>
         select(5:9) |>
         janitor::clean_names() |>
-        mutate(period = financial_year),
+        mutate(period = financial_year) |>
+        select(period, quartile, female, male) ,
       afc = read_excel(filepath, skip = 8, col_names = TRUE) |>
         select(2:7) |>
         janitor::clean_names() |>
@@ -70,7 +71,8 @@ paygap <- map(dfs, "paygap") |>
   select(period, everything())
 quartile <- map(dfs, "quartile") |>
   bind_rows() |>
-  select(period, everything())
+  select(period, everything()) |>
+  mutate(quartile = as.character(quartile))
 afc <- map(dfs, "afc") |>
   bind_rows() |>
   select(period, everything())
@@ -88,16 +90,38 @@ afc_staff <- afc |>
   ) |>
   left_join(lookup,
     by = "pay_scale"
-  ) |> 
-  select(-employee_number) |> 
-# Data quality error July 2013 Archive employee org is wrong, manually edited
-  mutate(org_l3 = ifelse(org_l3 == 'July 2013 Archive', "914 BSA Finance, Commercial and Estates L3", org_l3),
-         directorate = stringr::str_replace_all(
-           org_l3, c("^914 BSA " = "", " L3" = "")),
+  ) |>
+  select(-employee_number) |>
+
+  # Data quality error July 2013 Archive employee org
+  # is wrong, manually edited
+  mutate(org_l3 = ifelse(org_l3 == "July 2013 Archive",
+                         "914 BSA Finance, Commercial and Estates L3", org_l3),
+         directorate = stringr::str_replace_all(org_l3, c("^914 BSA " = "", " L3" = "")),
          directorate = stringr::str_trim(directorate),
-         headcount = 1) |> 
-  select(period, gender, headcount,hourly_rate, quartile, fte, afc_band, directorate)
-  
+         headcount = 1) |>
+  select(period, gender, headcount, hourly_rate, quartile, fte, afc_band, directorate)
+
+# quartile requires data transformation
+quartile_overall <- quartile |>
+  group_by(period) |>
+  summarise(female = sum(female),
+            male = sum(male),
+            .groups = "drop") |>
+  mutate(quartile = "Overall")
+
+quartile <- quartile |>
+  bind_rows(quartile_overall)
+
+quartile <- quartile |>
+  tidyr::pivot_longer(cols = c(female, male),
+                      names_to = "gender",
+                      values_to = "count") |>
+  group_by(period, quartile) |>
+  mutate(percent = count / sum(count) * 100) |>
+  ungroup()
+
+
 
 # Keep three main data frame and it will be used to create S3 class
 usethis::use_data(paygap, overwrite = TRUE)
@@ -107,7 +131,7 @@ usethis::use_data(afc_staff, overwrite = TRUE)
 # delete all the files in data_temp as they only stay in azure storage
 
 # Specify the folder path
-folder_path <- "./data_temp" 
+folder_path <- "./data_temp"
 
 # List all files in the directory
 files_to_delete <- list.files(path = folder_path, full.names = TRUE)
