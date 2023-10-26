@@ -21,17 +21,45 @@ app_ui <- function(request) {
         div(
           class = "nhsuk-main-wrapper",
           role = "main",
-          nhs_navlistPanel(
-            id = "mainTabs",
-            well = FALSE,
-            widths = c(3, 9),
-            tabPanel(
-              title = "Report",
-              mod_introduction_ui("introduction_1"),
-              mod_headcount_ui("headcount_1")
-            )
+          fluidRow(
+            id = "main",
+            column(width = 12),
+            shinyWidgets::pickerInput(
+              inputId = "nav_main",
+              label = "Content:",
+              choices = c(
+                "Introduction",
+                "Gender profile",
+                "Mean/Median hourly pay",
+                "Quartiles",
+                "Directorate"
+              ),
+              selected = "Introduction",
+              width = "fit",
+              inline = TRUE
+            ),
+            tags$div(id = "introduction"),
+            mod_introduction_ui("introduction_1"),
+            tags$div(id = "headcount"),
+            mod_headcount_ui("headcount_1")
           )
-        )
+        ),
+        # Whenever tab button is clicked, windows scroll to the top
+        tags$script('
+      $(document).ready(function() {
+        var selectedOption = $("#nav_main").val();
+
+        $("#nav_main").on("shown.bs.select", function() {
+          var offset = $("#nav_main").find("option[value=\'" + 
+                       selectedOption + "\']").offset().top;
+          $("html, body").animate({ scrollTop: offset }, "fast");
+        });
+
+        $("#mainTabs a[data-toggle=\'tab\']").on("click", function(e) {
+          window.scrollTo(0, 0);
+        });
+      });
+    ')
       )
     ),
     br(),

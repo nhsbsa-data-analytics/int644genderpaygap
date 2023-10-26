@@ -121,12 +121,13 @@ quartile <- quartile |>
   mutate(percent = count / sum(count) * 100) |>
   ungroup()
 
-
+# create gpg_class
+gpg_class <- gpg_data(afc_staff)
 
 # Keep three main data frame and it will be used to create S3 class
 usethis::use_data(paygap, overwrite = TRUE)
 usethis::use_data(quartile, overwrite = TRUE)
-usethis::use_data(afc_staff, overwrite = TRUE)
+usethis::use_data(gpg_class, overwrite = TRUE)
 
 # delete all the files in data_temp as they only stay in azure storage
 

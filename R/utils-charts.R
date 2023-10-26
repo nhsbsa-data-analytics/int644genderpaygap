@@ -142,7 +142,7 @@ gpg_pyramid <- function(x, xvar = "afc_band", yvar, yaxis_title) {
           )
         ) |>
         highcharter::hc_xAxis(
-          title = list(text = "AFC band"),
+          title = list(text = "AfC band"),
           reversed = FALSE
         ) |>
         highcharter::hc_plotOptions(
