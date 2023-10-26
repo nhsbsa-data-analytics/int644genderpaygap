@@ -1,20 +1,20 @@
-#' @title S3 gpg class to create headcount, hourly rate by AFC,
-#' directorate level hourly rate.'
+#' @title S3 gender pay gap class
 #'
 #' @description \code{gpg_data} is the class used for the creation of
-#' headcount, hourly rate by AFC with without directorate in the GPG report.
+#' headcount, hourly rate by further breakdown.
 #'
 #' @details The \code{gpg_data} class expects a \code{data.frame} with at
 #' least seven columns: period, gender, hourly_rate, quartile, fte, afc_band,
 #' directorate.
 #'
 #' Once initiated, the class has six slots:
-#' \code{df}: raw data frame
-#' \code{df_hdcnt}: data frame contains headcount by period
-#' \code{df_hdcnt_gender}: data frame contains headcount by gender by period
-#' \code{df_hdcnt_afc}: data frame contains headcount by afc band
+#' \code{df_hdcnt}: data frame contains overall headcount
+#' \code{df_hdcnt_gender}: data frame contains headcount
+#' \code{df_hdcnt_afc}: data frame contains headcount by AFC band
 #' \code{df_hdcnt_dir}: data frame contains headcount by directorate
-#' \code{df_hrrate}: data frame contains hourly rate by gender for each grade
+#' \code{df_hrrate}: data frame contains mean, median hourly rate
+#' \code{df_hrrate_afc}: data frame contains mean, median hourly rate by AFC band
+#' \code{df_hrrate_dir} data frame contains mean, median hourly rate by directorate
 #' \code{ending_fy}: a character vector containing ending reporting period
 #' (e.g. 31 March 2023). This uses for introduction paragraph
 #'
@@ -195,24 +195,34 @@ gpg_data <- function(x,
     ) |>
     dplyr::ungroup()
 
-  # data frame: hourly rate by gender for overall, each AFC band
-  df_hrrate <- dplyr::bind_rows(
-    x |>
-      dplyr::group_by(period, gender, afc_band) |>
-      dplyr::summarise(
-        mean_rate = mean(hourly_rate, na.rm = TRUE),
-        median_rate = median(hourly_rate, na.rm = TRUE),
-        .groups = "drop"
-      ),
-    x |>
-      dplyr::group_by(period, gender) |>
-      dplyr::summarise(
-        mean_rate = mean(hourly_rate, na.rm = TRUE),
-        median_rate = median(hourly_rate, na.rm = TRUE),
-        .groups = "drop"
-      ) |>
-      dplyr::mutate(afc_band = "Overall")
-  )
+  # data frame: hourly rate by gender for overall
+  df_hrrate <- x |>
+    dplyr::group_by(period, gender) |>
+    dplyr::summarise(
+      mean_rate = mean(hourly_rate, na.rm = TRUE),
+      median_rate = median(hourly_rate, na.rm = TRUE),
+      .groups = "drop"
+    )
+
+  # data frame: hourly rate by gender and by AFC band
+  df_hrrate_afc <- x |>
+    dplyr::group_by(period, gender, afc_band) |>
+    dplyr::summarise(
+      mean_rate = mean(hourly_rate, na.rm = TRUE),
+      median_rate = median(hourly_rate, na.rm = TRUE),
+      .groups = "drop"
+    )
+
+  # data frame: hourly rate by gender and by directorate
+  df_hrrate_dir <- x |>
+    dplyr::group_by(period, gender, directorate) |>
+    dplyr::summarise(
+      mean_rate = mean(hourly_rate, na.rm = TRUE),
+      median_rate = median(hourly_rate, na.rm = TRUE),
+      .groups = "drop"
+    )
+
+
 
 
   # Define the class here ----
@@ -220,13 +230,14 @@ gpg_data <- function(x,
 
   structure(
     list(
-      df = x,
       df_hdcnt = df_hdcnt,
       df_hdcnt_gender = df_hdcnt_gender,
       df_hdcnt_afc = df_hdcnt_afc,
       df_hdcnt_dir = df_hdcnt_dir,
       df_hrrate = df_hrrate,
-      reporting_headcoun = reporting_headcount,
+      df_hrrate_afc = df_hrrate_afc,
+      df_hrrate_dir = df_hrrate_dir,
+      reporting_headcount = reporting_headcount,
       ending_fy = ending_fy
     ),
     class = "gpg_data"
