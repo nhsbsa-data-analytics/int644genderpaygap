@@ -27,7 +27,8 @@ app_ui <- function(request) {
             widths = c(3, 9),
             tabPanel(
               title = "Report",
-              mod_introduction_ui("introduction_1")
+              mod_introduction_ui("introduction_1"),
+              mod_headcount_ui("headcount_1")
             )
           )
         )
