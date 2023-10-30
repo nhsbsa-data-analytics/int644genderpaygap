@@ -22,7 +22,7 @@ app_ui <- function(request) {
           class = "nhsuk-main-wrapper",
           role = "main",
           fluidRow(
-            id = "main",
+            id = "mainpage",
             column(width = 12),
             shinyWidgets::pickerInput(
               inputId = "content_main",
@@ -45,25 +45,14 @@ app_ui <- function(request) {
             tags$div(id = "headcount"),
             mod_headcount_ui("headcount_1"),
             actionLink("top_headcount_intro", "Go to top page"),
-            hr()
+            hr(),
+            br(),
+            tags$div(id = "hourly_rate"),
+            mod_hourly_rate_ui("hourly_rate_1"),
+            actionLink("top_hourly_rate_intro", "Go to top page"),
+            
           )
-        ),
-        # Whenever tab button is clicked, windows scroll to the top
-        tags$script('
-      $(document).ready(function() {
-        var selectedOption = $("#nav_main").val();
-
-        $("#nav_main").on("shown.bs.select", function() {
-          var offset = $("#nav_main").find("option[value=\'" + 
-                       selectedOption + "\']").offset().top;
-          $("html, body").animate({ scrollTop: offset }, "fast");
-        });
-
-        $("#mainTabs a[data-toggle=\'tab\']").on("click", function(e) {
-          window.scrollTo(0, 0);
-        });
-      });
-    ')
+        )
       )
     ),
     br(),
@@ -85,7 +74,7 @@ golem_add_external_resources <- function() {
 
   tags$head(
     favicon("assets/favicons/favicon"),
-    tags$title("nhsbsaGPG"),
+    tags$title("NHSBSA gender pay gap report"),
 
     # Add here other external resources
     # for example, you can add shinyalert::useShinyalert()

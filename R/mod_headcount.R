@@ -14,7 +14,7 @@ mod_headcount_ui <- function(id) {
     includeMarkdown("inst/markdown/02_headcount_1.md"),
     # chart 1: five year headcount trend split by gender
     nhs_card(
-      heading = "Headcount by gender",
+      # heading = "Headcount by gender",
       highcharter::highchartOutput(
         outputId = ns("headcount_all"),
         height = "240px"
@@ -24,12 +24,13 @@ mod_headcount_ui <- function(id) {
     includeMarkdown("inst/markdown/02_headcount_2.md"),
     # chart 2: headcount split by gender AfC
     nhs_card(
-      heading = "Headcount by AfC pay band and gender",
+      # heading = "Headcount by AfC pay band and gender",
       nhs_selectInput(
         inputId = ns("period"),
         label = "Reporting period",
         choices = unique(nhsbsaGPG::gpg_class$df_hdcnt$period),
-        full_width = TRUE
+        full_width = TRUE,
+        selected = max(unique(nhsbsaGPG::gpg_class$df_hdcnt$period))
       ),
       highcharter::highchartOutput(
         outputId = ns("headcount_afc"),
