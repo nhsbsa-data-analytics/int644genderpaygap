@@ -33,8 +33,12 @@ mod_headcount_ui <- function(id) {
       highcharter::highchartOutput(
         outputId = ns("headcount_afc"),
         height = "500px"
-
-      )
+      ),
+      mod_radio_button_ui(id = ns("hcnt_afc_toggle"), 
+                          label = "", 
+                          choices = c("Number" = "headcount", 
+                                      "Percentage" = "perc"), 
+                          selected = "headcount")
     ),
     # chart 2: reporting period drop down, radio button toggle
     # between count and percentage
@@ -49,7 +53,7 @@ mod_headcount_ui <- function(id) {
 mod_headcount_server <- function(id) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
-
+    
     df_hdcnt_gender <- nhsbsaGPG::gpg_class$df_hdcnt_gender |>
       tidyr::pivot_wider(names_from = gender, values_from = headcount)
 
@@ -70,11 +74,19 @@ mod_headcount_server <- function(id) {
         dplyr::filter(period == input$period) |>
         dplyr::mutate(headcount = headcount * ifelse(gender == "Male", 1, -1))
     })
+    
+    hcnt_afc_toggle <- mod_radio_button_server("hcnt_afc_toggle")
+    
+    yvar <- reactive({
+      req(hcnt_afc_toggle())
+      ifelse(hcnt_afc_toggle() == "headcount", "headcount", "perc") 
+    }) 
+    
 
     output$headcount_afc <- highcharter::renderHighchart({
 
       plt <- gpg_pyramid(x = df_hdcnt_afc(), xvar = "afc_band",
-                         yvar = "headcount", yaxis_title = "Headcount")
+                         yvar = yvar(), yaxis_title = "Headcount")
 
       plt |>
         highcharter::hc_tooltip(
