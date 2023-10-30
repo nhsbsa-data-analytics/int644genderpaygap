@@ -34,7 +34,9 @@ mod_radio_button_ui <- function(id, label = "", choices = c(), selected = NULL) 
 mod_radio_button_server <- function(id, filename, export_data) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
-    
-    return(reactive({input$toggle}))
+
+    return(reactive(
+                    {input$toggle})
+    )
   })
 }

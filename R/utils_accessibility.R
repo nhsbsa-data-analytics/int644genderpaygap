@@ -129,29 +129,29 @@ nhs_card_tabstop <- function(header, tabindex = 0, ...) {
 
 
 #' accessible_radio_button
-#' 
+#'
 #' @param ... radio content
-#' 
+#'
 #' @noRd
 #'
 accessible_radio_button <- function(inputId, label, choices = NULL, selected = NULL,
                                     inline = FALSE, width = NULL, choiceNames = NULL,
                                     choiceValues = NULL) {
-  
+
   args <- shiny:::normalizeChoicesArgs(choices, choiceNames, choiceValues)
-  
+
   selected <- shiny:::restoreInput(id = inputId, default = selected)
-  
+
   selected <- if (is.null(selected)) args$choiceValues[[1]] else as.character(selected)
   if (length(selected) > 1) stop("The 'selected' argument must be of length 1")
-  
+
   options <- shiny:::generateOptions(
     inputId, selected, inline, "radio", args$choiceNames, args$choiceValues
   )
-  
+
   divClass <- "form-group shiny-input-radiogroup shiny-input-container"
   if (inline) divClass <- paste(divClass, "shiny-input-container-inline")
-  
+
   tags$fieldset(
     tags$legend(label),
     tags$div(

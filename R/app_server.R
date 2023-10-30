@@ -22,22 +22,24 @@ app_server <- function(input, output, session) {
     }
   })
 
-    observeEvent(input$top_headcount_intro, {
-      # jump to the top of the screen
-      shinyjs::runjs("window.scrollTo(0, 0)")
-      
-      updateSelectInput(session,
-                        inputId = "content_main",
-                        selected = "Introduction")
-    })
-    
-    observeEvent(input$top_hourly_rate_intro, {
-      # jump to the top of the screen
-      shinyjs::runjs("window.scrollTo(0, 0)")
-      
-      updateSelectInput(session,
-                        inputId = "content_main",
-                        selected = "Introduction")
-    })
-  
+  observeEvent(input$top_headcount_intro, {
+    # jump to the top of the screen
+    shinyjs::runjs("window.scrollTo(0, 0)")
+
+    updateSelectInput(session,
+                      inputId = "content_main",
+                      selected = "Introduction")
+  })
+
+  observeEvent(input$top_hourly_rate_intro, {
+    # jump to the top of the screen
+    shinyjs::runjs("window.scrollTo(0, 0)")
+
+    updateSelectInput(session,
+                      inputId = "content_main",
+                      selected = "Introduction")
+  })
+
+  mod_hourly_rate_server("hourly_rate_1")
+
 }

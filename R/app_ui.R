@@ -50,7 +50,7 @@ app_ui <- function(request) {
             tags$div(id = "hourly_rate"),
             mod_hourly_rate_ui("hourly_rate_1"),
             actionLink("top_hourly_rate_intro", "Go to top page"),
-            
+
           )
         )
       )

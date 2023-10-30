@@ -14,7 +14,7 @@ mod_headcount_ui <- function(id) {
     includeMarkdown("inst/markdown/02_headcount_1.md"),
     # chart 1: five year headcount trend split by gender
     nhs_card(
-      # heading = "Headcount by gender",
+
       highcharter::highchartOutput(
         outputId = ns("headcount_all"),
         height = "240px"
@@ -24,7 +24,7 @@ mod_headcount_ui <- function(id) {
     includeMarkdown("inst/markdown/02_headcount_2.md"),
     # chart 2: headcount split by gender AfC
     nhs_card(
-      # heading = "Headcount by AfC pay band and gender",
+
       nhs_selectInput(
         inputId = ns("period"),
         label = "Reporting period",
@@ -36,10 +36,10 @@ mod_headcount_ui <- function(id) {
         outputId = ns("headcount_afc"),
         height = "500px"
       ),
-      mod_radio_button_ui(id = ns("hcnt_afc_toggle"), 
-                          label = "", 
-                          choices = c("Number" = "headcount", 
-                                      "Percentage" = "perc"), 
+      mod_radio_button_ui(id = ns("hcnt_afc_toggle"),
+                          label = "",
+                          choices = c("Number" = "headcount",
+                                      "Percentage" = "perc"),
                           selected = "headcount"),
       mod_nhs_download_ui(id = ns("download_headcount_afc"))
     ),
@@ -54,7 +54,7 @@ mod_headcount_ui <- function(id) {
 mod_headcount_server <- function(id) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
-    
+
     df_hdcnt_gender <- nhsbsaGPG::gpg_class$df_hdcnt_gender |>
       tidyr::pivot_wider(names_from = gender, values_from = headcount)
 
@@ -76,20 +76,20 @@ mod_headcount_server <- function(id) {
         dplyr::mutate(headcount = headcount * ifelse(gender == "Male", 1, -1),
                       perc = perc * ifelse(gender == "Male", 1, -1))
     })
-    
+
     hcnt_afc_toggle <- mod_radio_button_server("hcnt_afc_toggle")
-    
+
     yvar <- reactive({
       req(hcnt_afc_toggle())
-      ifelse(hcnt_afc_toggle() == "headcount", "headcount", "perc") 
-    }) 
-    
+      ifelse(hcnt_afc_toggle() == "headcount", "headcount", "perc")
+    })
+
     yaxis_title <- reactive({
       req(hcnt_afc_toggle())
-      ifelse(hcnt_afc_toggle() == "headcount", "Headcount", "Percentage") 
-      
+      ifelse(hcnt_afc_toggle() == "headcount", "Headcount", "Percentage")
+
     })
-    
+
 
     output$headcount_afc <- highcharter::renderHighchart({
 
