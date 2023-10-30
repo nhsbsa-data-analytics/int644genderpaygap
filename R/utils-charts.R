@@ -117,6 +117,8 @@ gpg_pyramid <- function(x, xvar = "afc_band", yvar, yaxis_title) {
   out <- tryCatch(
     expr = {
       data <- x
+      xaxis_category <- sort(unique(data[[xvar]]))
+
       # Create chart object
       plt <- data |>
         highcharter::hchart(
@@ -142,6 +144,7 @@ gpg_pyramid <- function(x, xvar = "afc_band", yvar, yaxis_title) {
           )
         ) |>
         highcharter::hc_xAxis(
+          categories = xaxis_category,
           title = list(text = "AfC band"),
           reversed = FALSE
         ) |>

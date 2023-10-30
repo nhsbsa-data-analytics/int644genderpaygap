@@ -1,4 +1,4 @@
-## Introduction
+# Introduction
 
 Organisations with 250 or more employees are mandated by the government to report annually on their gender pay gap. The requirements of the mandate within the Equality Act 2010 (Gender Pay Gap Information) Regulations 2017 are to publish information relating to pay for specific measures, as detailed in this report. 
 

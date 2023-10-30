@@ -73,8 +73,32 @@ mod_headcount_server <- function(id) {
 
     output$headcount_afc <- highcharter::renderHighchart({
 
-      gpg_pyramid(x = df_hdcnt_afc(), xvar = "afc_band",
-                  yvar = "headcount", yaxis_title = "Headcount")
+      plt <- gpg_pyramid(x = df_hdcnt_afc(), xvar = "afc_band",
+                         yvar = "headcount", yaxis_title = "Headcount")
+
+      plt |>
+        highcharter::hc_tooltip(
+          shared = FALSE,
+          useHTML = TRUE,
+          formatter = htmlwidgets::JS(
+            "
+              function() {
+
+                outHTML =
+                  '<b>Gender: </b>' + this.series.name + '<br>' +
+                  '<b>AfC: </b>' + this.point.afc_band + '<br/>' +
+                  '<b>Number of employees: </b>' + 
+          Highcharts.numberFormat(Math.abs(this.point.y), 0) + '<br>' +
+                  '<b>Percentage of employees: </b>' + 
+          Highcharts.numberFormat(Math.abs(this.point.perc), 1) + '%'
+
+                return outHTML
+
+                }
+              "
+          )
+        )
+
     })
 
   })

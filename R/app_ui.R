@@ -25,7 +25,7 @@ app_ui <- function(request) {
             id = "main",
             column(width = 12),
             shinyWidgets::pickerInput(
-              inputId = "nav_main",
+              inputId = "content_main",
               label = "Content:",
               choices = c(
                 "Introduction",
@@ -40,8 +40,12 @@ app_ui <- function(request) {
             ),
             tags$div(id = "introduction"),
             mod_introduction_ui("introduction_1"),
+            hr(),
+            br(),
             tags$div(id = "headcount"),
-            mod_headcount_ui("headcount_1")
+            mod_headcount_ui("headcount_1"),
+            actionLink("top_headcount_intro", "Go to top page"),
+            hr()
           )
         ),
         # Whenever tab button is clicked, windows scroll to the top

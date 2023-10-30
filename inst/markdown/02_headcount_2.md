@@ -1,5 +1,5 @@
-### Male and female employees in each pay band
+## Gender distribution across pay band
 
-The NHSBSA uses NHS Agenda for Change (AfC) pay bands for the vast majority of staff. Bands vary by levels of responsibility and each band has a set pay range with increments. Colleagues move up the increments in their band on a length of service basis so that generally those who have spent longer in the same grade would be expected to earn more, regardless of gender. In addition, we have a small group of employees who are on pay scales other than AfC. These include staff on Civil Service grades who transferred into the NHSBSA in 2006, a very small number on NHS Medical and Dental salary scales, and our most senior employees who receive NHS Executive and Very Senior Manager salaries.
+The NHSBSA uses NHS Agenda for Change (AfC) pay bands. Bands differ based on responsibility and have set pay ranges with increments. Pay rises within bands are based on service length, so longer-serving staff generally earn more, regardless of gender. A few employees have different pay scales, including those from the 2006 Civil Service transfer, a few on NHS Medical scales, and top executives. 
 
-The chart show the total headcount of staff within each pay band by gender, and the percentages of men and women within each pay band. Comparisons to the previous five year’s data are also included. The salary scales other than Agenda for Change as described above are shown as ‘Non-AfC’ on the chart.
+The chart shows staff counts and gender percentages for each band. They also compare this year to the previous years. Salaries outside AfC are labelled 'Non-AfC'.

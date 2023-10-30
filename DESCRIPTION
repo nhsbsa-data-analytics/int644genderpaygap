@@ -23,7 +23,9 @@ Imports:
     futile.logger (>= 1.4.3),
     stringr,
     htmlwidgets,
-    markdown
+    markdown,
+    shinyWidgets,
+    forcats
 Suggests:
     pkgload,
     testthat (>= 3.0.0),
