@@ -22,6 +22,7 @@ mod_headcount_ui <- function(id) {
       mod_nhs_download_ui(id = ns("download_headcount_all"))
     ),
     includeMarkdown("inst/markdown/02_headcount_2.md"),
+    # chart 2: headcount split by gender AfC
     nhs_card(
       heading = "Headcount by AfC pay band and gender",
       nhs_selectInput(
@@ -38,12 +39,11 @@ mod_headcount_ui <- function(id) {
                           label = "", 
                           choices = c("Number" = "headcount", 
                                       "Percentage" = "perc"), 
-                          selected = "headcount")
+                          selected = "headcount"),
+      mod_nhs_download_ui(id = ns("download_headcount_afc"))
     ),
-    # chart 2: reporting period drop down, radio button toggle
     # between count and percentage
     includeMarkdown("inst/markdown/02_headcount_3.md")
-
   )
 }
 
@@ -72,7 +72,8 @@ mod_headcount_server <- function(id) {
 
       nhsbsaGPG::gpg_class$df_hdcnt_afc |>
         dplyr::filter(period == input$period) |>
-        dplyr::mutate(headcount = headcount * ifelse(gender == "Male", 1, -1))
+        dplyr::mutate(headcount = headcount * ifelse(gender == "Male", 1, -1),
+                      perc = perc * ifelse(gender == "Male", 1, -1))
     })
     
     hcnt_afc_toggle <- mod_radio_button_server("hcnt_afc_toggle")
@@ -82,11 +83,17 @@ mod_headcount_server <- function(id) {
       ifelse(hcnt_afc_toggle() == "headcount", "headcount", "perc") 
     }) 
     
+    yaxis_title <- reactive({
+      req(hcnt_afc_toggle())
+      ifelse(hcnt_afc_toggle() == "headcount", "Headcount", "Percentage") 
+      
+    })
+    
 
     output$headcount_afc <- highcharter::renderHighchart({
 
       plt <- gpg_pyramid(x = df_hdcnt_afc(), xvar = "afc_band",
-                         yvar = yvar(), yaxis_title = "Headcount")
+                         yvar = yvar(), yaxis_title = yaxis_title())
 
       plt |>
         highcharter::hc_tooltip(
@@ -102,7 +109,7 @@ mod_headcount_server <- function(id) {
                   '<b>Number of employees: </b>' + 
           Highcharts.numberFormat(Math.abs(this.point.y), 0) + '<br>' +
                   '<b>Percentage of employees: </b>' + 
-          Highcharts.numberFormat(Math.abs(this.point.perc), 1) + '%'
+          Highcharts.numberFormat(Math.abs(this.point.perc), 0) + '%'
 
                 return outHTML
 

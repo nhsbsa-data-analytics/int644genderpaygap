@@ -118,6 +118,7 @@ gpg_pyramid <- function(x, xvar = "afc_band", yvar, yaxis_title) {
     expr = {
       data <- x
       xaxis_category <- sort(unique(data[[xvar]]))
+      yaxis_max <- if(yvar == "perc") 100 else NULL
 
       # Create chart object
       plt <- data |>
@@ -131,6 +132,7 @@ gpg_pyramid <- function(x, xvar = "afc_band", yvar, yaxis_title) {
         ) |>
         nhsbsaR::theme_nhsbsa_highchart(palette = "gender") |>
         highcharter::hc_yAxis(
+          max = yaxis_max,
           title = list(text = yaxis_title),
           labels = list(
             formatter = highcharter::JS(
