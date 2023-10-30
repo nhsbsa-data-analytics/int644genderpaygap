@@ -42,9 +42,7 @@ mod_headcount_ui <- function(id) {
                                       "Percentage" = "perc"),
                           selected = "headcount"),
       mod_nhs_download_ui(id = ns("download_headcount_afc"))
-    ),
-    # between count and percentage
-    includeMarkdown("inst/markdown/02_headcount_3.md")
+    )
   )
 }
 

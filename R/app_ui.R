@@ -23,14 +23,14 @@ app_ui <- function(request) {
           role = "main",
           fluidRow(
             id = "mainpage",
-            column(width = 12),
+            column(width = 10),
             shinyWidgets::pickerInput(
               inputId = "content_main",
               label = "Content:",
               choices = c(
                 "Introduction",
                 "Gender profile",
-                "Mean/Median hourly pay",
+                "Gender pay gap", 
                 "Quartiles",
                 "Directorate"
               ),
@@ -47,10 +47,9 @@ app_ui <- function(request) {
             actionLink("top_headcount_intro", "Go to top page"),
             hr(),
             br(),
-            tags$div(id = "hourly_rate"),
-            mod_hourly_rate_ui("hourly_rate_1"),
-            actionLink("top_hourly_rate_intro", "Go to top page"),
-
+            tags$div(id = "paygap"),
+            mod_paygap_ui("paygap_1"),
+            actionLink("top_paygap_intro", "Go to top page")
           )
         )
       )

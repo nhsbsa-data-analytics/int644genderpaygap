@@ -1,1 +1,0 @@
-The chart shows that most staff occupy bands 2-5, with higher female percentages. Males dominate bands 8B and above. Females in band 8A slightly rose from last year.

@@ -7,12 +7,12 @@
 app_server <- function(input, output, session) {
   mod_headcount_server("headcount_1")
 
-
   observeEvent(input$content_main, {
     tag <- switch(input$content_main,
       "Introduction" = "introduction",
       "Gender profile" = "headcount",
-      "Mean/Median hourly pay" = "hourly_rate"
+      "Mean/Median hourly pay" = "hourly_rate",
+      "Gender pay gap" = "paygap"
     )
 
     if (input$content_main == "Introduction") {
@@ -31,15 +31,16 @@ app_server <- function(input, output, session) {
                       selected = "Introduction")
   })
 
-  observeEvent(input$top_hourly_rate_intro, {
+ 
+  observeEvent(input$top_paygap_intro, {
     # jump to the top of the screen
     shinyjs::runjs("window.scrollTo(0, 0)")
-
+    
     updateSelectInput(session,
                       inputId = "content_main",
                       selected = "Introduction")
   })
 
-  mod_hourly_rate_server("hourly_rate_1")
+  
 
 }
