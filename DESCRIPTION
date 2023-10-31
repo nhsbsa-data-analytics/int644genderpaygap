@@ -19,13 +19,14 @@ Imports:
     nhsbsaR,
     shiny,
     shinyjs,
-    dplyr (>= 1.1.3),
+    dplyr (>= 1.1.2),
     futile.logger (>= 1.4.3),
     stringr,
     htmlwidgets,
     markdown,
     shinyWidgets,
-    forcats
+    forcats,
+    ggplot2
 Suggests:
     pkgload,
     testthat (>= 3.0.0),

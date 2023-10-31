@@ -266,7 +266,7 @@ gpg_bar <- function(x, xvar, yvar, yaxis_title) {
       data <- x
       # positive and negative value give different colours.
       data <- data |>
-        dplyr::filter(!is.na(mean_paygap) & !is.na(median_paygap)) |>
+        dplyr::filter(!is.na(.data[[xvar]])) |>
         dplyr::mutate(
           color = ifelse(.data[[yvar]] < 0,
             nhsbsaR::palette_nhsbsa("Pink"),
@@ -295,7 +295,7 @@ gpg_bar <- function(x, xvar, yvar, yaxis_title) {
           type = "category",
           title = list(text = "")
         ) |>
-        highcharter::hc_legend(element_blank()) |>
+        highcharter::hc_legend(ggplot2::element_blank()) |>
         highcharter::hc_plotOptions(
           bar = list(dataLabels = list(
             enabled = TRUE,
@@ -366,7 +366,7 @@ gpg_column <- function(x, xvar = "period", yvar, yaxis_title) {
           type = "category",
           title = list(text = "")
         ) |>
-        highcharter::hc_legend(element_blank()) |>
+        highcharter::hc_legend(ggplot2::element_blank()) |>
         highcharter::hc_plotOptions(
           column = list(dataLabels = list(
             enabled = TRUE,
@@ -375,7 +375,7 @@ gpg_column <- function(x, xvar = "period", yvar, yaxis_title) {
             align = "center",
             verticalAlign = "top",
             color = "#FFFFFF",
-            style = list(fontSize = "14px")
+            style = list(fontSize = "12px")
           )),
           pointPadding = 0.1,
           groupPadding = 0
