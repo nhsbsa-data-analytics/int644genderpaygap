@@ -4,28 +4,26 @@
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
-#' @noRd 
+#' @noRd
 #'
-#' @importFrom shiny NS tagList 
-mod_paygap_ui <- function(id){
+#' @importFrom shiny NS tagList
+mod_paygap_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    includeMarkdown("inst/markdown/03_gender_pay_gap_1.md")
- 
+    includeMarkdown("inst/markdown/03_gender_pay_gap_1.md"),
+    nhs_card_tabstop(
+      
+    )
+
   )
 }
-    
+
 #' paygap Server Functions
 #'
-#' @noRd 
-mod_paygap_server <- function(id){
-  moduleServer( id, function(input, output, session){
+#' @noRd
+mod_paygap_server <- function(id) {
+  moduleServer(id, function(input, output, session) {
     ns <- session$ns
- 
+
   })
 }
-    
-
-    
-## To be copied in the server
-# mod_paygap_server("paygap_1")

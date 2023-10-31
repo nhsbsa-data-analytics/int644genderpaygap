@@ -194,8 +194,8 @@ gpg_data <- function(x,
       perc = headcount / sum(headcount) * 100
     ) |>
     dplyr::ungroup()
-  
-  
+
+
   # data frame: hourly rate by gender for overall
   df_hrrate <- x |>
     dplyr::group_by(period, gender) |>
@@ -213,16 +213,16 @@ gpg_data <- function(x,
       mean_rate = mean(hourly_rate, na.rm = TRUE),
       median_rate = median(hourly_rate, na.rm = TRUE),
       .groups = "drop"
-    ) |> 
-    tidyr::pivot_wider(names_from = gender, values_from = c(mean_rate,median_rate)) |> 
+    ) |>
+    tidyr::pivot_wider(names_from = gender, values_from = c(mean_rate, median_rate)) |>
     dplyr::mutate(
       mean_paygap = (mean_rate_Male - mean_rate_Female) / mean_rate_Male * 100,
       median_paygap = (median_rate_Male - median_rate_Female) / median_rate_Male * 100
     )
 
-  
-  
-  
+
+
+
   # data frame: hourly rate by gender and by directorate
   df_hrrate_dir <- x |>
     dplyr::group_by(period, gender, directorate) |>
@@ -230,8 +230,8 @@ gpg_data <- function(x,
       mean_rate = mean(hourly_rate, na.rm = TRUE),
       median_rate = median(hourly_rate, na.rm = TRUE),
       .groups = "drop"
-    ) |> 
-    tidyr::pivot_wider(names_from = gender, values_from = c(mean_rate,median_rate)) |> 
+    ) |>
+    tidyr::pivot_wider(names_from = gender, values_from = c(mean_rate, median_rate)) |> 
     dplyr::mutate(
       mean_paygap = (mean_rate_Male - mean_rate_Female) / mean_rate_Male * 100,
       median_paygap = (median_rate_Male - median_rate_Female) / median_rate_Male * 100

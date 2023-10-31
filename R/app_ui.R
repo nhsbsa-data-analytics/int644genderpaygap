@@ -30,7 +30,7 @@ app_ui <- function(request) {
               choices = c(
                 "Introduction",
                 "Gender profile",
-                "Gender pay gap", 
+                "Gender pay gap",
                 "Quartiles",
                 "Directorate"
               ),

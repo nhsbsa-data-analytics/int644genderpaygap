@@ -237,11 +237,164 @@ gpg_stack <- function(x, xvar, yvar, groupvar, yaxis_title) {
     },
     warning = function() {
       w <- warnings()
-      warning("Warning produced running gpg_pyramid():", w)
+      warning("Warning produced running gpg_stack():", w)
     },
     error = function(e) {
-      stop("Error produced running gpg_pyramid():", e)
+      stop("Error produced running gpg_stack():", e)
     },
     finally = {}
   )
 }
+
+
+#' @title Highcharter bar chart. This chart will show columns horizontally. 
+#'
+#' @description {df_hrrate_afc} or {df_hrrate_dir} data frame is used for bar chart.
+#'
+#' @return Returns a highchart or htmlwidget object.
+#'
+#'
+#' @export
+#' @param x Input df_hrrate_afc or df_hrrate_dir data frame.
+#' @param xvar e.g. mean_paygap, median_paygap
+#' @param yvar AfC band, directorate
+#' @param yaxis_title Y axis title
+
+gpg_bar <- function(x, xvar, yvar, yaxis_title) {
+  out <- tryCatch(
+    expr = {
+      data <- x
+      # positive and negative value give different colours.
+      data <- data |>
+        dplyr::filter(!is.na(mean_paygap) & !is.na(median_paygap)) |> 
+        dplyr::mutate(
+          color = ifelse(.data[[yvar]] < 0, 
+                         nhsbsaR::palette_nhsbsa("Pink"), 
+                         nhsbsaR::palette_nhsbsa("LightBlue"))
+          )
+      
+      data$color = htmltools::parseCssColors(data$color)
+      
+      plt <- highcharter::highchart() |> 
+        highcharter::hc_add_series(
+          data = data,
+          type = "bar",
+          highcharter::hcaes(
+            x = .data[[xvar]],
+            y = .data[[yvar]],
+            color = color
+          ),
+          name = "Gender pay gap (%)" 
+        ) |> 
+        nhsbsaR::theme_nhsbsa_highchart() |>
+        highcharter::hc_yAxis(
+          title = list(text = yaxis_title)
+        ) |> 
+        highcharter::hc_xAxis(
+          type = "category",
+          title = list(text = "")
+        ) |> 
+        highcharter::hc_legend(element_blank()) |> 
+        highcharter::hc_plotOptions(bar = list(dataLabels = list(
+          enabled = TRUE,
+          format = "{y} %",
+          inside = FALSE,
+          align = "right",
+          color = "#425563",
+          style = list(fontSize = "14px")
+          
+        )),
+        pointPadding = 0.1,
+        groupPadding = 0
+        ) |> 
+        highcharter::hc_tooltip(
+          headerFormat = '<span style="font-size: 10px">{point.key}</span><br/>',
+          pointFormat = '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y} %</b><br/>',
+          footerFormat = ''
+        )
+      
+      return(plt)
+    },
+    warning = function() {
+      w <- warnings()
+      warning("Warning produced running gpg_bar():", w)
+    },
+    error = function(e) {
+      stop("Error produced running gpg_bar():", e)
+    },
+    finally = {}
+  )
+}
+
+
+
+#' @title Highcharter column chart. This chart will show columns vertically 
+#'
+#' @description {paygap} data frame is used for bar chart.
+#'
+#' @return Returns a highchart or htmlwidget object.
+#'
+#'
+#' @export
+#' @param x Input paygap data frame.
+#' @param xvar "period" default 
+#' @param yvar e.g. mean_paygap, median_paygap
+#' @param yaxis_title Y axis title
+
+gpg_column <- function(x, xvar = "period", yvar, yaxis_title) {
+  out <- tryCatch(
+    expr = {
+      data <- x
+      
+      plt <- highcharter::highchart() |> 
+        highcharter::hc_add_series(
+          data = data,
+          type = "column",
+          highcharter::hcaes(
+            x = .data[[xvar]],
+            y = .data[[yvar]]
+          ),
+          name = "Gender pay gap (%)"
+        ) |> 
+        nhsbsaR::theme_nhsbsa_highchart() |>
+        highcharter::hc_yAxis(
+          title = list(text = yaxis_title)
+        ) |> 
+        highcharter::hc_xAxis(
+          type = "category",
+          title = list(text = "")
+        ) |> 
+        highcharter::hc_legend(element_blank()) |> 
+        highcharter::hc_plotOptions(column = list(dataLabels = list(
+          enabled = TRUE,
+          format = "{y} %",
+          inside = TRUE,
+          align = "center",
+          verticalAlign = "top",
+          color = "#FFFFFF",
+          style = list(fontSize = "14px")
+         
+        )),
+        pointPadding = 0.1,
+        groupPadding = 0
+        ) |> 
+        highcharter::hc_tooltip(
+          headerFormat = '<span style="font-size: 10px">{point.key}</span><br/>',
+          pointFormat = '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y} %</b><br/>',
+          footerFormat = ''
+        )
+      
+      return(plt)
+    },
+    warning = function() {
+      w <- warnings()
+      warning("Warning produced running gpg_column():", w)
+    },
+    error = function(e) {
+      stop("Error produced running gpg_column():", e)
+    },
+    finally = {}
+  )
+}
+
+

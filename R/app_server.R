@@ -6,6 +6,7 @@
 #' @noRd
 app_server <- function(input, output, session) {
   mod_headcount_server("headcount_1")
+  mod_paygap_server("paygap_1")
 
   observeEvent(input$content_main, {
     tag <- switch(input$content_main,
@@ -31,16 +32,16 @@ app_server <- function(input, output, session) {
                       selected = "Introduction")
   })
 
- 
+
   observeEvent(input$top_paygap_intro, {
     # jump to the top of the screen
     shinyjs::runjs("window.scrollTo(0, 0)")
-    
+
     updateSelectInput(session,
                       inputId = "content_main",
                       selected = "Introduction")
   })
 
-  
+
 
 }

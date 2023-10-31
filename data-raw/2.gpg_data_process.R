@@ -30,8 +30,8 @@ process_file <- function(filepath) {
         mutate(period = financial_year) |>
         filter(gender == "Pay Gap %") |>
         select(period,
-               mean_hr_gpg = avg_hourly_rate,
-               median_hr_gpg = median_hourly_rate),
+               mean_paygap = avg_hourly_rate,
+               median_paygap = median_hourly_rate),
       quartile = read_excel(filepath, range = cell_rows(3:7), col_names = TRUE) |>
         select(5:9) |>
         janitor::clean_names() |>
