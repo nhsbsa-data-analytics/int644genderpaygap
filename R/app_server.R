@@ -28,8 +28,9 @@ app_server <- function(input, output, session) {
     shinyjs::runjs("window.scrollTo(0, 0)")
 
     updateSelectInput(session,
-                      inputId = "content_main",
-                      selected = "Introduction")
+      inputId = "content_main",
+      selected = "Introduction"
+    )
   })
 
 
@@ -38,10 +39,8 @@ app_server <- function(input, output, session) {
     shinyjs::runjs("window.scrollTo(0, 0)")
 
     updateSelectInput(session,
-                      inputId = "content_main",
-                      selected = "Introduction")
+      inputId = "content_main",
+      selected = "Introduction"
+    )
   })
-
-
-
 }

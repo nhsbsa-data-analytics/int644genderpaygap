@@ -11,10 +11,7 @@ mod_paygap_ui <- function(id) {
   ns <- NS(id)
   tagList(
     includeMarkdown("inst/markdown/03_gender_pay_gap_1.md"),
-    nhs_card_tabstop(
-      
-    )
-
+    nhs_card_tabstop()
   )
 }
 
@@ -24,6 +21,5 @@ mod_paygap_ui <- function(id) {
 mod_paygap_server <- function(id) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
-
   })
 }

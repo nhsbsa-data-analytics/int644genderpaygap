@@ -137,7 +137,6 @@ nhs_card_tabstop <- function(header, tabindex = 0, ...) {
 accessible_radio_button <- function(inputId, label, choices = NULL, selected = NULL,
                                     inline = FALSE, width = NULL, choiceNames = NULL,
                                     choiceValues = NULL) {
-
   args <- shiny:::normalizeChoicesArgs(choices, choiceNames, choiceValues)
 
   selected <- shiny:::restoreInput(id = inputId, default = selected)

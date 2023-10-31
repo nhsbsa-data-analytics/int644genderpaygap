@@ -8,12 +8,9 @@
 #'
 #' @importFrom shiny NS tagList
 mod_introduction_ui <- function(id) {
-
   ns <- NS(id)
   tagList(
-
     includeMarkdown("inst/markdown/01_introduction.md")
-
   )
 }
 
@@ -21,11 +18,7 @@ mod_introduction_ui <- function(id) {
 #'
 #' @noRd
 mod_introduction_server <- function(id) {
-
   moduleServer(id, function(input, output, session) {
-
     ns <- session$ns
-
-
   })
 }

@@ -10,11 +10,9 @@
 mod_headcount_ui <- function(id) {
   ns <- NS(id)
   tagList(
-
     includeMarkdown("inst/markdown/02_headcount_1.md"),
     # chart 1: five year headcount trend split by gender
     nhs_card(
-
       highcharter::highchartOutput(
         outputId = ns("headcount_all"),
         height = "240px"
@@ -24,7 +22,6 @@ mod_headcount_ui <- function(id) {
     includeMarkdown("inst/markdown/02_headcount_2.md"),
     # chart 2: headcount split by gender AfC
     nhs_card(
-
       nhs_selectInput(
         inputId = ns("period"),
         label = "Reporting period",
@@ -36,11 +33,15 @@ mod_headcount_ui <- function(id) {
         outputId = ns("headcount_afc"),
         height = "500px"
       ),
-      mod_radio_button_ui(id = ns("hcnt_afc_toggle"),
-                          label = "",
-                          choices = c("Number" = "headcount",
-                                      "Percentage" = "perc"),
-                          selected = "headcount"),
+      mod_radio_button_ui(
+        id = ns("hcnt_afc_toggle"),
+        label = "",
+        choices = c(
+          "Number" = "headcount",
+          "Percentage" = "perc"
+        ),
+        selected = "headcount"
+      ),
       mod_nhs_download_ui(id = ns("download_headcount_afc"))
     )
   )
@@ -57,13 +58,14 @@ mod_headcount_server <- function(id) {
       tidyr::pivot_wider(names_from = gender, values_from = headcount)
 
     output$headcount_all <- highcharter::renderHighchart({
-
-      gpg_trend(x = df_hdcnt_gender, xvar = "period",
-                yvars = c("Female", "Male"),
-                series_names = c("Female", "Male"),
-                yaxis_title = "Headcount",
-                yaxis_label = "number",
-                colpalette = "gender")
+      gpg_trend(
+        x = df_hdcnt_gender, xvar = "period",
+        yvars = c("Female", "Male"),
+        series_names = c("Female", "Male"),
+        yaxis_title = "Headcount",
+        yaxis_label = "number",
+        colpalette = "gender"
+      )
     })
 
     df_hdcnt_afc <- reactive({
@@ -71,8 +73,10 @@ mod_headcount_server <- function(id) {
 
       nhsbsaGPG::gpg_class$df_hdcnt_afc |>
         dplyr::filter(period == input$period) |>
-        dplyr::mutate(headcount = headcount * ifelse(gender == "Male", 1, -1),
-                      perc = perc * ifelse(gender == "Male", 1, -1))
+        dplyr::mutate(
+          headcount = headcount * ifelse(gender == "Male", 1, -1),
+          perc = perc * ifelse(gender == "Male", 1, -1)
+        )
     })
 
     hcnt_afc_toggle <- mod_radio_button_server("hcnt_afc_toggle")
@@ -85,14 +89,14 @@ mod_headcount_server <- function(id) {
     yaxis_title <- reactive({
       req(hcnt_afc_toggle())
       ifelse(hcnt_afc_toggle() == "headcount", "Headcount", "Percentage")
-
     })
 
 
     output$headcount_afc <- highcharter::renderHighchart({
-
-      plt <- gpg_pyramid(x = df_hdcnt_afc(), xvar = "afc_band",
-                         yvar = yvar(), yaxis_title = yaxis_title())
+      plt <- gpg_pyramid(
+        x = df_hdcnt_afc(), xvar = "afc_band",
+        yvar = yvar(), yaxis_title = yaxis_title()
+      )
 
       plt |>
         highcharter::hc_tooltip(
@@ -105,9 +109,9 @@ mod_headcount_server <- function(id) {
                 outHTML =
                   '<b>Gender: </b>' + this.series.name + '<br>' +
                   '<b>AfC: </b>' + this.point.afc_band + '<br/>' +
-                  '<b>Number of employees: </b>' + 
+                  '<b>Number of employees: </b>' +
           Highcharts.numberFormat(Math.abs(this.point.y), 0) + '<br>' +
-                  '<b>Percentage of employees: </b>' + 
+                  '<b>Percentage of employees: </b>' +
           Highcharts.numberFormat(Math.abs(this.point.perc), 0) + '%'
 
                 return outHTML
@@ -116,8 +120,6 @@ mod_headcount_server <- function(id) {
               "
           )
         )
-
     })
-
   })
 }

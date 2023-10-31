@@ -30,13 +30,14 @@ process_file <- function(filepath) {
         mutate(period = financial_year) |>
         filter(gender == "Pay Gap %") |>
         select(period,
-               mean_paygap = avg_hourly_rate,
-               median_paygap = median_hourly_rate),
+          mean_paygap = avg_hourly_rate,
+          median_paygap = median_hourly_rate
+        ),
       quartile = read_excel(filepath, range = cell_rows(3:7), col_names = TRUE) |>
         select(5:9) |>
         janitor::clean_names() |>
         mutate(period = financial_year) |>
-        select(period, quartile, female, male) ,
+        select(period, quartile, female, male),
       afc = read_excel(filepath, skip = 8, col_names = TRUE) |>
         select(2:7) |>
         janitor::clean_names() |>
@@ -92,31 +93,37 @@ afc_staff <- afc |>
     by = "pay_scale"
   ) |>
   select(-employee_number) |>
-
   # Data quality error July 2013 Archive employee org
   # is wrong, manually edited
-  mutate(org_l3 = ifelse(org_l3 == "July 2013 Archive",
-                         "914 BSA Finance, Commercial and Estates L3", org_l3),
-         directorate = stringr::str_replace_all(org_l3, c("^914 BSA " = "", " L3" = "")),
-         directorate = stringr::str_trim(directorate),
-         headcount = 1) |>
+  mutate(
+    org_l3 = ifelse(org_l3 == "July 2013 Archive",
+      "914 BSA Finance, Commercial and Estates L3", org_l3
+    ),
+    directorate = stringr::str_replace_all(org_l3, c("^914 BSA " = "", " L3" = "")),
+    directorate = stringr::str_trim(directorate),
+    headcount = 1
+  ) |>
   select(period, gender, headcount, hourly_rate, quartile, fte, afc_band, directorate)
 
 # quartile requires data transformation
 quartile_overall <- quartile |>
   group_by(period) |>
-  summarise(female = sum(female),
-            male = sum(male),
-            .groups = "drop") |>
+  summarise(
+    female = sum(female),
+    male = sum(male),
+    .groups = "drop"
+  ) |>
   mutate(quartile = "Overall")
 
 quartile <- quartile |>
   bind_rows(quartile_overall)
 
 quartile <- quartile |>
-  tidyr::pivot_longer(cols = c(female, male),
-                      names_to = "gender",
-                      values_to = "count") |>
+  tidyr::pivot_longer(
+    cols = c(female, male),
+    names_to = "gender",
+    values_to = "count"
+  ) |>
   group_by(period, quartile) |>
   mutate(percent = count / sum(count) * 100) |>
   ungroup()

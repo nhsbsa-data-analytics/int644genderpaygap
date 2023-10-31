@@ -150,8 +150,10 @@ gpg_data <- function(x,
   # data frame: aggregate headcount by period
   df_hdcnt <- x |>
     dplyr::group_by(period) |>
-    dplyr::summarise(headcount = sum(headcount, na.rm = TRUE),
-                     .groups = "drop") |>
+    dplyr::summarise(
+      headcount = sum(headcount, na.rm = TRUE),
+      .groups = "drop"
+    ) |>
     dplyr::arrange(period)
 
   # Extract the values
@@ -163,8 +165,10 @@ gpg_data <- function(x,
   # data frame: aggregate headcount by gender by period
   df_hdcnt_gender <- x |>
     dplyr::group_by(period, gender) |>
-    dplyr::summarise(headcount = sum(headcount, na.rm = TRUE),
-                     .groups = "drop") |>
+    dplyr::summarise(
+      headcount = sum(headcount, na.rm = TRUE),
+      .groups = "drop"
+    ) |>
     dplyr::arrange(period)
 
 
@@ -231,7 +235,7 @@ gpg_data <- function(x,
       median_rate = median(hourly_rate, na.rm = TRUE),
       .groups = "drop"
     ) |>
-    tidyr::pivot_wider(names_from = gender, values_from = c(mean_rate, median_rate)) |> 
+    tidyr::pivot_wider(names_from = gender, values_from = c(mean_rate, median_rate)) |>
     dplyr::mutate(
       mean_paygap = (mean_rate_Male - mean_rate_Female) / mean_rate_Male * 100,
       median_paygap = (median_rate_Male - median_rate_Female) / median_rate_Male * 100
