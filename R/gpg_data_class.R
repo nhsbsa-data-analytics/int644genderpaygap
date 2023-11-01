@@ -4,7 +4,7 @@
 #' headcount, hourly rate by further breakdown.
 #'
 #' @details The \code{gpg_data} class expects a \code{data.frame} with at
-#' least seven columns: period, gender, hourly_rate, quartile, fte, afc_band,
+#' least seven columns: period, gender, hourly_rate, quartile, afc_band,
 #' directorate.
 #'
 #' Once initiated, the class has six slots:
@@ -47,7 +47,7 @@ gpg_data <- function(x,
                            \n\nIt expects a data.frame with at
                            least eight columns: period, gender,
                            headcount, hourly_rate, quartile,
-                           fte, afc_band, directorate.")
+                           afc_band, directorate.")
 
 
 
@@ -61,10 +61,10 @@ gpg_data <- function(x,
 
   futile.logger::flog.debug("Checking x has correct columns...")
 
-  if (length(colnames(x)) < 7) {
+  if (length(colnames(x)) < 6) {
     futile.logger::flog.error("x must have at least eight columns:
                               period, gender, headcount, hourly_rate,
-                              quartile, fte, afc_band, directorate.")
+                              quartile, afc_band, directorate.")
   }
 
   futile.logger::flog.debug("Checking x contains a period column...")
@@ -81,11 +81,6 @@ gpg_data <- function(x,
   futile.logger::flog.debug("Checking x contains a hourly_rate column...")
   if (!"hourly_rate" %in% colnames(x)) {
     stop("x must contain hourly_rate column")
-  }
-
-  futile.logger::flog.debug("Checking x contains a fte column...")
-  if (!"fte" %in% colnames(x)) {
-    stop("x must contain fte column")
   }
 
   futile.logger::flog.debug("Checking x contains a afc_band column...")
@@ -219,9 +214,10 @@ gpg_data <- function(x,
       .groups = "drop"
     ) |>
     tidyr::pivot_wider(names_from = gender, values_from = c(mean_rate, median_rate)) |>
+    janitor::clean_names() |>
     dplyr::mutate(
-      mean_paygap = (mean_rate_Male - mean_rate_Female) / mean_rate_Male * 100,
-      median_paygap = (median_rate_Male - median_rate_Female) / median_rate_Male * 100
+      mean_paygap = (mean_rate_men - mean_rate_women) / mean_rate_men * 100,
+      median_paygap = (median_rate_men - median_rate_women) / median_rate_men * 100
     )
 
 
@@ -236,9 +232,10 @@ gpg_data <- function(x,
       .groups = "drop"
     ) |>
     tidyr::pivot_wider(names_from = gender, values_from = c(mean_rate, median_rate)) |>
+    janitor::clean_names() |>
     dplyr::mutate(
-      mean_paygap = (mean_rate_Male - mean_rate_Female) / mean_rate_Male * 100,
-      median_paygap = (median_rate_Male - median_rate_Female) / median_rate_Male * 100
+      mean_paygap = (mean_rate_men - mean_rate_women) / mean_rate_men * 100,
+      median_paygap = (median_rate_men - median_rate_women) / median_rate_men * 100
     )
 
 
