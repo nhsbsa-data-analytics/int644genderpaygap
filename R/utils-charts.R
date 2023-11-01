@@ -289,7 +289,8 @@ gpg_bar <- function(x, xvar, yvar, yaxis_title) {
         ) |>
         nhsbsaR::theme_nhsbsa_highchart() |>
         highcharter::hc_yAxis(
-          title = list(text = yaxis_title)
+          title = list(text = yaxis_title),
+          max = 50
         ) |>
         highcharter::hc_xAxis(
           type = "category",
@@ -301,12 +302,12 @@ gpg_bar <- function(x, xvar, yvar, yaxis_title) {
             enabled = TRUE,
             format = "{y} %",
             inside = FALSE,
-            align = "right",
+            align = "top",
             color = "#425563",
-            style = list(fontSize = "14px")
+            style = list(fontSize = "13px")
           )),
-          pointPadding = 0.1,
-          groupPadding = 0
+          pointPadding = 1,
+          groupPadding = 1
         ) |>
         highcharter::hc_tooltip(
           headerFormat = '<span style="font-size: 10px">{point.key}</span><br/>',
@@ -360,7 +361,8 @@ gpg_column <- function(x, xvar = "period", yvar, yaxis_title) {
         ) |>
         nhsbsaR::theme_nhsbsa_highchart() |>
         highcharter::hc_yAxis(
-          title = list(text = yaxis_title)
+          title = list(text = yaxis_title),
+          max = 20
         ) |>
         highcharter::hc_xAxis(
           type = "category",

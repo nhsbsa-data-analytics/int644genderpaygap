@@ -46,7 +46,7 @@ mod_paygap_ui <- function(id) {
         ),
         nhs_selectInput(
           inputId = ns("stats"),
-          label = "Pay gap shown by",
+          label = "Gender pay gap by",
           choices = c("Mean" = "mean_paygap", 
                       "Median" = "median_paygap"),
           full_width = TRUE,
@@ -83,7 +83,7 @@ mod_paygap_server <- function(id) {
         x = df_paygap, 
         xvar = "period",
         yvar = "mean_paygap",
-        yaxis_title = "Mean pay gap (%)"
+        yaxis_title = "Mean gender pay gap (%)"
       )
     })
     
@@ -92,7 +92,7 @@ mod_paygap_server <- function(id) {
         x = df_paygap, 
         xvar = "period",
         yvar = "median_paygap",
-        yaxis_title = "Median pay gap (%)"
+        yaxis_title = "Median gender pay gap (%)"
       )
     })
     
@@ -103,26 +103,28 @@ mod_paygap_server <- function(id) {
 
       if(input$factor == "afc_band"){
         nhsbsaGPG::gpg_class$df_hrrate_afc |> 
+          dplyr::mutate(mean_paygap = round(mean_paygap, 1),
+                        median_paygap = round(median_paygap, 1)) |> 
           dplyr::filter(period == input$period) |> 
-          dplyr::select(period, afc_band, input$stats)
-        
+          dplyr::select(period, afc_band, input$stats)  
+
       }else{
         nhsbsaGPG::gpg_class$df_hrrate_dir |> 
+          dplyr::mutate(mean_paygap = round(mean_paygap, 1),
+                        median_paygap = round(median_paygap, 1)) |> 
           dplyr::filter(period == input$period) |> 
           dplyr::select(period, directorate, input$stats)
       }
     })
-    
-    observe(print(df_paygap_afc_directorate()))
-    
+
     output$paygap_afc_directorate <- highcharter::renderHighchart({ 
       gpg_bar(
         x = df_paygap_afc_directorate(),
         xvar = input$factor,
         yvar = input$stats,
         yaxis_title = switch(input$stats,
-                             "mean_paygap" = "Mean pay gap (%)",
-                             "median_paygap" = "Median pay gap (%)")
+                             "mean_paygap" = "Mean gender pay gap (%)",
+                             "median_paygap" = "Median gender pay gap (%)")
       )
       })
       
