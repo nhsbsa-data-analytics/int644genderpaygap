@@ -29,7 +29,6 @@ blob_names <- blobs_in_folder[["name"]]
 
 # Loop through each blob in the folder and download
 for (blob_name in blob_names) {
-
   local_file_path <- paste0(config$import$local_path, "/", basename(blob_name))
 
   # Check if the file exists locally, and if so, delete it

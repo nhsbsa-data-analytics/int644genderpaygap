@@ -21,14 +21,35 @@ app_ui <- function(request) {
         div(
           class = "nhsuk-main-wrapper",
           role = "main",
-          nhs_navlistPanel(
-            id = "mainTabs",
-            well = FALSE,
-            widths = c(3, 9),
-            tabPanel(
-              title = "Report",
-              mod_introduction_ui("introduction_1")
-            )
+          fluidRow(
+            id = "mainpage",
+            column(width = 10),
+            shinyWidgets::pickerInput(
+              inputId = "content_main",
+              label = "Content:",
+              choices = c(
+                "Introduction",
+                "Gender profile",
+                "Gender pay gap",
+                "Quartiles",
+                "Directorate"
+              ),
+              selected = "Introduction",
+              width = "fit",
+              inline = TRUE
+            ),
+            tags$div(id = "introduction"),
+            mod_introduction_ui("introduction_1"),
+            hr(),
+            br(),
+            tags$div(id = "headcount"),
+            mod_headcount_ui("headcount_1"),
+            actionLink("top_headcount_intro", "Go to top page"),
+            hr(),
+            br(),
+            tags$div(id = "paygap"),
+            mod_paygap_ui("paygap_1"),
+            actionLink("top_paygap_intro", "Go to top page")
           )
         )
       )
@@ -52,7 +73,7 @@ golem_add_external_resources <- function() {
 
   tags$head(
     favicon("assets/favicons/favicon"),
-    tags$title("nhsbsaGPG"),
+    tags$title("NHSBSA gender pay gap report"),
 
     # Add here other external resources
     # for example, you can add shinyalert::useShinyalert()

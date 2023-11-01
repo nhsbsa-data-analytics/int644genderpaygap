@@ -2,8 +2,7 @@
 % Please edit documentation in R/gpg_data_class.R
 \name{gpg_data}
 \alias{gpg_data}
-\title{S3 gpg class to create headcount, hourly rate by AFC,
-directorate level hourly rate.'}
+\title{S3 gender pay gap class}
 \usage{
 gpg_data(x, log_level = futile.logger::WARN, eda = FALSE)
 }
@@ -19,7 +18,7 @@ If the class is not instantiated correctly, nothing is returned.
 }
 \description{
 \code{gpg_data} is the class used for the creation of
-headcount, hourly rate by AFC with without directorate in the GPG report.
+headcount, hourly rate by further breakdown.
 }
 \details{
 The \code{gpg_data} class expects a \code{data.frame} with at
@@ -27,12 +26,13 @@ least seven columns: period, gender, hourly_rate, quartile, fte, afc_band,
 directorate.
 
 Once initiated, the class has six slots:
-\code{df}: raw data frame
-\code{df_hdcnt}: data frame contains headcount by period
-\code{df_hdcnt_gender}: data frame contains headcount by gender by period
-\code{df_hdcnt_afc}: data frame contains headcount by afc band
+\code{df_hdcnt}: data frame contains overall headcount
+\code{df_hdcnt_gender}: data frame contains headcount
+\code{df_hdcnt_afc}: data frame contains headcount by AFC band
 \code{df_hdcnt_dir}: data frame contains headcount by directorate
-\code{df_hrrate}: data frame contains hourly rate by gender for each grade
+\code{df_hrrate}: data frame contains mean, median hourly rate
+\code{df_hrrate_afc}: data frame contains mean, median hourly rate by AFC band
+\code{df_hrrate_dir} data frame contains mean, median hourly rate by directorate
 \code{ending_fy}: a character vector containing ending reporting period
 (e.g. 31 March 2023). This uses for introduction paragraph
 }
