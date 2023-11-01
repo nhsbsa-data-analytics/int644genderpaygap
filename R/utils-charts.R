@@ -266,7 +266,7 @@ gpg_bar <- function(x, xvar, yvar, yaxis_title) {
       data <- x
       # positive and negative value give different colours.
       data <- data |>
-        dplyr::filter(!is.na(.data[[xvar]])) |>
+        dplyr::filter(!is.na(.data[[yvar]])) |>
         dplyr::mutate(
           color = ifelse(.data[[yvar]] < 0,
             nhsbsaR::palette_nhsbsa("Pink"),
