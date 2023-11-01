@@ -25,7 +25,6 @@ Imports:
     htmlwidgets,
     markdown,
     shinyWidgets,
-    forcats,
     ggplot2
 Suggests:
     pkgload,

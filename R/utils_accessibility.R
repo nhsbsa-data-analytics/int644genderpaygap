@@ -139,7 +139,7 @@ accessible_radio_button <- function(inputId, label, choices = NULL, selected = N
                                     choiceValues = NULL) {
   args <- shiny:::normalizeChoicesArgs(choices, choiceNames, choiceValues)
 
-  selected <- shiny:::restoreInput(id = inputId, default = selected)
+  selected <- shiny::restoreInput(id = inputId, default = selected)
 
   selected <- if (is.null(selected)) args$choiceValues[[1]] else as.character(selected)
   if (length(selected) > 1) stop("The 'selected' argument must be of length 1")
