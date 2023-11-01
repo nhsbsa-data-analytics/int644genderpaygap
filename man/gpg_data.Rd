@@ -22,7 +22,7 @@ headcount, hourly rate by further breakdown.
 }
 \details{
 The \code{gpg_data} class expects a \code{data.frame} with at
-least seven columns: period, gender, hourly_rate, quartile, fte, afc_band,
+least seven columns: period, gender, hourly_rate, quartile, afc_band,
 directorate.
 
 Once initiated, the class has six slots:

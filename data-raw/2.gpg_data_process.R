@@ -2,7 +2,7 @@
 # Three parts will be pulled for the report
 # Gender pay gap (%) based on male hourly pay
 # Quantiles by gender
-# Join with staff list to get AFC band information, FTE
+# Join with staff list to get AFC band information
 
 # Load required libraries
 library(readxl)
@@ -52,8 +52,7 @@ process_file <- function(filepath) {
         select(
           employee_number,
           org_l3,
-          pay_scale,
-          fte
+          pay_scale
         ) |>
         mutate(
           period = financial_year,
@@ -101,16 +100,17 @@ afc_staff <- afc |>
     ),
     directorate = stringr::str_replace_all(org_l3, c("^914 BSA " = "", " L3" = "")),
     directorate = stringr::str_trim(directorate),
-    headcount = 1
+    headcount = 1,
+    gender = ifelse(gender == "Female", "Women", "Men")
   ) |>
-  select(period, gender, headcount, hourly_rate, quartile, fte, afc_band, directorate)
+  select(period, gender, headcount, hourly_rate, quartile, afc_band, directorate)
 
 # quartile requires data transformation
 quartile_overall <- quartile |>
   group_by(period) |>
   summarise(
-    female = sum(female),
-    male = sum(male),
+    women = sum(female),
+    men = sum(male),
     .groups = "drop"
   ) |>
   mutate(quartile = "Overall")
@@ -120,7 +120,7 @@ quartile <- quartile |>
 
 quartile <- quartile |>
   tidyr::pivot_longer(
-    cols = c(female, male),
+    cols = c(women, men),
     names_to = "gender",
     values_to = "count"
   ) |>
