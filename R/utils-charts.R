@@ -80,8 +80,8 @@ gpg_trend <- function(x,
           itemWidth = 600,
           itemMarginTop = 5,
           y = 0
-        ) |> 
-        highcharter::hc_credits(enabled = TRUE) 
+        ) |>
+        highcharter::hc_credits(enabled = TRUE)
 
       return(plt)
     },
@@ -162,8 +162,8 @@ gpg_pyramid <- function(x, xvar = "afc_band", yvar, yaxis_title) {
               legendItemClick = htmlwidgets::JS("function () { return false; }")
             )
           )
-        ) |> 
-        highcharter::hc_credits(enabled = TRUE) 
+        ) |>
+        highcharter::hc_credits(enabled = TRUE)
 
 
       return(plt)
@@ -232,8 +232,8 @@ gpg_stack <- function(x, xvar, yvar, groupvar, yaxis_title) {
               legendItemClick = htmlwidgets::JS("function () { return false; }")
             )
           )
-        ) |> 
-        highcharter::hc_credits(enabled = TRUE) 
+        ) |>
+        highcharter::hc_credits(enabled = TRUE)
 
 
       return(plt)
@@ -317,8 +317,8 @@ gpg_bar <- function(x, xvar, yvar, yaxis_title) {
           pointFormat = '<span style="color:{point.color}">
           \u25CF</span> {series.name}: <b>{point.y} %</b><br/>',
           footerFormat = ""
-        ) |> 
-        highcharter::hc_credits(enabled = TRUE) 
+        ) |>
+        highcharter::hc_credits(enabled = TRUE)
 
       return(plt)
     },
@@ -408,7 +408,7 @@ gpg_column <- function(x, xvar = "period", yvar, yaxis_title) {
 
 
 
-#' @title Highcharter dumbbell chart. 
+#' @title Highcharter dumbbell chart.
 #'
 #' @description df_hrrate_afc or df_hrrate_dir data frame.
 #'
@@ -426,7 +426,7 @@ gpg_dumbbell <- function(x, low, high, xaxis_category, yaxis_title) {
     expr = {
       data <- x
       category_text <- data[[xaxis_category]]
-      
+
       plt <- highcharter::highchart() |>
         highcharter::hc_add_series(
           data = data,
@@ -442,28 +442,30 @@ gpg_dumbbell <- function(x, low, high, xaxis_category, yaxis_title) {
           useHTML = TRUE,
           text =
             "
-            <span style = 'color:#AE2573; font-size: 18px'> &bull; </span> <b> <span style = font-size: 35px'> Women </span> </b>
-            <span style = 'color:#003087; font-size: 18px'> &bull; </span> <b> <span style = font-size: 35px'> Men </span>
+            <span style = 'color:#AE2573; font-size: 18px'> &bull; 
+          </span> <b> <span style = font-size: 35px'> Women </span> </b>
+            <span style = 'color:#003087; font-size: 18px'> &bull; 
+          </span> <b> <span style = font-size: 35px'> Men </span>
             ",
           align = "center"
-        ) |> 
+        ) |>
         highcharter::hc_chart(
           inverted = TRUE,
           marginLeft = 200
-        ) |> 
+        ) |>
         highcharter::hc_xAxis(
           categories = category_text,
           title = list(text = "")
-        ) |> 
+        ) |>
         highcharter::hc_yAxis(
           min = 0,
           max = 90
-          ) |> 
-        highcharter::hc_scrollbar(enabled = FALSE) |> 
-        highcharter::hc_legend(enabled = FALSE) |> 
-        nhsbsaR::theme_nhsbsa_highchart() |> 
+        ) |>
+        highcharter::hc_scrollbar(enabled = FALSE) |>
+        highcharter::hc_legend(enabled = FALSE) |>
+        nhsbsaR::theme_nhsbsa_highchart() |>
         highcharter::hc_credits(enabled = TRUE)
-      
+
       return(plt)
     },
     warning = function() {

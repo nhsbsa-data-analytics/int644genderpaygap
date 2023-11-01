@@ -55,13 +55,13 @@ mod_headcount_server <- function(id) {
     ns <- session$ns
 
     df_hdcnt_gender <- nhsbsaGPG::gpg_class$df_hdcnt_gender |>
-      tidyr::pivot_wider(names_from = gender, values_from = headcount) |> 
+      tidyr::pivot_wider(names_from = gender, values_from = headcount) |>
       dplyr::mutate(
         total = Men + Women,
-        dplyr::across(c(Men, Women), ~ round(./total*100,1), .names = "{.col}_Proportion")
+        dplyr::across(c(Men, Women), ~ round(./total * 100, 1),
+                      .names = "{.col}_Proportion")
       ) %>%
       dplyr::select(-total)
-      
 
     output$headcount_all <- highcharter::renderHighchart({
       plt <- gpg_trend(
@@ -72,9 +72,9 @@ mod_headcount_server <- function(id) {
         yaxis_label = "number",
         colpalette = "gender"
       )
-      
-      plt |> 
-        highcharter::hc_tooltip(
+
+      plt |>
+        ighcharter::hc_tooltip(
           shared = FALSE,
           borderColor = "#425563",
           formatter = highcharter::JS(
@@ -90,9 +90,8 @@ mod_headcount_server <- function(id) {
 
             "
           )
-        ) 
+        )
     })
-
     df_hdcnt_afc <- reactive({
       req(input$period)
 

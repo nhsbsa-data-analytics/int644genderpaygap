@@ -96,10 +96,10 @@ mod_paygap_server <- function(id) {
       )
     })
 
-    
-    
-    
-    
+
+
+
+
     df_paygap <- reactive({
       req(input$period)
       req(input$factor)
@@ -109,55 +109,55 @@ mod_paygap_server <- function(id) {
           dplyr::mutate(mean_paygap = round(mean_paygap, 1),
                         median_paygap = round(median_paygap, 1),
                         tooltip_text = .data[[input$factor]]) |>
-          dplyr::filter(period == input$period) 
+          dplyr::filter(period == input$period)
 
       }else {
         nhsbsaGPG::gpg_class$df_hrrate_dir |>
           dplyr::mutate(mean_paygap = round(mean_paygap, 1),
                         median_paygap = round(median_paygap, 1),
                         tooltip_text = .data[[input$factor]]) |>
-          dplyr::filter(period == input$period) 
+          dplyr::filter(period == input$period)
       }
     })
-    
-    
+
+
     df_paygap_afc_directorate <- reactive({
       req(input$stats)
-      
-      df <- if(input$stats == "mean_paygap"){
+
+      df <- if (input$stats == "mean_paygap") {
         df_paygap() |>
-          dplyr::select(-dplyr::starts_with("median")) |> 
+          dplyr::select(-dplyr::starts_with("median")) |>
           dplyr::rename(rate_women = mean_rate_women,
-                        rate_men = mean_rate_men) |> 
+                        rate_men = mean_rate_men) |>
           dplyr::mutate(paygap = mean_paygap)
-        
-      }else{
+
+      }else {
         df_paygap() |>
-          dplyr::select(-dplyr::starts_with("mean")) |> 
+          dplyr::select(-dplyr::starts_with("mean")) |>
           dplyr::rename(rate_women = median_rate_women,
-                        rate_men = median_rate_men) |> 
+                        rate_men = median_rate_men) |>
           dplyr::mutate(paygap = median_paygap)
-        
+
       }
-      
-      df_paygap_afc_directorate <- df |> 
+
+      df_paygap_afc_directorate <- df |>
         dplyr::filter(rowSums(is.na(df)) == 0)
-      
+
     })
-    
+
 
     # tooltip heading
     tooltip_title <- reactive({
       req(input$stats)
-      
+
       lbl <- switch(input$stats,
-                    "mean_paygap" = "Mean pay gap of",
-                    "median_paygap" = "Median pay gap of"
+        "mean_paygap" = "Mean pay gap of",
+        "median_paygap" = "Median pay gap of"
       )
     })
 
 
-    
+
     output$paygap_afc_directorate <- highcharter::renderHighchart({
       plt <- gpg_dumbbell(
         x = df_paygap_afc_directorate(),
@@ -168,24 +168,26 @@ mod_paygap_server <- function(id) {
                              "mean_paygap" = "Mean gender pay gap (%)",
                              "median_paygap" = "Median gender pay gap (%)")
       )
-      
-      plt |> 
+
+      plt |>
         highcharter::hc_tooltip(
           headerFormat = "",
-          positioner = htmlwidgets::JS("function(){return {
-                                                         x:this.chart.chartWidth - (this.label.width)*1.01,
-                                                         y:this.chart.chartHeight*0.2}}"
+          positioner = htmlwidgets::JS(
+            "function(){return {
+                 x:this.chart.chartWidth - (this.label.width)*1.01,
+                 y:this.chart.chartHeight*0.2}
+            }"
           ),
           pointFormat = paste0(
             "<b>{point.tooltip_text}</b> <br><br>",
-            "<b>",tooltip_title(), " {point.paygap}%</b><br>",
+            "<b>", tooltip_title(), " {point.paygap}%</b><br>",
             "<b>Women:</b> {point.rate_women:,.1f} per hour  <br>",
             "<b>Men:</b> {point.rate_men:,.1f} per hour"
           )
         )
-      
-      
-        
+
+
+
     })
   })
 }
