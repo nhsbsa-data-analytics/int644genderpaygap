@@ -39,7 +39,7 @@ mod_paygap_ui <- function(id) {
         nhs_selectInput(
           inputId = ns("factor"),
           label = "Report by",
-          choices = c("AfC band" = "afc_band", 
+          choices = c("AfC band" = "afc_band",
                       "Directorate" = "directorate"),
           full_width = TRUE,
           selected = "AfC band"
@@ -47,7 +47,7 @@ mod_paygap_ui <- function(id) {
         nhs_selectInput(
           inputId = ns("stats"),
           label = "Gender pay gap by",
-          choices = c("Mean" = "mean_paygap", 
+          choices = c("Mean" = "mean_paygap",
                       "Median" = "median_paygap"),
           full_width = TRUE,
           selected = "Mean"
@@ -59,9 +59,9 @@ mod_paygap_ui <- function(id) {
         outputId = ns("paygap_afc_directorate"),
         height = "400px"
       )
-    
+
     )
-    
+
   )
 }
 
@@ -71,53 +71,53 @@ mod_paygap_ui <- function(id) {
 mod_paygap_server <- function(id) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
-    
-    df_paygap <- nhsbsaGPG::paygap |> 
+
+    df_paygap <- nhsbsaGPG::paygap |>
       dplyr::mutate(
-        mean_paygap = round(mean_paygap,1),
-        median_paygap = round(median_paygap,1)
+        mean_paygap = round(mean_paygap, 1),
+        median_paygap = round(median_paygap, 1)
       )
-    
+
     output$paygap_all_mean <- highcharter::renderHighchart({
       gpg_column(
-        x = df_paygap, 
+        x = df_paygap,
         xvar = "period",
         yvar = "mean_paygap",
         yaxis_title = "Mean gender pay gap (%)"
       )
     })
-    
+
     output$paygap_all_median <- highcharter::renderHighchart({
       gpg_column(
-        x = df_paygap, 
+        x = df_paygap,
         xvar = "period",
         yvar = "median_paygap",
         yaxis_title = "Median gender pay gap (%)"
       )
     })
-    
+
     df_paygap_afc_directorate <- reactive({
       req(input$period)
       req(input$factor)
       req(input$stats)
 
-      if(input$factor == "afc_band"){
-        nhsbsaGPG::gpg_class$df_hrrate_afc |> 
+      if (input$factor == "afc_band") {
+        nhsbsaGPG::gpg_class$df_hrrate_afc |>
           dplyr::mutate(mean_paygap = round(mean_paygap, 1),
-                        median_paygap = round(median_paygap, 1)) |> 
-          dplyr::filter(period == input$period) |> 
-          dplyr::select(period, afc_band, input$stats)  
+                        median_paygap = round(median_paygap, 1)) |>
+          dplyr::filter(period == input$period) |>
+          dplyr::select(period, afc_band, input$stats)
 
-      }else{
-        nhsbsaGPG::gpg_class$df_hrrate_dir |> 
+      }else {
+        nhsbsaGPG::gpg_class$df_hrrate_dir |>
           dplyr::mutate(mean_paygap = round(mean_paygap, 1),
-                        median_paygap = round(median_paygap, 1)) |> 
-          dplyr::filter(period == input$period) |> 
+                        median_paygap = round(median_paygap, 1)) |>
+          dplyr::filter(period == input$period) |>
           dplyr::select(period, directorate, input$stats)
       }
     })
 
-    output$paygap_afc_directorate <- highcharter::renderHighchart({ 
+    output$paygap_afc_directorate <- highcharter::renderHighchart({
       gpg_bar(
         x = df_paygap_afc_directorate(),
         xvar = input$factor,
@@ -126,7 +126,6 @@ mod_paygap_server <- function(id) {
                              "mean_paygap" = "Mean gender pay gap (%)",
                              "median_paygap" = "Median gender pay gap (%)")
       )
-      })
-      
+    })
   })
 }
