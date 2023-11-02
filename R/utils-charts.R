@@ -426,7 +426,7 @@ gpg_dumbbell <- function(x, low, high, xaxis_category, yaxis_title) {
     expr = {
       data <- x
       category_text <- data[[xaxis_category]]
-
+      yaxis_max_value <- ifelse(xaxis_category == "afc_band", 60, 90)
       plt <- highcharter::highchart() |>
         highcharter::hc_add_series(
           data = data,
@@ -459,7 +459,8 @@ gpg_dumbbell <- function(x, low, high, xaxis_category, yaxis_title) {
         ) |>
         highcharter::hc_yAxis(
           min = 0,
-          max = 90
+          max = yaxis_max_value,
+          title = list(text = yaxis_title)
         ) |>
         highcharter::hc_scrollbar(enabled = FALSE) |>
         highcharter::hc_legend(enabled = FALSE) |>
