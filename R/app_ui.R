@@ -31,8 +31,8 @@ app_ui <- function(request) {
                 "Introduction",
                 "Gender profile",
                 "Gender pay gap",
-                "Quartiles",
-                "Directorate"
+                "Pay quartile",
+                "Action"
               ),
               selected = "Introduction",
               width = "fit",
@@ -44,12 +44,20 @@ app_ui <- function(request) {
             br(),
             tags$div(id = "headcount"),
             mod_headcount_ui("headcount_1"),
-            actionLink("top_headcount_intro", "Go to top page"),
+            accessible_action_link("top_headcount_intro", "Go to top page"),
             hr(),
             br(),
             tags$div(id = "paygap"),
             mod_paygap_ui("paygap_1"),
-            actionLink("top_paygap_intro", "Go to top page")
+            accessible_action_link("top_paygap_intro", "Go to top page"),
+            hr(),
+            br(),
+            tags$div(id = "quartile"),
+            mod_quartile_ui("quartile_1"),
+            accessible_action_link("top_quartile_intro", "Go to top page"),
+            hr(),
+            br(),
+            tags$div(id = "gpg_action")
           )
         )
       )
