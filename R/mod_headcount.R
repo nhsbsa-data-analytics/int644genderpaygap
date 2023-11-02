@@ -74,7 +74,7 @@ mod_headcount_server <- function(id) {
       )
 
       plt |>
-        ighcharter::hc_tooltip(
+        highcharter::hc_tooltip(
           shared = FALSE,
           borderColor = "#425563",
           formatter = highcharter::JS(
