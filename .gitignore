@@ -16,7 +16,9 @@ rsconnect
 ################################################
 *.[xX][lL][sS][xXmMtT]?
 # Any RDA files
-*.[rR][dD][aA]
+*.[rR][dD][aA]?
+# Any docx files
+*.[dD][oO][cC][xX]
 data/*
 data_temp/*
 /doc/

@@ -10,7 +10,7 @@
 mod_headcount_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    includeMarkdown("inst/markdown/02_headcount_1.md"),
+    includeMarkdown("inst/app/www/assets/markdown/02_headcount_1.md"),
     # chart 1: five year headcount trend split by gender
     nhs_card(
       highcharter::highchartOutput(
@@ -19,7 +19,7 @@ mod_headcount_ui <- function(id) {
       ),
       mod_nhs_download_ui(id = ns("download_headcount_all"))
     ),
-    includeMarkdown("inst/markdown/02_headcount_2.md"),
+    includeMarkdown("inst/app/www/assets/markdown/02_headcount_2.md"),
     # chart 2: headcount split by gender AfC
     nhs_card(
       nhs_selectInput(
