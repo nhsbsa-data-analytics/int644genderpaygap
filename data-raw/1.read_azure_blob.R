@@ -39,3 +39,4 @@ for (blob_name in blob_names) {
   # Download the blob data to the local file
   storage_download(blob_container, blob_name, local_file_path, overwrite = TRUE)
 }
+

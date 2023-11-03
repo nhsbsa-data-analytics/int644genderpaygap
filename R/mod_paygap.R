@@ -106,16 +106,12 @@ mod_paygap_server <- function(id) {
 
       if (input$factor == "afc_band") {
         nhsbsaGPG::gpg_class$df_hrrate_afc |>
-          dplyr::mutate(mean_paygap = round(mean_paygap, 1),
-                        median_paygap = round(median_paygap, 1),
-                        tooltip_text = .data[[input$factor]]) |>
+          dplyr::mutate(tooltip_text = .data[[input$factor]]) |>
           dplyr::filter(period == input$period)
 
       }else {
         nhsbsaGPG::gpg_class$df_hrrate_dir |>
-          dplyr::mutate(mean_paygap = round(mean_paygap, 1),
-                        median_paygap = round(median_paygap, 1),
-                        tooltip_text = .data[[input$factor]]) |>
+          dplyr::mutate(tooltip_text = .data[[input$factor]]) |>
           dplyr::filter(period == input$period)
       }
     })
@@ -165,8 +161,8 @@ mod_paygap_server <- function(id) {
         high = "rate_men",
         xaxis_category = input$factor,
         yaxis_title = switch(input$stats,
-                             "mean_paygap" = "Mean gender pay gap (%)",
-                             "median_paygap" = "Median gender pay gap (%)")
+                             "mean_paygap" = "Mean hour pay (£)",
+                             "median_paygap" = "Median hour pay (£)")
       )
 
       plt |>
@@ -181,12 +177,10 @@ mod_paygap_server <- function(id) {
           pointFormat = paste0(
             "<b>{point.tooltip_text}</b> <br><br>",
             "<b>", tooltip_title(), " {point.paygap}%</b><br>",
-            "<b>Women:</b> {point.rate_women:,.1f} per hour  <br>",
-            "<b>Men:</b> {point.rate_men:,.1f} per hour"
+            "<b>Women:</b> £{point.rate_women:,.1f} per hour  <br>",
+            "<b>Men:</b> £{point.rate_men:,.1f} per hour"
           )
         )
-
-
 
     })
   })

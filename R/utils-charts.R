@@ -213,27 +213,47 @@ gpg_stack <- function(x, xvar, yvar, groupvar, yaxis_title) {
             group = .data[[groupvar]]
           )
         ) |>
-        nhsbsaR::theme_nhsbsa_highchart(palette = "gender") |>
+        nhsbsaR::theme_nhsbsa_highchart(palette = c("LightBlue","Pink")) |>
         highcharter::hc_yAxis(
           title = list(text = yaxis_title),
           max = 100
         ) |>
         highcharter::hc_xAxis(
+          min = 0,
+          max = 4, # Pad to ensure we can see the 4 label
+          categories = c("Lower Quartile<br>(Lowest Paid)", "Lower Middle Quartile", "Upper Middle Quartile", "Upper Quartile<br>(Highest Paid)", "Overall"),
           title = list(text = "Quartile")
-        ) |>
+        ) |> 
+        highcharter::hc_credits(enabled = TRUE) |> 
+        # highcharter::hc_legend(ggplot2::element_blank()) |>
         highcharter::hc_plotOptions(
-          series = list(
-            states = list(
-              # Disable series highlighting
-              inactive = list(enabled = FALSE)
-            ),
-            events = list(
-              # Disables turning the series off
-              legendItemClick = htmlwidgets::JS("function () { return false; }")
+          column = list(dataLabels = list(
+            enabled = TRUE,
+            format = "{point.y:.1f} %",
+            inside = TRUE,
+            align = "center",
+            color = "#425563",
+            style = list(fontSize = "13px")
+          )),
+          pointPadding = 1,
+          groupPadding = 1,
+            series = list(
+              states = list(
+                # Disable series highlighting
+                inactive = list(enabled = FALSE)
+              ),
+              events = list(
+                # Disables turning the series off
+                legendItemClick = htmlwidgets::JS("function () { return false; }")
+              )
             )
-          )
         ) |>
-        highcharter::hc_credits(enabled = TRUE)
+        highcharter::hc_tooltip(
+          headerFormat = '<span style="font-size: 10px">{point.key}</span><br/>',
+          pointFormat = '<span style="color:{point.color}">
+          \u25CF</span> {series.name}: <b>{point.y} %</b><br/>',
+          footerFormat = ""
+        ) 
 
 
       return(plt)
@@ -303,7 +323,7 @@ gpg_bar <- function(x, xvar, yvar, yaxis_title) {
         highcharter::hc_plotOptions(
           bar = list(dataLabels = list(
             enabled = TRUE,
-            format = "{y} %",
+            format = "{point.y:.1f} %",
             inside = FALSE,
             align = "top",
             color = "#425563",
@@ -426,7 +446,7 @@ gpg_dumbbell <- function(x, low, high, xaxis_category, yaxis_title) {
     expr = {
       data <- x
       category_text <- data[[xaxis_category]]
-
+      yaxis_max_value <- ifelse(xaxis_category == "afc_band", 60, 90)
       plt <- highcharter::highchart() |>
         highcharter::hc_add_series(
           data = data,
@@ -459,7 +479,8 @@ gpg_dumbbell <- function(x, low, high, xaxis_category, yaxis_title) {
         ) |>
         highcharter::hc_yAxis(
           min = 0,
-          max = 90
+          max = yaxis_max_value,
+          title = list(text = yaxis_title)
         ) |>
         highcharter::hc_scrollbar(enabled = FALSE) |>
         highcharter::hc_legend(enabled = FALSE) |>

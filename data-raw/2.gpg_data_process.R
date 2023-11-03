@@ -72,7 +72,8 @@ paygap <- map(dfs, "paygap") |>
 quartile <- map(dfs, "quartile") |>
   bind_rows() |>
   select(period, everything()) |>
-  mutate(quartile = as.character(quartile))
+  mutate(quartile = as.character(quartile)) |> 
+  rename(women = female, men = male)
 afc <- map(dfs, "afc") |>
   bind_rows() |>
   select(period, everything())
@@ -109,8 +110,8 @@ afc_staff <- afc |>
 quartile_overall <- quartile |>
   group_by(period) |>
   summarise(
-    women = sum(female),
-    men = sum(male),
+    women = sum(women),
+    men = sum(men),
     .groups = "drop"
   ) |>
   mutate(quartile = "Overall")

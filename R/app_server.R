@@ -5,15 +5,17 @@
 #' @import shiny
 #' @noRd
 app_server <- function(input, output, session) {
-  mod_headcount_server("headcount_1")
-  mod_paygap_server("paygap_1")
+  mod_headcount_server("headcount")
+  mod_paygap_server("paygap")
+  mod_quartile_server("quartile")
 
   observeEvent(input$content_main, {
     tag <- switch(input$content_main,
       "Introduction" = "introduction",
       "Gender profile" = "headcount",
-      "Mean/Median hourly pay" = "hourly_rate",
-      "Gender pay gap" = "paygap"
+      "Gender pay gap" = "paygap",
+      "Pay quartile" = "quartile",
+      "Action" = "gpg_action"
     )
 
     if (input$content_main == "Introduction") {
@@ -43,4 +45,15 @@ app_server <- function(input, output, session) {
       selected = "Introduction"
     )
   })
+  
+  observeEvent(input$top_quartile_intro, {
+    # jump to the top of the screen
+    shinyjs::runjs("window.scrollTo(0, 0)")
+    
+    updateSelectInput(session,
+                      inputId = "content_main",
+                      selected = "Introduction"
+    )
+  })
+  
 }
