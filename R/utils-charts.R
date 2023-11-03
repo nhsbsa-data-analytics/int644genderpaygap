@@ -203,6 +203,10 @@ gpg_stack <- function(x, xvar, yvar, groupvar, yaxis_title) {
   out <- tryCatch(
     expr = {
       data <- x
+
+      # Like other chart, women then follow by men
+      data[[groupvar]] <- factor(data[[groupvar]], levels = c("Women", "Men"))
+
       # Create chart object
       plt <- data |>
         highcharter::hchart(
@@ -221,8 +225,10 @@ gpg_stack <- function(x, xvar, yvar, groupvar, yaxis_title) {
         highcharter::hc_xAxis(
           min = 0,
           max = 4, # Pad to ensure we can see the 4 label
-          categories = c("Lower Quartile<br>(Lowest Paid)", "Lower Middle Quartile",
-                         "Upper Middle Quartile", "Upper Quartile<br>(Highest Paid)",
+          categories = c("1: Lower Quartile<br>(Lowest Paid)",
+                         "2: Lower Middle Quartile",
+                         "3: Upper Middle Quartile",
+                         "4: Upper Quartile<br>(Highest Paid)",
                          "Overall"),
           title = list(text = "Quartile")
         ) |>
@@ -250,13 +256,7 @@ gpg_stack <- function(x, xvar, yvar, groupvar, yaxis_title) {
             )
           )
         ) |>
-        highcharter::hc_tooltip(
-          headerFormat = '<span style="font-size: 10px">{point.key}</span><br/>',
-          pointFormat = '<span style="color:{point.color}">
-          \u25CF</span> {series.name}: <b>{point.y} %</b><br/>',
-          footerFormat = ""
-        )
-
+        highcharter::hc_tooltip(enabled = FALSE)
 
       return(plt)
     },
