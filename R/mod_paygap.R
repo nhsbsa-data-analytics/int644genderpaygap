@@ -26,7 +26,7 @@ mod_paygap_ui <- function(id) {
     ),
     mod_nhs_download_ui(id = ns("download_paygap_all")),
     br(),
-    includeMarkdown("inst/markdown/03_gender_pay_gap_2.md"),
+    includeMarkdown("inst/app/www/assets/markdown/03_gender_pay_gap_2.md"),
     nhs_card_tabstop(
       nhs_grid_3_col(
         nhs_selectInput(
@@ -176,7 +176,7 @@ mod_paygap_server <- function(id) {
           ),
           pointFormat = paste0(
             "<b>{point.tooltip_text}</b> <br><br>",
-            "<b>", tooltip_title(), " {point.paygap}%</b><br>",
+            "<b>", tooltip_title(), " {point.paygap:,.1f}%</b><br>",
             "<b>Women:</b> £{point.rate_women:,.1f} per hour  <br>",
             "<b>Men:</b> £{point.rate_men:,.1f} per hour"
           )
