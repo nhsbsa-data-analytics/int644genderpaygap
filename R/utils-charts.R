@@ -213,14 +213,17 @@ gpg_stack <- function(x, xvar, yvar, groupvar, yaxis_title) {
             group = .data[[groupvar]]
           )
         ) |>
-        nhsbsaR::theme_nhsbsa_highchart(palette = "gender") |>
+        nhsbsaR::theme_nhsbsa_highchart(palette = c("LightBlue","Pink")) |>
         highcharter::hc_yAxis(
           title = list(text = yaxis_title),
           max = 100
         ) |>
         highcharter::hc_xAxis(
+          min = 0,
+          max = 4, # Pad to ensure we can see the 4 label
+          categories = c("1<br>Lowest<br>Paid", rep(NA, 2), "4<br>Highest<br>Paid", "Overall"),
           title = list(text = "Quartile")
-        ) |>
+        ) |> 
         highcharter::hc_plotOptions(
           series = list(
             states = list(

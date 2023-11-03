@@ -1,10 +1,12 @@
 library(tidyr)
 library(dplyr)
+library(testthat)
+local_edition(3)
 
 x <- data.frame(
   period = c("2018/19", "2019/20", "2020/21", "2021/22", "2022/23"),
-  Female = c(1700, 1800, 1900, 2000, 2300),
-  Male = c(1100, 1300, 1300, 1400, 1500)
+  Women = c(1700, 1800, 1900, 2000, 2300),
+  Men = c(1100, 1300, 1300, 1400, 1500)
 )
 
 y <- data.frame(
@@ -27,7 +29,7 @@ z <- data.frame(
 quartile_test <- data.frame(
   period = c(rep("2018/19", 8)),
   quartile = c(rep(1, 2), rep(2, 2), rep(3, 2), rep(4, 2)),
-  gender = c("female", "male", "female", "male", "female", "male", "female", "male"),
+  gender = c("women", "men", "women", "men", "women", "men", "women", "men"),
   count = c(425, 282, 438, 261, 461, 269, 380, 344),
   percent = c(60.1, 39.9, 62.7, 37.3, 63.2, 36.8, 52.5, 47.5)
 )
@@ -77,9 +79,9 @@ paygap_all <- data.frame(
 testthat::test_that("gpg_trend function runs without errors", {
   expect_silent(gpg_trend(x,
     xvar = "period",
-    yvars = c("Male", "Female"),
-    series_names = c("Male", "Female"),
-    yaxis_title = "Male and Female employee headcount",
+    yvars = c("Men", "Women"),
+    series_names = c("Men", "Women"),
+    yaxis_title = "Men and Women employee headcount",
     yaxis_label = "number",
     colpalette = "gender"
   ))
@@ -90,9 +92,9 @@ testthat::test_that("gpg_trend outputs a highchart, htmlwidget class", {
   expect_equal(class(
     gpg_trend(x,
       xvar = "period",
-      yvars = c("Male", "Female"),
-      series_names = c("Male", "Female"),
-      yaxis_title = "Male and Female employee headcount",
+      yvars = c("Men", "Women"),
+      series_names = c("Men", "Women"),
+      yaxis_title = "Men and Women employee headcount",
       yaxis_label = "number",
       colpalette = c("DarkBlue", "Green")
     )
@@ -104,9 +106,9 @@ testthat::test_that("gpg_trend takes list as an input", {
 })
 
 
-testthat::test_that("gpg_trend input data frame must contain Female,
-                    Male column", {
-                      expect_equal(length(grep("Female|Male", names(x))), 2)
+testthat::test_that("gpg_trend input data frame must contain Women,
+                    Men column", {
+                      expect_equal(length(grep("Women|Men", names(x))), 2)
                     })
 
 
@@ -137,7 +139,7 @@ testthat::test_that("gpg_pyramid function runs without error", {
 testthat::test_that("gpg_stack function runs without error", {
   expect_silent(gpg_stack(quartile_test,
     xvar = "quartile", yvar = "percent",
-    groupvar = "gender", yaxis_title = "Males and females in pay quartile"
+    groupvar = "gender", yaxis_title = "Men and women in pay quartile"
   ))
 })
 
@@ -145,7 +147,7 @@ testthat::test_that("gpg_stack function runs without error", {
 testthat::test_that("gpg_stack function runs with error", {
   expect_error(gpg_stack(quartile_test,
     xvar = "quartile", yvar = "percent",
-    groupvar = NA, yaxis_title = "Males and females in pay quartile"
+    groupvar = NA, yaxis_title = "Men and women in pay quartile"
   ))
 })
 

@@ -22,7 +22,7 @@ app_ui <- function(request) {
           class = "nhsuk-main-wrapper",
           role = "main",
           fluidRow(
-            id = "mainpage",
+            id = "mainTabs",
             column(width = 10),
             shinyWidgets::pickerInput(
               inputId = "content_main",
