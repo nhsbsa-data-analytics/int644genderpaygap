@@ -217,7 +217,7 @@ gpg_stack <- function(x, xvar, yvar, groupvar, yaxis_title) {
             group = .data[[groupvar]]
           )
         ) |>
-        nhsbsaR::theme_nhsbsa_highchart(palette = c("LightBlue", "Pink")) |>
+        nhsbsaR::theme_nhsbsa_highchart(palette = "gender") |>
         highcharter::hc_yAxis(
           title = list(text = yaxis_title),
           max = 100
