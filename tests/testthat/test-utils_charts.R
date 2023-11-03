@@ -32,5 +32,5 @@ testthat::test_that("gender_profile takes list as an input", {
 
 testthat::test_that("gender_profile input data frame must contain Female,
                     Male column", {
-  expect_equal(length(grep("Female|Male", names(x))), 2)
-})
+                      expect_equal(length(grep("Female|Male", names(x))), 2)
+                    })

@@ -26,13 +26,9 @@
 #'
 #' @import nhsbsa-data-analytics/nhsbsaR
 #'
-gender_profile <- function(x,
-                           xvar = "FINANCIAL_YEAR",
-                           yvars,
-                           series_names,
-                           yaxis_title,
-                           yaxis_label 
-                           ){
+gender_profile <- function(x, xvar = "FINANCIAL_YEAR", yvars, series_names,
+  yaxis_title, yaxis_label
+) {
   out <- tryCatch(
     expr = {
       # Input data frame convert to list
@@ -41,9 +37,9 @@ gender_profile <- function(x,
       # create plot object (empty one..)
       plt <- highcharter::highchart() |>
         highcharter::hc_chart(type = "line") |>
-        nhsbsaR::theme_nhsbsa_highchart(stack = NA, 
+        nhsbsaR::theme_nhsbsa_highchart(stack = NA,
                                         palette = c("Blue", "AquaGreen"))
-      
+
 
       # It requires minimum two series (male, female) but it could split further
       for (i in seq_along(series_names)) {
@@ -81,7 +77,7 @@ gender_profile <- function(x,
           )
 
         plt <- plt |>
-          highcharter::hc_xAxis(type = "category") |> 
+          highcharter::hc_xAxis(type = "category") |>
           highcharter::hc_legend(
             itemWidth = 600,
             itemMarginTop = 5,
@@ -100,5 +96,3 @@ gender_profile <- function(x,
     finally = {}
   )
 }
-
-

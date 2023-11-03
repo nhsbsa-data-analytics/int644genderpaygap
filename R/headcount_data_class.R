@@ -1,5 +1,5 @@
-#' @title S3 headcount class to create number of headcount by gender and also 
-#' gender and AFC pay band.#' 
+#' @title S3 headcount class to create number of headcount by gender and also
+#' gender and AFC pay band.#'
 #'
 #' @description \code{headcount_data} is the class used for the creation of
 #' first two headcount related figures in the GPG report.
@@ -8,7 +8,7 @@
 #' least five columns: FINANCIAL_YEAR, GENDER, PAY_GRADE_NAME, FTE_GROUP, HEADCOUNT. Each
 #' row represents aggregated headcount by four columns.
 #'
-#' Once initiated, the class has seven slots: 
+#' Once initiated, the class has seven slots:
 #' \code{df}: data frame \n
 #' \code{overview_gender}: data frame \n
 #' \code{overview_afc}: data frame \n
@@ -17,7 +17,7 @@
 #' year's headcount \n
 #' \code{diffs}: a numeric vector containing differences from previous \n
 #' financial year headcount to current reporting financial year headcount \n
-#' \code{ending_fy}: a character vector containing ending reporting period  
+#' \code{ending_fy}: a character vector containing ending reporting period
 #' (e.g. 31 March 2022). This uses for introduction paragraph
 #'
 #'
@@ -36,10 +36,10 @@
 #' @export
 
 
-headcount_data <- function(x, 
+headcount_data <- function(x,
                            log_level = futile.logger::WARN,
                            eda = FALSE) {
-  
+
   # Set logger severity threshold, defaults to WARN
   futile.logger::flog.threshold(log_level)
 
@@ -166,27 +166,27 @@ headcount_data <- function(x,
   ending_fy <- as.character(start_latest_year + 1)
 
   # Attach data frame: headcount by GENDER
-  overview_gender <- x |> 
-    dplyr::group_by(FINANCIAL_YEAR, GENDER) |> 
+  overview_gender <- x |>
+    dplyr::group_by(FINANCIAL_YEAR, GENDER) |>
     dplyr::summarise(HEADCOUNT = sum(HEADCOUNT, na.rm = TRUE),
-                      .groups = "drop") |>
+                     .groups = "drop") |>
     tidyr::pivot_wider(names_from = GENDER,
                        values_from = HEADCOUNT)
-  
+
   # Attach data frame: headcount by GENDER & PAY_GRADE_NAME
-  overview_afc <- x |> 
-    dplyr::group_by(FINANCIAL_YEAR, GENDER, PAY_GRADE_NAME) |> 
+  overview_afc <- x |>
+    dplyr::group_by(FINANCIAL_YEAR, GENDER, PAY_GRADE_NAME) |>
     dplyr::summarise(HEADCOUNT = sum(HEADCOUNT, na.rm = TRUE),
-                     .groups = "drop") 
-  
+                     .groups = "drop")
+
   # Attach data frame: headcount by GENDER & FTE
-  overview_fte <- x |> 
-    dplyr::group_by(FINANCIAL_YEAR, GENDER, FTE_GROUP) |> 
+  overview_fte <- x |>
+    dplyr::group_by(FINANCIAL_YEAR, GENDER, FTE_GROUP) |>
     dplyr::summarise(HEADCOUNT = sum(HEADCOUNT, na.rm = TRUE),
-                     .groups = "drop") |> 
+                     .groups = "drop") |>
     tidyr::pivot_wider(names_from = c(GENDER, FTE_GROUP),
                        values_from = HEADCOUNT)
-    
+
 
   # Define the class here ----
   # It will use to create highchart line graph
@@ -204,6 +204,3 @@ headcount_data <- function(x,
     class = "headcount_data"
   )
 }
-
-
-

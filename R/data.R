@@ -1,8 +1,8 @@
 #' NHSBSA employee headcount
 #'
 #' A dataset containing NHSBSA employee headcount
-#' since financial year 2017/18, split by gender, AFC band 
-#' and FTE (full time or part time) 
+#' since financial year 2017/18, split by gender, AFC band
+#' and FTE (full time or part time)
 #'
 #' @format A data frame
 #' \describe{
