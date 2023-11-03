@@ -1,4 +1,4 @@
-# NHSBSA R Shiny template
+# NHSBSA Gender Pay Gap report
 
 This R package has been developed by NHS Business Services Authority Data Analytics Learning Lab to use as a template for building NHSBSA branded R `{shiny}` dashboards. 
 

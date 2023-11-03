@@ -15,4 +15,7 @@ rsconnect
 # Excel files (including macros and templates) #
 ################################################
 *.[xX][lL][sS][xXmMtT]?
+# Any RDA files
+*.[rR][dD][aA]
 data/*
+data_temp/*

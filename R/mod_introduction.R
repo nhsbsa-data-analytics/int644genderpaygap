@@ -1,21 +1,23 @@
-#' markdown_example UI Function
+#' introduction UI Function
 #'
 #' @description A shiny Module.
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
 #' @noRd
-mod_markdown_example_ui <- function(id) {
+#'
+#' @importFrom shiny NS tagList
+mod_introduction_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    includeMarkdown("inst/app/www/assets/markdown/mod_markdown_example.md")
+    includeMarkdown("inst/markdown/01_introduction.md")
   )
 }
 
-#' markdown_example Server Functions
+#' introduction Server Functions
 #'
 #' @noRd
-mod_markdown_example_server <- function(id) {
+mod_introduction_server <- function(id) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
   })

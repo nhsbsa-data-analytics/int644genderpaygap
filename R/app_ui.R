@@ -21,22 +21,43 @@ app_ui <- function(request) {
         div(
           class = "nhsuk-main-wrapper",
           role = "main",
-          nhs_navlistPanel(
+          fluidRow(
             id = "mainTabs",
-            well = FALSE,
-            widths = c(3, 9),
-            tabPanel(
-              title = "Introduction",
-              mod_markdown_example_ui("markdown_example_ui_1")
+            column(width = 10),
+            shinyWidgets::pickerInput(
+              inputId = "content_main",
+              label = "Content:",
+              choices = c(
+                "Introduction",
+                "Gender profile",
+                "Gender pay gap",
+                "Pay quartile",
+                "Action"
+              ),
+              selected = "Introduction",
+              width = "fit",
+              inline = TRUE
             ),
-            tabPanel(
-              title = "Charts",
-              mod_chart_example_ui("chart_example_ui_1")
-            ),
-            tabPanel(
-              title = "Scrolly example",
-              mod_scrollytell_example_ui("scrollytell_example_1")
-            )
+            tags$div(id = "introduction"),
+            mod_introduction_ui("introduction"),
+            hr(),
+            br(),
+            tags$div(id = "headcount"),
+            mod_headcount_ui("headcount"),
+            accessible_action_link("top_headcount_intro", "Go to top page"),
+            hr(),
+            br(),
+            tags$div(id = "paygap"),
+            mod_paygap_ui("paygap"),
+            accessible_action_link("top_paygap_intro", "Go to top page"),
+            hr(),
+            br(),
+            tags$div(id = "quartile"),
+            mod_quartile_ui("quartile"),
+            accessible_action_link("top_quartile_intro", "Go to top page"),
+            hr(),
+            br(),
+            tags$div(id = "gpg_action")
           )
         )
       )
@@ -60,7 +81,7 @@ golem_add_external_resources <- function() {
 
   tags$head(
     favicon("assets/favicons/favicon"),
-    tags$title("nhsbsaGPG"),
+    tags$title("NHSBSA gender pay gap report"),
 
     # Add here other external resources
     # for example, you can add shinyalert::useShinyalert()

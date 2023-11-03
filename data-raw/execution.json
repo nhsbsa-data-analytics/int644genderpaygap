@@ -1,0 +1,7 @@
+{
+    "import": {
+        "container": "peopledata-prod",
+        "local_path": "./data_temp",
+        "folder": "Gender Pay Gap Data"
+    }
+}
