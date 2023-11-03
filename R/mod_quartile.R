@@ -10,7 +10,7 @@
 mod_quartile_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    includeMarkdown("inst/markdown/04_quartile.md"),
+    includeMarkdown("inst/app/www/assets/markdown/04_quartile.md"),
     nhs_card_tabstop(
       nhs_selectInput(
         inputId = ns("period"),

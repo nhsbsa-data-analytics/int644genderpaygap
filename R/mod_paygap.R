@@ -10,7 +10,7 @@
 mod_paygap_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    includeMarkdown("inst/markdown/03_gender_pay_gap_1.md"),
+    includeMarkdown("inst/app/www/assets/markdown/03_gender_pay_gap_1.md"),
     nhs_card_tabstop(
       nhs_grid_2_col(
         highcharter::highchartOutput(

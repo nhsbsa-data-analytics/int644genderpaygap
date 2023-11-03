@@ -32,7 +32,20 @@ Suggests:
     usethis,
     tidyr,
     graphics,
-    stats
+    stats,
+    knitr,
+    officedown,
+    officer,
+    pkgload,
+    purrr,
+    markdown,
+    rmarkdown,
+    rprojroot,
+    testthat,
+    tidyr,
+    usethis,
+    withr,
+    xml2
 Remotes:
     nhsbsa-data-analytics/nhsbsaR
 Encoding: UTF-8

@@ -19,3 +19,5 @@ rsconnect
 *.[rR][dD][aA]
 data/*
 data_temp/*
+/doc/
+/Meta/
