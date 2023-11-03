@@ -5,9 +5,9 @@
 #' @import shiny
 #' @noRd
 app_server <- function(input, output, session) {
-  mod_headcount_server("headcount_1")
-  mod_paygap_server("paygap_1")
-  mod_quartile_server("quartile_1")
+  mod_headcount_server("headcount")
+  mod_paygap_server("paygap")
+  mod_quartile_server("quartile")
 
   observeEvent(input$content_main, {
     tag <- switch(input$content_main,

@@ -106,16 +106,12 @@ mod_paygap_server <- function(id) {
 
       if (input$factor == "afc_band") {
         nhsbsaGPG::gpg_class$df_hrrate_afc |>
-          dplyr::mutate(mean_paygap = round(mean_paygap, 1),
-                        median_paygap = round(median_paygap, 1),
-                        tooltip_text = .data[[input$factor]]) |>
+          dplyr::mutate(tooltip_text = .data[[input$factor]]) |>
           dplyr::filter(period == input$period)
 
       }else {
         nhsbsaGPG::gpg_class$df_hrrate_dir |>
-          dplyr::mutate(mean_paygap = round(mean_paygap, 1),
-                        median_paygap = round(median_paygap, 1),
-                        tooltip_text = .data[[input$factor]]) |>
+          dplyr::mutate(tooltip_text = .data[[input$factor]]) |>
           dplyr::filter(period == input$period)
       }
     })
