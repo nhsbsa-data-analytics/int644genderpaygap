@@ -169,11 +169,10 @@ accessible_radio_button <- function(inputId, label, choices = NULL, selected = N
 #'
 #' @noRd
 #'
-accessible_action_link <- function (inputId, label, icon = NULL, ...) 
-{
+accessible_action_link <- function(inputId, label, icon = NULL, ...) {
   value <- restoreInput(id = inputId, default = NULL)
-  tags$a(id = inputId, href = "#", class = "action-button", 
-         `data-val` = value, style = "color: #004280; text-decoration: underline;",
+  tags$a(id = inputId, href = "#", class = "action-button",
+         `data-val` = value, style = "color: #004280; text-ecoration: underline;",
          list(shiny:::validateIcon(icon), label),
          ...)
 }

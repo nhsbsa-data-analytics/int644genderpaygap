@@ -213,7 +213,7 @@ gpg_stack <- function(x, xvar, yvar, groupvar, yaxis_title) {
             group = .data[[groupvar]]
           )
         ) |>
-        nhsbsaR::theme_nhsbsa_highchart(palette = c("LightBlue","Pink")) |>
+        nhsbsaR::theme_nhsbsa_highchart(palette = c("LightBlue", "Pink")) |>
         highcharter::hc_yAxis(
           title = list(text = yaxis_title),
           max = 100
@@ -221,10 +221,12 @@ gpg_stack <- function(x, xvar, yvar, groupvar, yaxis_title) {
         highcharter::hc_xAxis(
           min = 0,
           max = 4, # Pad to ensure we can see the 4 label
-          categories = c("Lower Quartile<br>(Lowest Paid)", "Lower Middle Quartile", "Upper Middle Quartile", "Upper Quartile<br>(Highest Paid)", "Overall"),
+          categories = c("Lower Quartile<br>(Lowest Paid)", "Lower Middle Quartile",
+                         "Upper Middle Quartile", "Upper Quartile<br>(Highest Paid)",
+                         "Overall"),
           title = list(text = "Quartile")
-        ) |> 
-        highcharter::hc_credits(enabled = TRUE) |> 
+        ) |>
+        highcharter::hc_credits(enabled = TRUE) |>
         # highcharter::hc_legend(ggplot2::element_blank()) |>
         highcharter::hc_plotOptions(
           column = list(dataLabels = list(
@@ -237,23 +239,23 @@ gpg_stack <- function(x, xvar, yvar, groupvar, yaxis_title) {
           )),
           pointPadding = 1,
           groupPadding = 1,
-            series = list(
-              states = list(
-                # Disable series highlighting
-                inactive = list(enabled = FALSE)
-              ),
-              events = list(
-                # Disables turning the series off
-                legendItemClick = htmlwidgets::JS("function () { return false; }")
-              )
+          series = list(
+            states = list(
+              # Disable series highlighting
+              inactive = list(enabled = FALSE)
+            ),
+            events = list(
+              # Disables turning the series off
+              legendItemClick = htmlwidgets::JS("function () { return false; }")
             )
+          )
         ) |>
         highcharter::hc_tooltip(
           headerFormat = '<span style="font-size: 10px">{point.key}</span><br/>',
           pointFormat = '<span style="color:{point.color}">
           \u25CF</span> {series.name}: <b>{point.y} %</b><br/>',
           footerFormat = ""
-        ) 
+        )
 
 
       return(plt)

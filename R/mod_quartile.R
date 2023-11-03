@@ -4,10 +4,10 @@
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
-#' @noRd 
+#' @noRd
 #'
-#' @importFrom shiny NS tagList 
-mod_quartile_ui <- function(id){
+#' @importFrom shiny NS tagList
+mod_quartile_ui <- function(id) {
   ns <- NS(id)
   tagList(
     includeMarkdown("inst/markdown/04_quartile_1.md"),
@@ -28,33 +28,29 @@ mod_quartile_ui <- function(id){
     )
   )
 }
-    
+
 #' quartile Server Functions
 #'
-#' @noRd 
-mod_quartile_server <- function(id){
-  moduleServer( id, function(input, output, session){
+#' @noRd
+mod_quartile_server <- function(id) {
+  moduleServer(id, function(input, output, session) {
     ns <- session$ns
- 
+
     df_quartile <- reactive({
       req(input$period)
-      
-      nhsbsaGPG::quartile |> 
-        dplyr::filter(period == input$period) 
+
+      nhsbsaGPG::quartile |>
+        dplyr::filter(period == input$period)
     })
-    
+
     output$quartile <- highcharter::renderHighchart({
-      plt <- gpg_stack(x = df_quartile() ,
-                xvar = "quartile",
-                yvar = "percent",
-                groupvar = "gender",
-                yaxis_title = "% of men and women in each pay quartile")
-      
+      plt <- gpg_stack(x = df_quartile(),
+                       xvar = "quartile",
+                       yvar = "percent",
+                       groupvar = "gender",
+                       yaxis_title = "% of men and women in each pay quartile")
+
     })
-  
+
   })
 }
-    
-
-    
-

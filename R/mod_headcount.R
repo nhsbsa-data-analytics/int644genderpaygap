@@ -92,8 +92,8 @@ mod_headcount_server <- function(id) {
           )
         )
     })
-    
-    
+
+
     df_hdcnt_afc <- reactive({
       req(input$period)
 

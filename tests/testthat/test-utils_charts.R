@@ -1,7 +1,6 @@
 library(tidyr)
 library(dplyr)
 library(testthat)
-local_edition(3)
 
 x <- data.frame(
   period = c("2018/19", "2019/20", "2020/21", "2021/22", "2022/23"),
@@ -105,13 +104,6 @@ testthat::test_that("gpg_trend takes list as an input", {
   expect_equal(class(list(x)), "list")
 })
 
-
-<<<<<<< HEAD
-testthat::test_that("gender_profile input data frame must contain Female,
-                    Male column", {
-                      expect_equal(length(grep("Female|Male", names(x))), 2)
-                    })
-=======
 testthat::test_that("gpg_trend input data frame must contain Women,
                     Men column", {
                       expect_equal(length(grep("Women|Men", names(x))), 2)
@@ -179,4 +171,3 @@ testthat::test_that("gpg_column function runs without error", {
     yaxis_title = "Mean pay gap"
   ))
 })
->>>>>>> e1b1c8f6cfc85ab7567236c9706b04897495f4d9

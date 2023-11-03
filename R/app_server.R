@@ -29,9 +29,7 @@ app_server <- function(input, output, session) {
     # jump to the top of the screen
     shinyjs::runjs("window.scrollTo(0, 0)")
 
-    updateSelectInput(session,
-      inputId = "content_main",
-      selected = "Introduction"
+    updateSelectInput(session, inputId = "content_main", selected = "Introduction"
     )
   })
 
@@ -40,20 +38,15 @@ app_server <- function(input, output, session) {
     # jump to the top of the screen
     shinyjs::runjs("window.scrollTo(0, 0)")
 
-    updateSelectInput(session,
-      inputId = "content_main",
-      selected = "Introduction"
-    )
+    updateSelectInput(session, inputId = "content_main", selected = "Introduction")
   })
-  
+
   observeEvent(input$top_quartile_intro, {
     # jump to the top of the screen
     shinyjs::runjs("window.scrollTo(0, 0)")
-    
-    updateSelectInput(session,
-                      inputId = "content_main",
-                      selected = "Introduction"
+
+    updateSelectInput(session, inputId = "content_main", selected = "Introduction"
     )
   })
-  
+
 }
