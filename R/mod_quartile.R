@@ -10,7 +10,7 @@
 mod_quartile_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    includeMarkdown("inst/markdown/04_quartile_1.md"),
+    includeMarkdown("inst/markdown/04_quartile.md"),
     nhs_card_tabstop(
       nhs_selectInput(
         inputId = ns("period"),
@@ -40,7 +40,8 @@ mod_quartile_server <- function(id) {
       req(input$period)
 
       nhsbsaGPG::quartile |>
-        dplyr::filter(period == input$period)
+        dplyr::filter(period == input$period) |>
+        dplyr::mutate(gender = ifelse(gender == "men", "Men", "Women"))
     })
 
     output$quartile <- highcharter::renderHighchart({

@@ -57,7 +57,9 @@ app_ui <- function(request) {
             accessible_action_link("top_quartile_intro", "Go to top page"),
             hr(),
             br(),
-            tags$div(id = "gpg_action")
+            tags$div(id = "gpg_action"),
+            mod_action_ui("action"),
+            accessible_action_link("top_action_intro", "Go to top page")
           )
         )
       )

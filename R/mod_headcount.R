@@ -90,6 +90,18 @@ mod_headcount_server <- function(id) {
 
             "
           )
+        ) |>
+        highcharter::hc_plotOptions(
+          series = list(
+            states = list(
+              # Disable series highlighting
+              inactive = list(enabled = FALSE)
+            ),
+            events = list(
+              # Disables turning the series off
+              legendItemClick = htmlwidgets::JS("function () { return false; }")
+            )
+          )
         )
     })
 
