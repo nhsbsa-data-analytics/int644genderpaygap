@@ -204,13 +204,13 @@ mod_headcount_server <- function(id) {
     # headcount_breakdown
     df_hdcnt_breakdown_download <- dplyr::bind_rows(
       nhsbsaGPG::gpg_class$df_hdcnt_afc |>
-        mutate(breakdown = "AfC band") >
-        rename(sub_breakdown = afc_band),
+        dplyr::mutate(breakdown = "AfC band") |> 
+        dplyr::rename(sub_breakdown = afc_band),
       nhsbsaGPG::gpg_class$df_hdcnt_dir |>
-        mutate(breakdown = "Directorate") |>
-        rename(sub_breakdown = directorate)
+        dplyr::mutate(breakdown = "Directorate") |>
+        dplyr::rename(sub_breakdown = directorate)
     ) |>
-      rename(`Reporting period` = period,
+      dplyr::rename(`Reporting period` = period,
              Gender = gender,
              Breakdown = breakdown,
              `Sub breakdown` = sub_breakdown,
