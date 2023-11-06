@@ -24,15 +24,15 @@ process_file <- function(filepath) {
   # Create three data frames and add the financial year (reporting period)
   if (stringr::str_detect(filepath, "\\.xlsx$")) {
     list(
-      paygap = read_excel(filepath, range = cell_rows(3:7), col_names = TRUE) |>
-        select(1:3) |>
-        janitor::clean_names() |>
-        mutate(period = financial_year) |>
-        filter(gender == "Pay Gap %") |>
-        select(period,
-          mean_paygap = avg_hourly_rate,
-          median_paygap = median_hourly_rate
-        ),
+      # paygap = read_excel(filepath, range = cell_rows(3:7), col_names = TRUE) |>
+      #   select(1:3) |>
+      #   janitor::clean_names() |>
+      #   mutate(period = financial_year) |>
+      #   filter(gender == "Pay Gap %") |>
+      #   select(period,
+      #     mean_paygap = avg_hourly_rate,
+      #     median_paygap = median_hourly_rate
+      #   ),
       quartile = read_excel(filepath, range = cell_rows(3:7), col_names = TRUE) |>
         select(5:9) |>
         janitor::clean_names() |>
@@ -66,9 +66,9 @@ process_file <- function(filepath) {
 dfs <- map(files, process_file)
 
 # Row bind all df1s, df2s, and df3s
-paygap <- map(dfs, "paygap") |>
-  bind_rows() |>
-  select(period, everything())
+# paygap <- map(dfs, "paygap") |>
+#   bind_rows() |>
+#   select(period, everything())
 quartile <- map(dfs, "quartile") |>
   bind_rows() |>
   select(period, everything()) |>
@@ -133,7 +133,7 @@ quartile <- quartile |>
 gpg_class <- gpg_data(afc_staff)
 
 # Keep three main data frame and it will be used to create S3 class
-usethis::use_data(paygap, overwrite = TRUE)
+# usethis::use_data(paygap, overwrite = TRUE)
 usethis::use_data(quartile, overwrite = TRUE)
 usethis::use_data(gpg_class, overwrite = TRUE)
 

@@ -202,7 +202,15 @@ gpg_data <- function(x,
       mean_rate = mean(hourly_rate, na.rm = TRUE),
       median_rate = median(hourly_rate, na.rm = TRUE),
       .groups = "drop"
+    ) |> 
+    tidyr::pivot_wider(names_from = gender, values_from = c(mean_rate, median_rate)) |>
+    janitor::clean_names() |>
+    dplyr::mutate(
+      mean_paygap = (mean_rate_men - mean_rate_women) / mean_rate_men * 100,
+      median_paygap = (median_rate_men - median_rate_women) / median_rate_men * 100
     )
+  
+
 
   # data frame: hourly rate by gender and by AFC band,
   # calculate mean and median pay gap
@@ -239,7 +247,9 @@ gpg_data <- function(x,
     )
 
 
-
+  
+  
+  
 
   # Define the class here ----
   # This will mainly use for highchart graphs
