@@ -12,7 +12,7 @@ mod_headcount_ui <- function(id) {
   tagList(
     includeMarkdown("inst/app/www/assets/markdown/02_headcount_1.md"),
     # chart 1: five year headcount trend split by gender
-    nhs_card(
+    nhs_card_tabstop(
       highcharter::highchartOutput(
         outputId = ns("headcount_all"),
         height = "240px"
@@ -21,20 +21,30 @@ mod_headcount_ui <- function(id) {
     ),
     includeMarkdown("inst/app/www/assets/markdown/02_headcount_2.md"),
     # chart 2: headcount split by gender AfC
-    nhs_card(
-      nhs_selectInput(
-        inputId = ns("period"),
-        label = "Reporting period",
-        choices = unique(nhsbsaGPG::gpg_class$df_hdcnt$period),
-        full_width = TRUE,
-        selected = max(unique(nhsbsaGPG::gpg_class$df_hdcnt$period))
+    nhs_card_tabstop(
+      nhs_grid_2_col(
+        nhs_selectInput(
+          inputId = ns("period"),
+          label = "Reporting period",
+          choices = unique(nhsbsaGPG::gpg_class$df_hdcnt$period),
+          full_width = TRUE,
+          selected = max(unique(nhsbsaGPG::gpg_class$df_hdcnt$period))
+        ),
+        nhs_selectInput(
+          inputId = ns("factor"),
+          label = "Filter by",
+          choices = c("AfC band" = "afc_band", "Directorate" = "directorate"),
+          full_width = TRUE,
+          selected = "AfC band"
+        )
       ),
+
       highcharter::highchartOutput(
-        outputId = ns("headcount_afc"),
+        outputId = ns("headcount_breakdown"),
         height = "500px"
       ),
       mod_radio_button_ui(
-        id = ns("hcnt_afc_toggle"),
+        id = ns("hcnt_breakdown_toggle"),
         label = "",
         choices = c(
           "Number" = "headcount",
@@ -42,7 +52,7 @@ mod_headcount_ui <- function(id) {
         ),
         selected = "headcount"
       ),
-      mod_nhs_download_ui(id = ns("download_headcount_afc"))
+      mod_nhs_download_ui(id = ns("download_headcount_breakdown"))
     )
   )
 }
@@ -106,33 +116,52 @@ mod_headcount_server <- function(id) {
     })
 
 
-    df_hdcnt_afc <- reactive({
+    df_hdcnt_breakdown <- reactive({
       req(input$period)
+      req(input$factor)
 
-      nhsbsaGPG::gpg_class$df_hdcnt_afc |>
-        dplyr::filter(period == input$period) |>
-        dplyr::mutate(
-          headcount = headcount * ifelse(gender == "Men", 1, -1),
-          perc = perc * ifelse(gender == "Men", 1, -1)
-        )
+      if (input$factor == "afc_band") {
+        nhsbsaGPG::gpg_class$df_hdcnt_afc |>
+          dplyr::filter(period == input$period) |>
+          dplyr::mutate(
+            headcount = headcount * ifelse(gender == "Men", 1, -1),
+            perc = perc * ifelse(gender == "Men", 1, -1),
+            tooltip_text = afc_band
+          )
+      } else {
+        nhsbsaGPG::gpg_class$df_hdcnt_dir |>
+          dplyr::filter(period == input$period) |>
+          dplyr::mutate(
+            headcount = headcount * ifelse(gender == "Men", 1, -1),
+            perc = perc * ifelse(gender == "Men", 1, -1),
+            tooltip_text = directorate
+          )
+      }
+
     })
 
-    hcnt_afc_toggle <- mod_radio_button_server("hcnt_afc_toggle")
+    hcnt_breakdown_toggle <- mod_radio_button_server("hcnt_breakdown_toggle")
+
+    xvar <- reactive({
+      req(input$factor)
+      ifelse(input$factor == "afc_band", "afc_band", "directorate")
+    })
 
     yvar <- reactive({
-      req(hcnt_afc_toggle())
-      ifelse(hcnt_afc_toggle() == "headcount", "headcount", "perc")
+      req(hcnt_breakdown_toggle())
+      ifelse(hcnt_breakdown_toggle() == "headcount", "headcount", "perc")
     })
 
     yaxis_title <- reactive({
-      req(hcnt_afc_toggle())
-      ifelse(hcnt_afc_toggle() == "headcount", "Headcount", "Percentage")
+      req(hcnt_breakdown_toggle())
+      ifelse(hcnt_breakdown_toggle() == "headcount", "Headcount", "Percentage")
     })
 
 
-    output$headcount_afc <- highcharter::renderHighchart({
+
+    output$headcount_breakdown <- highcharter::renderHighchart({
       plt <- gpg_pyramid(
-        x = df_hdcnt_afc(), xvar = "afc_band",
+        x = df_hdcnt_breakdown(), xvar = xvar(),
         yvar = yvar(), yaxis_title = yaxis_title()
       )
 
@@ -141,23 +170,59 @@ mod_headcount_server <- function(id) {
           shared = FALSE,
           useHTML = TRUE,
           formatter = htmlwidgets::JS(
-            "
-              function() {
-
-                outHTML =
-                  '<b>Gender: </b>' + this.series.name + '<br>' +
-                  '<b>AfC: </b>' + this.point.afc_band + '<br/>' +
-                  '<b>Number of employees: </b>' +
-          Highcharts.numberFormat(Math.abs(this.point.y), 0) + '<br>' +
+            paste0(
+              "
+                  function() {
+                    outHTML =
+                      '<b>Gender: </b>' + this.series.name + '<br>' + '<b>",
+              switch(input$factor,
+                     "afc_band" = "AfC",
+                     "directorate" = "Directorate"),
+              ": </b>' + this.point.tooltip_text + '<br/>' + 
+               '<b>Number of employees: </b>' +
+          Highcharts.numberFormat(Math.abs(this.point.headcount), 0) + '<br>' +
                   '<b>Percentage of employees: </b>' +
           Highcharts.numberFormat(Math.abs(this.point.perc), 0) + '%'
-
-                return outHTML
-
-                }
-              "
+                    return outHTML
+                  }
+                  "
+            )
           )
         )
     })
+
+
+    # download headcount all
+    mod_nhs_download_server(
+      id = "download_headcount_all",
+      filename = "nhsbsa_headcount.csv",
+      export_data = nhsbsaGPG::gpg_class$df_hdcnt |>
+        rename(`Reporting period` = period,
+               Headcount = headcount)
+    )
+
+    # headcount_breakdown
+    df_hdcnt_breakdown_download <- dplyr::bind_rows(
+      nhsbsaGPG::gpg_class$df_hdcnt_afc |>
+        mutate(breakdown = "AfC band") >
+        rename(sub_breakdown = afc_band),
+      nhsbsaGPG::gpg_class$df_hdcnt_dir |>
+        mutate(breakdown = "Directorate") |>
+        rename(sub_breakdown = directorate)
+    ) |>
+      rename(`Reporting period` = period,
+             Gender = gender,
+             Breakdown = breakdown,
+             `Sub breakdown` = sub_breakdown,
+             Headcount = headcount,
+             Percentage = perc)
+
+    # download headcount afc & directorate
+    mod_nhs_download_server(
+      id = "download_headcount_breakdown",
+      filename = "nhsbsa_headcount_afc_directorate.csv",
+      export_data = df_hdcnt_breakdown_download
+    )
+
   })
 }

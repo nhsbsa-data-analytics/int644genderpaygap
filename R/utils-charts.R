@@ -110,16 +110,18 @@ gpg_trend <- function(x,
 #'
 #' @export
 #' @param x Input data frame from \code{gpg_data} S3 class object.
-#' @param xvar "afc_band" default value
-#' @param yvar headcount/mean hourly/median hourly pay
+#' @param xvar This can be either afc_band or directorate
+#' @param yvar headcount by number or percentage
 #' @param yaxis_title Y axis title
 
-gpg_pyramid <- function(x, xvar = "afc_band", yvar, yaxis_title) {
+gpg_pyramid <- function(x, xvar, yvar, yaxis_title) {
   out <- tryCatch(
     expr = {
       data <- x
       xaxis_category <- sort(unique(data[[xvar]]))
       yaxis_max <- if (yvar == "perc") 100 else NULL
+      xaxis_title <- if (xvar == "afc_band") "AfC band" else "Directorate"
+      data$gender <- factor(data$gender, levels = c("Women", "Men"))
 
       # Create chart object
       plt <- data |>
@@ -148,7 +150,7 @@ gpg_pyramid <- function(x, xvar = "afc_band", yvar, yaxis_title) {
         ) |>
         highcharter::hc_xAxis(
           categories = xaxis_category,
-          title = list(text = "AfC band"),
+          title = list(text = xaxis_title),
           reversed = FALSE
         ) |>
         highcharter::hc_plotOptions(

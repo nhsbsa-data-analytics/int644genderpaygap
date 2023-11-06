@@ -35,8 +35,6 @@ local_edition(3)
 # future".
 # test_that("generate snapshots", {
 #   with_dir(find_package_root_file(), {
-#     source("review/scripts/md_to_word.R")
-#     
 #     expect_snapshot_file("inst/app/www/assets/markdown/01_introduction.md")
 #     expect_snapshot_file("inst/app/www/assets/markdown/02_headcount_1.md")
 #     expect_snapshot_file("inst/app/www/assets/markdown/02_headcount_2.md")
@@ -51,20 +49,25 @@ local_edition(3)
 
 # 3. Uncomment the below block, ready for future changes
 
-# 4. When you make changes to the files, use 'Run Tests' button above right
-test_that("markdown text is as expected", {
-  with_dir(find_package_root_file(), {
-    source("review/scripts/word_to_md.R")
-
-    expect_snapshot_file("review/temp/01_mod_the_first.md")
-    expect_snapshot_file("review/temp/02_mod_the_second.md")
-  })
-})
+# # 4. When you make changes to the files, use 'Run Tests' button above right
+# test_that("markdown text is as expected", {
+#   with_dir(find_package_root_file(), {
+#     source("review/scripts/word_to_md.R")
+# 
+#     expect_snapshot_file("review/temp/01_introduction.md")
+#     expect_snapshot_file("review/temp/02_headcount_1.md")
+#     expect_snapshot_file("review/temp/02_headcount_2.md")
+#     expect_snapshot_file("review/temp/03_gender_pay_gap_1.md")
+#     expect_snapshot_file("review/temp/03_gender_pay_gap_2.md")
+#     expect_snapshot_file("review/temp/04_quartile.md")
+#     expect_snapshot_file("review/temp/05_action.md")
+#   })
+# })
 
 # 5. If any differences are present (there should be if you changed the files...)
 # a diff viewer can be opened by running the code below in the console (you can 
 # open it in browser using the 'Show in new window' button in the Viewer pane)
-#     testthat::snapshot_review('snapshot_tests/', "review/tests")
+    # testthat::snapshot_review('snapshot_tests/', "review/tests")
 
 # 6. Review the changes in each file one by one.
 #    If ALL changes in a file are as intended, then choose the 'Accept' option.
@@ -90,3 +93,5 @@ test_that("markdown text is as expected", {
 #        source("review/scripts/word_to_md.R")
 #    due to reversions, MAKE SURE to uncomment it now so it is ready for the next
 #    set of changes.
+
+

@@ -17,9 +17,11 @@ rsconnect
 *.[xX][lL][sS][xXmMtT]?
 # Any RDA files
 *.[rR][dD][aA]?
-# Any docx files
-*.[dD][oO][cC][xX]
 data/*
 data_temp/*
 /doc/
 /Meta/
+review/tests/_snaps/*
+!review/temp/.gitkeep
+# Any docx files
+*.[dD][oO][cC][xX]

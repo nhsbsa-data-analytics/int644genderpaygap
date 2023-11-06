@@ -410,6 +410,8 @@ pwalk(
         ),
         text = case_match(
           style_name,
+          "Heading 1" ~ paste0("# ", text),
+          "heading 1" ~ paste0("# ", text),
           "Heading 2" ~ paste0("## ", text),
           "heading 2" ~ paste0("## ", text),
           "Heading 3" ~ paste0("### ", text),

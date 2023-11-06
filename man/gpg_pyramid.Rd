@@ -5,14 +5,14 @@
 \title{Highcharter bar chart to create pyramid chart. This chart
 shows gender pay gap information by AFC band in NHSBSA}
 \usage{
-gpg_pyramid(x, xvar = "afc_band", yvar, yaxis_title)
+gpg_pyramid(x, xvar, yvar, yaxis_title)
 }
 \arguments{
 \item{x}{Input data frame from \code{gpg_data} S3 class object.}
 
-\item{xvar}{"afc_band" default value}
+\item{xvar}{This can be either afc_band or directorate}
 
-\item{yvar}{headcount/mean hourly/median hourly pay}
+\item{yvar}{headcount by number or percentage}
 
 \item{yaxis_title}{Y axis title}
 }
