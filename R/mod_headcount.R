@@ -52,7 +52,7 @@ mod_headcount_ui <- function(id) {
         ),
         selected = "headcount"
       ),
-      mod_nhs_download_ui(id = ns("download_headcount_afc"))
+      mod_nhs_download_ui(id = ns("download_headcount_breakdown"))
     )
   )
 }
@@ -189,7 +189,40 @@ mod_headcount_server <- function(id) {
             )
           )
         )
-
     })
+
+
+    # download headcount all
+    mod_nhs_download_server(
+      id = "download_headcount_all",
+      filename = "nhsbsa_headcount.csv",
+      export_data = nhsbsaGPG::gpg_class$df_hdcnt |>
+        rename(`Reporting period` = period,
+               Headcount = headcount)
+    )
+
+    # headcount_breakdown
+    df_hdcnt_breakdown_download <- dplyr::bind_rows(
+      nhsbsaGPG::gpg_class$df_hdcnt_afc |>
+        mutate(breakdown = "AfC band") >
+        rename(sub_breakdown = afc_band),
+      nhsbsaGPG::gpg_class$df_hdcnt_dir |>
+        mutate(breakdown = "Directorate") |>
+        rename(sub_breakdown = directorate)
+    ) |>
+      rename(`Reporting period` = period,
+             Gender = gender,
+             Breakdown = breakdown,
+             `Sub breakdown` = sub_breakdown,
+             Headcount = headcount,
+             Percentage = perc)
+
+    # download headcount afc & directorate
+    mod_nhs_download_server(
+      id = "download_headcount_breakdown",
+      filename = "nhsbsa_headcount_afc_directorate.csv",
+      export_data = df_hdcnt_breakdown_download
+    )
+
   })
 }
