@@ -409,12 +409,6 @@ gpg_column <- function(x, xvar = "period", yvar, yaxis_title) {
           )),
           pointPadding = 0.1,
           groupPadding = 0
-        ) |>
-        highcharter::hc_tooltip(
-          headerFormat = '<span style="font-size: 10px">{point.key}</span><br/>',
-          pointFormat = '<span style="color:{point.color}">
-          \u25CF</span> {series.name}: <b>{point.y} %</b><br/>',
-          footerFormat = ""
         )
 
       return(plt)

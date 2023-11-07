@@ -24,20 +24,6 @@ process_file <- function(filepath) {
   # Create three data frames and add the financial year (reporting period)
   if (stringr::str_detect(filepath, "\\.xlsx$")) {
     list(
-      paygap = read_excel(filepath, range = cell_rows(3:7), col_names = TRUE) |>
-        select(1:3) |>
-        janitor::clean_names() |>
-        mutate(period = financial_year) |>
-        filter(gender == "Pay Gap %") |>
-        select(period,
-          mean_paygap = avg_hourly_rate,
-          median_paygap = median_hourly_rate
-        ),
-      quartile = read_excel(filepath, range = cell_rows(3:7), col_names = TRUE) |>
-        select(5:9) |>
-        janitor::clean_names() |>
-        mutate(period = financial_year) |>
-        select(period, quartile, female, male),
       afc = read_excel(filepath, skip = 8, col_names = TRUE) |>
         select(2:7) |>
         janitor::clean_names() |>
@@ -65,18 +51,10 @@ process_file <- function(filepath) {
 # Apply the function to each file
 dfs <- map(files, process_file)
 
-# Row bind all df1s, df2s, and df3s
-paygap <- map(dfs, "paygap") |>
-  bind_rows() |>
-  select(period, everything())
-quartile <- map(dfs, "quartile") |>
-  bind_rows() |>
-  select(period, everything()) |>
-  mutate(quartile = as.character(quartile)) |>
-  rename(women = female, men = male)
 afc <- map(dfs, "afc") |>
   bind_rows() |>
   select(period, everything())
+
 staff <- map(dfs, "staff") |>
   bind_rows() |>
   select(period, everything())
@@ -106,35 +84,10 @@ afc_staff <- afc |>
   ) |>
   select(period, gender, headcount, hourly_rate, quartile, afc_band, directorate)
 
-# quartile requires data transformation
-quartile_overall <- quartile |>
-  group_by(period) |>
-  summarise(
-    women = sum(women),
-    men = sum(men),
-    .groups = "drop"
-  ) |>
-  mutate(quartile = "Overall")
-
-quartile <- quartile |>
-  bind_rows(quartile_overall)
-
-quartile <- quartile |>
-  tidyr::pivot_longer(
-    cols = c(women, men),
-    names_to = "gender",
-    values_to = "count"
-  ) |>
-  group_by(period, quartile) |>
-  mutate(percent = count / sum(count) * 100) |>
-  ungroup()
-
 # create gpg_class
 gpg_class <- gpg_data(afc_staff)
 
 # Keep three main data frame and it will be used to create S3 class
-usethis::use_data(paygap, overwrite = TRUE)
-usethis::use_data(quartile, overwrite = TRUE)
 usethis::use_data(gpg_class, overwrite = TRUE)
 
 # delete all the files in data_temp as they only stay in azure storage

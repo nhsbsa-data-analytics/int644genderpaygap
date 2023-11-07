@@ -58,8 +58,8 @@ mod_paygap_ui <- function(id) {
       highcharter::highchartOutput(
         outputId = ns("paygap_afc_directorate"),
         height = "400px"
-      )
-
+      ),
+      mod_nhs_download_ui(id = ns("download_paygap_afc_directorate"))
     )
 
   )
@@ -72,28 +72,47 @@ mod_paygap_server <- function(id) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    df_paygap_all <- nhsbsaGPG::paygap |>
+    df_paygap_all <- nhsbsaGPG::gpg_class$df_hrrate |>
       dplyr::mutate(
-        mean_paygap = round(mean_paygap, 1),
-        median_paygap = round(median_paygap, 1)
+        dplyr::mutate(dplyr::across(where(is.double), \(x) round(x, digits = 1)))
       )
 
     output$paygap_all_mean <- highcharter::renderHighchart({
-      gpg_column(
+      plt <- gpg_column(
         x = df_paygap_all,
         xvar = "period",
         yvar = "mean_paygap",
         yaxis_title = "Mean gender pay gap (%)"
       )
+
+      plt |>
+        highcharter::hc_tooltip(
+          headerFormat = '<span style="font-size: 10px">{point.key}</span><br/>',
+          pointFormat = '<span style="color:{point.color}">
+          \u25CF</span> {series.name}: <b>{point.y} %</b><br/>
+          \u25CF</span> Mean men per hour: £{point.mean_rate_men} <br/>
+          \u25CF</span> Mean women per hour: £{point.mean_rate_women}',
+          footerFormat = ""
+        )
     })
 
     output$paygap_all_median <- highcharter::renderHighchart({
-      gpg_column(
+      plt <- gpg_column(
         x = df_paygap_all,
         xvar = "period",
         yvar = "median_paygap",
         yaxis_title = "Median gender pay gap (%)"
       )
+
+      plt |>
+        highcharter::hc_tooltip(
+          headerFormat = '<span style="font-size: 10px">{point.key}</span><br/>',
+          pointFormat = '<span style="color:{point.color}">
+          \u25CF</span> {series.name}: <b>{point.y} %</b><br/>
+          \u25CF</span> Median men per hour: £{point.median_rate_men} <br/>
+          \u25CF</span> Median women per hour: £{point.median_rate_women}',
+          footerFormat = ""
+        )
     })
 
 
@@ -181,7 +200,56 @@ mod_paygap_server <- function(id) {
             "<b>Men:</b> £{point.rate_men:,.1f} per hour"
           )
         )
-
     })
+
+    df_paygap_all_download <- df_paygap_all |>
+      dplyr::rename(`Reporting period` = period,
+                    `Men's mean hourly pay` = mean_rate_men,
+                    `Women's mean hourly pay` = mean_rate_women,
+                    `Mean gender pay gap (%)` = mean_paygap,
+                    `Men's median hourly pay` = median_rate_men,
+                    `Women's median hourly pay` = median_rate_women,
+                    `Median gender pay gap (%)` = median_paygap)
+
+    # data download - gender pay gap for all
+    mod_nhs_download_server(
+      id = "download_paygap_all",
+      filename = "gender_pay_gap_overall.csv",
+      export_data = df_paygap_all_download
+    )
+
+
+
+    df_paygap_afc_dir_download <- dplyr::bind_rows(
+      nhsbsaGPG::gpg_class$df_hrrate_afc |>
+        dplyr::mutate(breakdown = "AfC band") |>
+        dplyr::rename(sub_breakdown = afc_band),
+      nhsbsaGPG::gpg_class$df_hrrate_dir |>
+        dplyr::mutate(breakdown = "Directorate") |>
+        dplyr::rename(sub_breakdown = directorate)
+    ) |>
+      dplyr::rename(`Reporting period` = period,
+        Breakdown = breakdown,
+        `Sub breakdown` = sub_breakdown,
+        `Men's mean hourly pay` = mean_rate_men,
+        `Women's mean hourly pay` = mean_rate_women,
+        `Mean gender pay gap (%)` = mean_paygap,
+        `Men's median hourly pay` = median_rate_men,
+        `Women's median hourly pay` = median_rate_women,
+        `Median gender pay gap (%)` = median_paygap
+      )
+
+    # data download - gender pay gap by AfC, directorate
+    mod_nhs_download_server(
+      id = "download_paygap_afc_directorate",
+      filename = "gender_pay_gap_afc_directorate.csv",
+      export_data = df_paygap_afc_dir_download
+    )
+
   })
+
+
+
+
+
 }
