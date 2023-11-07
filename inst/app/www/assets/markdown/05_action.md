@@ -37,7 +37,3 @@ The NHSBSA is committed to addressing our gender pay gap and achieving equal rep
 -	Continuing to actively seek feedback from our female colleagues about their work/life balance needs as we transition into a fully hybrid working organisation.
 
 -	Reviewing and updating our approach to colleagues who are carers to ensure they are supported and can work flexibly in their roles within our organisation.
- 
-
-
-

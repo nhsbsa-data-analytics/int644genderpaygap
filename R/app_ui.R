@@ -23,43 +23,47 @@ app_ui <- function(request) {
           role = "main",
           fluidRow(
             id = "mainTabs",
-            column(width = 10),
-            shinyWidgets::pickerInput(
-              inputId = "content_main",
-              label = "Content:",
-              choices = c(
-                "Introduction",
-                "Gender profile",
-                "Gender pay gap",
-                "Pay quartile",
-                "Action"
+            column(
+              width = 11,
+              shinyWidgets::pickerInput(
+                inputId = "content_main",
+                label = "Content:",
+                choices = c(
+                  "Introduction",
+                  "Gender profile",
+                  "Gender pay gap",
+                  "Pay quartile",
+                  "Action"
+                ),
+                selected = "Introduction",
+                width = "fit",
+                inline = TRUE
               ),
-              selected = "Introduction",
-              width = "fit",
-              inline = TRUE
-            ),
-            tags$div(id = "introduction"),
-            mod_introduction_ui("introduction"),
-            hr(),
-            br(),
-            tags$div(id = "headcount"),
-            mod_headcount_ui("headcount"),
-            accessible_action_link("top_headcount_intro", "Go to top page"),
-            hr(),
-            br(),
-            tags$div(id = "paygap"),
-            mod_paygap_ui("paygap"),
-            accessible_action_link("top_paygap_intro", "Go to top page"),
-            hr(),
-            br(),
-            tags$div(id = "quartile"),
-            mod_quartile_ui("quartile"),
-            accessible_action_link("top_quartile_intro", "Go to top page"),
-            hr(),
-            br(),
-            tags$div(id = "action"),
-            mod_action_ui("action"),
-            accessible_action_link("top_action_intro", "Go to top page")
+              tags$div(id = "introduction"),
+              mod_introduction_ui("introduction"),
+              hr(),
+              br(),
+              tags$div(id = "headcount"),
+              mod_headcount_ui("headcount"),
+              accessible_action_link("top_headcount_intro", "Go to top page"),
+              hr(),
+              br(),
+              tags$div(id = "paygap"),
+              mod_paygap_ui("paygap"),
+              accessible_action_link("top_paygap_intro", "Go to top page"),
+              hr(),
+              br(),
+              tags$div(id = "quartile"),
+              mod_quartile_ui("quartile"),
+              accessible_action_link("top_quartile_intro", "Go to top page"),
+              hr(),
+              br(),
+              tags$div(id = "gpg_action"),
+              mod_action_ui("action"),
+              accessible_action_link("top_action_intro", "Go to top page"),
+              hr(),
+              br()
+            )
           )
         )
       )
