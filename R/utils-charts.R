@@ -409,7 +409,7 @@ gpg_column <- function(x, xvar = "period", yvar, yaxis_title) {
           )),
           pointPadding = 0.1,
           groupPadding = 0
-        ) 
+        )
 
       return(plt)
     },

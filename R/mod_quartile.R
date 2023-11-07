@@ -15,9 +15,9 @@ mod_quartile_ui <- function(id) {
       nhs_selectInput(
         inputId = ns("period"),
         label = "Reporting period",
-        choices = unique(nhsbsaGPG::quartile$period),
+        choices = unique(nhsbsaGPG::gpg_class$df_quartile$period),
         full_width = TRUE,
-        selected = max(unique(nhsbsaGPG::quartile$period))
+        selected = max(nhsbsaGPG::gpg_class$df_quartile$period)
       ),
       br(),
       highcharter::highchartOutput(
@@ -52,9 +52,9 @@ mod_quartile_server <- function(id) {
                        yaxis_title = "% of men and women in each pay quartile")
 
     })
-    
-    df_pay_quartile_download <- nhsbsaGPG::quartile |> 
-      dplyr::mutate(percent = round(percent,1)) |> 
+
+    df_pay_quartile_download <- nhsbsaGPG::quartile |>
+      dplyr::mutate(percent = round(percent, 1)) |>
       dplyr::rename(
         `Reporting period` = period,
         Quartile = quartile,
@@ -62,7 +62,7 @@ mod_quartile_server <- function(id) {
         Count = count,
         Percent = percent
       )
-        
+
     # data download - quartile
     mod_nhs_download_server(
       id = "download_quartile",

@@ -14,7 +14,8 @@
 #' \code{df_hdcnt_dir}: data frame contains headcount by directorate
 #' \code{df_hrrate}: data frame contains mean, median hourly rate
 #' \code{df_hrrate_afc}: data frame contains mean, median hourly rate by AFC band
-#' \code{df_hrrate_dir} data frame contains mean, median hourly rate by directorate
+#' \code{df_hrrate_dir}: data frame contains mean, median hourly rate by directorate
+#' \code{df_quartile}: data frame contains quartile
 #' \code{ending_fy}: a character vector containing ending reporting period
 #' (e.g. 31 March 2023). This uses for introduction paragraph
 #'
@@ -202,14 +203,14 @@ gpg_data <- function(x,
       mean_rate = mean(hourly_rate, na.rm = TRUE),
       median_rate = median(hourly_rate, na.rm = TRUE),
       .groups = "drop"
-    ) |> 
+    ) |>
     tidyr::pivot_wider(names_from = gender, values_from = c(mean_rate, median_rate)) |>
     janitor::clean_names() |>
     dplyr::mutate(
       mean_paygap = (mean_rate_men - mean_rate_women) / mean_rate_men * 100,
       median_paygap = (median_rate_men - median_rate_women) / median_rate_men * 100
     )
-  
+
 
 
   # data frame: hourly rate by gender and by AFC band,
@@ -247,9 +248,24 @@ gpg_data <- function(x,
     )
 
 
-  
-  
-  
+  # data frame: number of men, women by quartile
+  df_quartile <- bind_rows(
+    x |>
+      group_by(period, gender, quartile) |>
+      summarise(count = dplyr::n(), .groups = "drop") |>
+      group_by(period, quartile) |>
+      mutate(percent = (count / sum(count)) * 100) |>
+      ungroup() |>
+      mutate(quartile = as.character(quartile)),
+    x |>
+      group_by(period, gender) |>
+      summarise(count = dplyr::n(), .groups = "drop") |>
+      group_by(period) |>
+      mutate(percent = (count / sum(count)) * 100) |>
+      dplyr::ungroup() |>
+      mutate(quartile = "Overall")
+  )
+
 
   # Define the class here ----
   # This will mainly use for highchart graphs
@@ -263,6 +279,7 @@ gpg_data <- function(x,
       df_hrrate = df_hrrate,
       df_hrrate_afc = df_hrrate_afc,
       df_hrrate_dir = df_hrrate_dir,
+      df_quartile = df_quartile,
       reporting_headcount = reporting_headcount,
       ending_fy = ending_fy
     ),

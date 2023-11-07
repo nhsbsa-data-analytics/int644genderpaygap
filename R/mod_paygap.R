@@ -211,47 +211,45 @@ mod_paygap_server <- function(id) {
                     `Women's median hourly pay` = median_rate_women,
                     `Median gender pay gap (%)` = median_paygap)
 
-    # data download - gender pay gap for all 
+    # data download - gender pay gap for all
     mod_nhs_download_server(
       id = "download_paygap_all",
       filename = "gender_pay_gap_overall.csv",
       export_data = df_paygap_all_download
     )
-    
-    
-    
-    df_paygap_afc_directorate_download <- dplyr::bind_rows(
+
+
+
+    df_paygap_afc_dir_download <- dplyr::bind_rows(
       nhsbsaGPG::gpg_class$df_hrrate_afc |>
-        dplyr::mutate(breakdown = "AfC band") |> 
+        dplyr::mutate(breakdown = "AfC band") |>
         dplyr::rename(sub_breakdown = afc_band),
       nhsbsaGPG::gpg_class$df_hrrate_dir |>
         dplyr::mutate(breakdown = "Directorate") |>
         dplyr::rename(sub_breakdown = directorate)
     ) |>
       dplyr::rename(`Reporting period` = period,
-                    Breakdown = breakdown,
-                    `Sub breakdown` = sub_breakdown,
-                    `Men's mean hourly pay` = mean_rate_men,
-                    `Women's mean hourly pay` = mean_rate_women,
-                    `Mean gender pay gap (%)` = mean_paygap,
-                    `Men's median hourly pay` = median_rate_men,
-                    `Women's median hourly pay` = median_rate_women,
-                    `Median gender pay gap (%)` = median_paygap
+        Breakdown = breakdown,
+        `Sub breakdown` = sub_breakdown,
+        `Men's mean hourly pay` = mean_rate_men,
+        `Women's mean hourly pay` = mean_rate_women,
+        `Mean gender pay gap (%)` = mean_paygap,
+        `Men's median hourly pay` = median_rate_men,
+        `Women's median hourly pay` = median_rate_women,
+        `Median gender pay gap (%)` = median_paygap
       )
-                    
-                    
-    
+
     # data download - gender pay gap by AfC, directorate
     mod_nhs_download_server(
       id = "download_paygap_afc_directorate",
       filename = "gender_pay_gap_afc_directorate.csv",
-      export_data = df_paygap_afc_directorate_download
+      export_data = df_paygap_afc_dir_download
     )
-    
+
   })
-  
-  
-  
-  
-  
+
+
+
+
+
 }

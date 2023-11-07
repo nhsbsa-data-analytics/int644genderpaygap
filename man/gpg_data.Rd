@@ -32,7 +32,8 @@ Once initiated, the class has six slots:
 \code{df_hdcnt_dir}: data frame contains headcount by directorate
 \code{df_hrrate}: data frame contains mean, median hourly rate
 \code{df_hrrate_afc}: data frame contains mean, median hourly rate by AFC band
-\code{df_hrrate_dir} data frame contains mean, median hourly rate by directorate
+\code{df_hrrate_dir}: data frame contains mean, median hourly rate by directorate
+\code{df_quartile}: data frame contains quartile
 \code{ending_fy}: a character vector containing ending reporting period
 (e.g. 31 March 2023). This uses for introduction paragraph
 }
