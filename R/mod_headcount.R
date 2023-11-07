@@ -191,14 +191,15 @@ mod_headcount_server <- function(id) {
         )
     })
 
+    df_headcount_all_download <- nhsbsaGPG::gpg_class$df_hdcnt |>
+      dplyr::rename(`Reporting period` = period,
+                    Headcount = headcount)
 
     # download headcount all
     mod_nhs_download_server(
       id = "download_headcount_all",
       filename = "nhsbsa_headcount.csv",
-      export_data = nhsbsaGPG::gpg_class$df_hdcnt |>
-        rename(`Reporting period` = period,
-               Headcount = headcount)
+      export_data = df_headcount_all_download
     )
 
     # headcount_breakdown
