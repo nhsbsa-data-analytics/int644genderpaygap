@@ -182,7 +182,7 @@ mod_headcount_server <- function(id) {
                '<b>Number of employees: </b>' +
           Highcharts.numberFormat(Math.abs(this.point.headcount), 0) + '<br>' +
                   '<b>Percentage of employees: </b>' +
-          Highcharts.numberFormat(Math.abs(this.point.perc), 0) + '%'
+          Highcharts.numberFormat(Math.abs(this.point.perc), 1) + '%'
                     return outHTML
                   }
                   "
@@ -211,7 +211,8 @@ mod_headcount_server <- function(id) {
         dplyr::mutate(breakdown = "Directorate") |>
         dplyr::rename(sub_breakdown = directorate)
     ) |>
-      dplyr::rename(`Reporting period` = period,
+      dplyr::mutate(perc = round(perc, 1)) |> 
+      dplyr::select(`Reporting period` = period,
                     Gender = gender,
                     Breakdown = breakdown,
                     `Sub breakdown` = sub_breakdown,
