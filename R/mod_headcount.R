@@ -211,7 +211,7 @@ mod_headcount_server <- function(id) {
         dplyr::mutate(breakdown = "Directorate") |>
         dplyr::rename(sub_breakdown = directorate)
     ) |>
-      dplyr::mutate(perc = round(perc, 1)) |> 
+      dplyr::mutate(perc = round(perc, 1)) |>
       dplyr::select(`Reporting period` = period,
                     Gender = gender,
                     Breakdown = breakdown,

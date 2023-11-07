@@ -230,7 +230,7 @@ mod_paygap_server <- function(id) {
     ) |>
       dplyr::mutate(
         dplyr::mutate(dplyr::across(where(is.double), \(x) round(x, digits = 1)))
-      ) |> 
+      ) |>
       dplyr::select(`Reporting period` = period,
         Breakdown = breakdown,
         `Sub breakdown` = sub_breakdown,
@@ -250,9 +250,4 @@ mod_paygap_server <- function(id) {
     )
 
   })
-
-
-
-
-
 }
