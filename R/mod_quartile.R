@@ -52,6 +52,23 @@ mod_quartile_server <- function(id) {
                        yaxis_title = "% of men and women in each pay quartile")
 
     })
+    
+    df_pay_quartile_download <- nhsbsaGPG::quartile |> 
+      dplyr::mutate(percent = round(percent,1)) |> 
+      dplyr::rename(
+        `Reporting period` = period,
+        Quartile = quartile,
+        Gender = gender,
+        Count = count,
+        Percent = percent
+      )
+        
+    # data download - quartile
+    mod_nhs_download_server(
+      id = "download_quartile",
+      filename = "pay_quartile.csv",
+      export_data = df_pay_quartile_download
+    )
 
   })
 }
