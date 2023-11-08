@@ -1,6 +1,6 @@
 ## Introduction
 
-Organisations with 250 or more employees are required by the government to report on their gender pay gap each year. The [Equality Act 2010 (Specific Duties and Public Authorities) Regulations 2017](https://www.legislation.gov.uk/uksi/2017/353/schedule/1/made) sets out the specific obligations.
+Organisations with 250 or more employees are required by the government to report on their gender pay gap each year. The <a href="https://www.legislation.gov.uk/uksi/2017/353/schedule/1/made" target="_blank">**Equality Act 2010 (Specific Duties and Public Authorities) Regulations 2017**</a> sets out the specific obligations.
 
 __The gender pay gap shows the difference in the average pay between all men and women in an organisation.__ It is different to equal pay, which examines the pay differences between men and women who carry out the same or similar jobs, or work of equal value. It is unlawful to pay people unequally because they are a man or a woman.
 

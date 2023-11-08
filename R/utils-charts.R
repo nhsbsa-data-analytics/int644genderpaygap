@@ -133,7 +133,7 @@ gpg_pyramid <- function(x, xvar, yvar, yaxis_title) {
             group = "gender"
           )
         ) |>
-        nhsbsaR::theme_nhsbsa_highchart(palette = "gender") |>
+        nhsbsaR::theme_nhsbsa_highchart(palette = c("#19a7a1","#244e6e") ) |>
         highcharter::hc_yAxis(
           max = yaxis_max,
           title = list(text = yaxis_title),
