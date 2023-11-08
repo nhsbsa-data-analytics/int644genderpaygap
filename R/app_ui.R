@@ -24,7 +24,7 @@ app_ui <- function(request) {
           fluidRow(
             id = "mainTabs",
             column(
-              width = 11,
+              width = 2,
               shinyWidgets::pickerInput(
                 inputId = "content_main",
                 label = "Content:",
@@ -38,7 +38,9 @@ app_ui <- function(request) {
                 selected = "Introduction",
                 width = "fit",
                 inline = TRUE
-              ),
+              )),
+            column(
+              width = 10,
               tags$div(id = "introduction"),
               mod_introduction_ui("introduction"),
               hr(),
