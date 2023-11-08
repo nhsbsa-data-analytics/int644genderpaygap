@@ -182,8 +182,8 @@ mod_paygap_server <- function(id) {
         high = "rate_men",
         xaxis_category = input$factor,
         yaxis_title = switch(input$stats,
-                             "mean_paygap" = "Mean hour pay (£)",
-                             "median_paygap" = "Median hour pay (£)")
+                             "mean_paygap" = "Mean hourly pay (£)",
+                             "median_paygap" = "Median hourly pay (£)")
       )
 
       plt |>
