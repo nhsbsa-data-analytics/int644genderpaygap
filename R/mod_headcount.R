@@ -25,7 +25,7 @@ mod_headcount_ui <- function(id) {
       nhs_grid_2_col(
         nhs_selectInput(
           inputId = ns("period"),
-          label = "Reporting period",
+          label = "Snapshot as of",
           choices = unique(nhsbsaGPG::gpg_class$df_hdcnt$period),
           full_width = TRUE,
           selected = max(unique(nhsbsaGPG::gpg_class$df_hdcnt$period))
@@ -191,8 +191,8 @@ mod_headcount_server <- function(id) {
         )
     })
 
-    df_headcount_all_download <- nhsbsaGPG::gpg_class$df_hdcnt |>
-      dplyr::rename(`Reporting period` = period,
+    df_headcount_all_download <- nhsbsaGPG::gpg_class$df_hdcnt_gender |>
+      dplyr::rename(`Snapshot as of` = period,
                     Headcount = headcount)
 
     # download headcount all
@@ -212,7 +212,7 @@ mod_headcount_server <- function(id) {
         dplyr::rename(sub_breakdown = directorate)
     ) |>
       dplyr::mutate(perc = round(perc, 1)) |>
-      dplyr::select(`Reporting period` = period,
+      dplyr::select(`Snapshot as of` = period,
                     Gender = gender,
                     Breakdown = breakdown,
                     `Sub breakdown` = sub_breakdown,

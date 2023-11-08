@@ -14,7 +14,7 @@ mod_quartile_ui <- function(id) {
     nhs_card_tabstop(
       nhs_selectInput(
         inputId = ns("period"),
-        label = "Reporting period",
+        label = "Snapshot as of",
         choices = unique(nhsbsaGPG::gpg_class$df_quartile$period),
         full_width = TRUE,
         selected = max(nhsbsaGPG::gpg_class$df_quartile$period)
@@ -39,9 +39,8 @@ mod_quartile_server <- function(id) {
     df_quartile <- reactive({
       req(input$period)
 
-      nhsbsaGPG::quartile |>
-        dplyr::filter(period == input$period) |>
-        dplyr::mutate(gender = ifelse(gender == "men", "Men", "Women"))
+      nhsbsaGPG::gpg_class$df_quartile |>
+        dplyr::filter(period == input$period) 
     })
 
     output$quartile <- highcharter::renderHighchart({
@@ -53,10 +52,10 @@ mod_quartile_server <- function(id) {
 
     })
 
-    df_pay_quartile_download <- nhsbsaGPG::quartile |>
+    df_pay_quartile_download <- nhsbsaGPG::gpg_class$df_quartile |>
       dplyr::mutate(percent = round(percent, 1)) |>
       dplyr::rename(
-        `Reporting period` = period,
+        `Snapshot as of` = period,
         Quartile = quartile,
         Gender = gender,
         Count = count,

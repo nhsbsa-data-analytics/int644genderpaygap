@@ -31,7 +31,7 @@ mod_paygap_ui <- function(id) {
       nhs_grid_3_col(
         nhs_selectInput(
           inputId = ns("period"),
-          label = "Reporting period",
+          label = "Snapshot as of",
           choices = unique(nhsbsaGPG::gpg_class$df_hrrate_afc$period),
           full_width = TRUE,
           selected = max(unique(nhsbsaGPG::gpg_class$df_hrrate_afc$period))
@@ -203,7 +203,7 @@ mod_paygap_server <- function(id) {
     })
 
     df_paygap_all_download <- df_paygap_all |>
-      dplyr::select(`Reporting period` = period,
+      dplyr::select(`Snapshot as of` = period,
                     `Men's mean hourly pay` = mean_rate_men,
                     `Women's mean hourly pay` = mean_rate_women,
                     `Mean gender pay gap (%)` = mean_paygap,
@@ -231,7 +231,7 @@ mod_paygap_server <- function(id) {
       dplyr::mutate(
         dplyr::mutate(dplyr::across(where(is.double), \(x) round(x, digits = 1)))
       ) |>
-      dplyr::select(`Reporting period` = period,
+      dplyr::select(`Snapshot as of` = period,
         Breakdown = breakdown,
         `Sub breakdown` = sub_breakdown,
         `Men's mean hourly pay` = mean_rate_men,

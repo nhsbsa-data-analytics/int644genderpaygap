@@ -1,6 +1,6 @@
-#  Action to remove the gender pay gap
+##  Action to remove the gender pay gap
 
-## Addressing the gender pay gap
+### Addressing the gender pay gap
 
 The NHSBSA is committed to addressing our gender pay gap and achieving equal representation between men and women across all pay bands. We are undertaking a wide range of actions, many of which are aimed at increasing the representation of women in senior roles within our organisation, and during the last year significant progress has been made in the following areas:
 
@@ -20,7 +20,7 @@ The NHSBSA is committed to addressing our gender pay gap and achieving equal rep
 
 -	Other awareness and communications campaigns have been delivered to colleagues and externally, such as those for International Women’s Day, which raise awareness of female role models working at a senior level within the NHSBSA or in a traditionally male-dominated occupation, and we have promoted learning and development opportunities such as external Women in Leadership events.
 
-## Continue to build on this progress by focussing on:
+### Continue to build on this progress by focussing on:
               
 -	Continuing our in-house Reciprocal Mentoring for Inclusion Programme with a second cohort underway and plans for a rolling programme of cohorts.
 

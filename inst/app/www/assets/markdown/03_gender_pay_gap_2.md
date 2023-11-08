@@ -1,4 +1,4 @@
-## Mean and median gender pay gap by AfC band and directorate
+### Mean and median gender pay gap by AfC band and directorate
 
 Bands 2 to 4 have minor pay gaps; women earn more in bands 5, 7, and 8d. However, 
 disparities grow in higher bands, with non-AfC roles showing a 35.6% gap in favour of men.
