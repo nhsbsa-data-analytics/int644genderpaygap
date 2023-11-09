@@ -242,8 +242,9 @@ gpg_stack <- function(x, xvar, yvar, groupvar, yaxis_title) {
             format = "{point.y:.1f} %",
             inside = TRUE,
             align = "center",
-            color = "#425563",
-            style = list(fontSize = "13px")
+            color = "#E8EDEE",
+            style = list(fontSize = "13px",
+                         textOutline = 0)
           )),
           pointPadding = 1,
           groupPadding = 1,
@@ -331,7 +332,8 @@ gpg_bar <- function(x, xvar, yvar, yaxis_title) {
             inside = FALSE,
             align = "top",
             color = "#425563",
-            style = list(fontSize = "13px")
+            style = list(fontSize = "13px",
+                         textOutline = 0)
           )),
           pointPadding = 1,
           groupPadding = 1
@@ -401,11 +403,13 @@ gpg_column <- function(x, xvar = "period", yvar, yaxis_title) {
           column = list(dataLabels = list(
             enabled = TRUE,
             format = "{y} %",
-            inside = TRUE,
+            inside = FALSE,
             align = "center",
-            verticalAlign = "top",
-            color = "#FFFFFF",
-            style = list(fontSize = "12px")
+            verticalAlign = "bottom",
+            y = -5,
+            color = "#231f20",
+            style = list(fontSize = "12px",
+                         textOutline = 0)
           )),
           pointPadding = 0.1,
           groupPadding = 0
