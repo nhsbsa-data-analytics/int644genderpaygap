@@ -82,7 +82,7 @@ mod_headcount_server <- function(id) {
         series_names = c("Women", "Men"),
         yaxis_title = "Headcount",
         yaxis_label = "number",
-        colpalette = c("#19a7a1","#244e6e")
+        colpalette = c("AquaGreen","Purple")
       )
 
       plt |>

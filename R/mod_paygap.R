@@ -59,7 +59,7 @@ mod_paygap_ui <- function(id) {
       # chart 4: Pay gap by period, AfC, directorate
       highcharter::highchartOutput(
         outputId = ns("paygap_afc_directorate"),
-        height = "400px"
+        height = "500px"
       ),
       mod_nhs_download_ui(id = ns("download_paygap_afc_directorate"))
     )
@@ -89,7 +89,7 @@ mod_paygap_server <- function(id) {
 
       plt |>
         highcharter::hc_tooltip(
-          headerFormat = '<span style="font-size: 10px">{point.key}</span><br/>',
+          headerFormat = '<span style="font-size: 12px">{point.key}</span><br/>',
           pointFormat = '<span style="color:{point.color}">
           \u25CF</span> {series.name}: <b>{point.y} %</b><br/>
           \u25CF</span> Mean men per hour: £{point.mean_rate_men} <br/>
@@ -108,7 +108,7 @@ mod_paygap_server <- function(id) {
 
       plt |>
         highcharter::hc_tooltip(
-          headerFormat = '<span style="font-size: 10px">{point.key}</span><br/>',
+          headerFormat = '<span style="font-size: 12px">{point.key}</span><br/>',
           pointFormat = '<span style="color:{point.color}">
           \u25CF</span> {series.name}: <b>{point.y} %</b><br/>
           \u25CF</span> Median men per hour: £{point.median_rate_men} <br/>

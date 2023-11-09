@@ -133,7 +133,7 @@ gpg_pyramid <- function(x, xvar, yvar, yaxis_title) {
             group = "gender"
           )
         ) |>
-        nhsbsaR::theme_nhsbsa_highchart(palette = c("#19a7a1","#244e6e") ) |>
+        nhsbsaR::theme_nhsbsa_highchart(palette = c("AquaGreen","Purple") ) |>
         highcharter::hc_yAxis(
           max = yaxis_max,
           title = list(text = yaxis_title),
@@ -219,7 +219,7 @@ gpg_stack <- function(x, xvar, yvar, groupvar, yaxis_title) {
             group = .data[[groupvar]]
           )
         ) |>
-        nhsbsaR::theme_nhsbsa_highchart(palette = c("#19a7a1","#244e6e")) |>
+        nhsbsaR::theme_nhsbsa_highchart(palette = c("AquaGreen","Purple")) |>
         highcharter::hc_yAxis(
           title = list(text = yaxis_title),
           max = 100
@@ -453,16 +453,16 @@ gpg_dumbbell <- function(x, low, high, xaxis_category, yaxis_title) {
             low = .data[[low]],
             high = .data[[high]]
           ),
-          lowColor = nhsbsaR::palette_nhsbsa("#19A7A1"),
-          color = nhsbsaR::palette_nhsbsa("#244E6E")
+          lowColor = nhsbsaR::palette_nhsbsa("AquaGreen"),
+          color = nhsbsaR::palette_nhsbsa("Purple")
         ) |>
         highcharter::hc_subtitle(
           useHTML = TRUE,
           text =
             "
-            <span style = 'color:#19A7A1; font-size: 18px'> &bull; 
+            <span style = 'color:#00A499; font-size: 30px'> &bull; 
           </span> <b> <span style = font-size: 35px'> Women </span> </b>
-            <span style = 'color:#244E6E; font-size: 18px'> &bull; 
+            <span style = 'color:#330072; font-size: 30px'> &bull; 
           </span> <b> <span style = font-size: 35px'> Men </span>
             ",
           align = "center"
