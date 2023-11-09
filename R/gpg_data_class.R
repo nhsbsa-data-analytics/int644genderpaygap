@@ -134,7 +134,9 @@ gpg_data <- function(x,
 
 
   # Calculate the latest reporting year
-  reporting_latest_year <- as.character(max(as.numeric(stringr::str_sub(x$period, 10, 14))))
+  reporting_latest_year <- as.character(max(as.numeric(
+    stringr::str_sub(x$period, 10, 14)
+  )))
 
 
 

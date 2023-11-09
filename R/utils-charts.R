@@ -133,7 +133,7 @@ gpg_pyramid <- function(x, xvar, yvar, yaxis_title) {
             group = "gender"
           )
         ) |>
-        nhsbsaR::theme_nhsbsa_highchart(palette = c("AquaGreen","Purple") ) |>
+        nhsbsaR::theme_nhsbsa_highchart(palette = c("AquaGreen", "Purple")) |>
         highcharter::hc_yAxis(
           max = yaxis_max,
           title = list(text = yaxis_title),
@@ -219,7 +219,7 @@ gpg_stack <- function(x, xvar, yvar, groupvar, yaxis_title) {
             group = .data[[groupvar]]
           )
         ) |>
-        nhsbsaR::theme_nhsbsa_highchart(palette = c("AquaGreen","Purple")) |>
+        nhsbsaR::theme_nhsbsa_highchart(palette = c("AquaGreen", "Purple")) |>
         highcharter::hc_yAxis(
           title = list(text = yaxis_title),
           max = 100

@@ -41,7 +41,7 @@ mod_quartile_server <- function(id) {
       req(input$period)
 
       nhsbsaGPG::gpg_class$df_quartile |>
-        dplyr::filter(period == input$period) 
+        dplyr::filter(period == input$period)
     })
 
     output$quartile <- highcharter::renderHighchart({
