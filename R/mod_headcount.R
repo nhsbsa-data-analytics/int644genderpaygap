@@ -13,6 +13,7 @@ mod_headcount_ui <- function(id) {
     includeMarkdown("inst/app/www/assets/markdown/02_headcount_1.md"),
     # chart 1: five year headcount trend split by gender
     nhs_card_tabstop(
+      heading = "Gender breakdown of workforce",
       highcharter::highchartOutput(
         outputId = ns("headcount_all"),
         height = "240px"
@@ -22,10 +23,11 @@ mod_headcount_ui <- function(id) {
     includeMarkdown("inst/app/www/assets/markdown/02_headcount_2.md"),
     # chart 2: headcount split by gender AfC
     nhs_card_tabstop(
+      heading = "Gender by AfC pay bands and directorate",
       nhs_grid_2_col(
         nhs_selectInput(
           inputId = ns("period"),
-          label = "Reporting period",
+          label = "Snapshot as of",
           choices = unique(nhsbsaGPG::gpg_class$df_hdcnt$period),
           full_width = TRUE,
           selected = max(unique(nhsbsaGPG::gpg_class$df_hdcnt$period))
@@ -80,7 +82,7 @@ mod_headcount_server <- function(id) {
         series_names = c("Women", "Men"),
         yaxis_title = "Headcount",
         yaxis_label = "number",
-        colpalette = "gender"
+        colpalette = c("AquaGreen", "Purple")
       )
 
       plt |>
@@ -179,10 +181,10 @@ mod_headcount_server <- function(id) {
                      "afc_band" = "AfC",
                      "directorate" = "Directorate"),
               ": </b>' + this.point.tooltip_text + '<br/>' + 
-               '<b>Number of employees: </b>' +
-          Highcharts.numberFormat(Math.abs(this.point.headcount), 0) + '<br>' +
-                  '<b>Percentage of employees: </b>' +
-          Highcharts.numberFormat(Math.abs(this.point.perc), 1) + '%'
+              '<b>Number of employees in ' + this.point.tooltip_text + ' : </b>' + 
+              Highcharts.numberFormat(Math.abs(this.point.headcount), 0) + '<br>' +      
+              '<b>Percentage of employees in ' + this.point.tooltip_text + ' : </b>' + 
+              Highcharts.numberFormat(Math.abs(this.point.perc), 1) + '%'
                     return outHTML
                   }
                   "
@@ -191,8 +193,8 @@ mod_headcount_server <- function(id) {
         )
     })
 
-    df_headcount_all_download <- nhsbsaGPG::gpg_class$df_hdcnt |>
-      dplyr::rename(`Reporting period` = period,
+    df_headcount_all_download <- nhsbsaGPG::gpg_class$df_hdcnt_gender |>
+      dplyr::rename(`Snapshot as of` = period,
                     Headcount = headcount)
 
     # download headcount all
@@ -212,7 +214,7 @@ mod_headcount_server <- function(id) {
         dplyr::rename(sub_breakdown = directorate)
     ) |>
       dplyr::mutate(perc = round(perc, 1)) |>
-      dplyr::select(`Reporting period` = period,
+      dplyr::select(`Snapshot as of` = period,
                     Gender = gender,
                     Breakdown = breakdown,
                     `Sub breakdown` = sub_breakdown,

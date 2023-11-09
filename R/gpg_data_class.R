@@ -16,7 +16,7 @@
 #' \code{df_hrrate_afc}: data frame contains mean, median hourly rate by AFC band
 #' \code{df_hrrate_dir}: data frame contains mean, median hourly rate by directorate
 #' \code{df_quartile}: data frame contains quartile
-#' \code{ending_fy}: a character vector containing ending reporting period
+#' \code{ending_fy}: a character vector containing ending reporting month
 #' (e.g. 31 March 2023). This uses for introduction paragraph
 #'
 #'
@@ -103,12 +103,12 @@ gpg_data <- function(x,
                              greater than 16000.")
   }
 
-  # Check sensible range for reporting period
-  futile.logger::flog.debug("Checking beginning reporting period in a sensible
+  # Check sensible range for reporting year
+  futile.logger::flog.debug("Checking beginning reporting month in a sensible
                             range e.g.(2018:2023)...")
 
 
-  if (any(as.numeric(stringr::str_sub(x$period, 1, 4)) < 2018)) {
+  if (any(as.numeric(stringr::str_sub(x$period, 10, 14)) < 2018)) {
     futile.logger::flog.warn("The dates should start from
                              2018/19 financial year. Please check data-raw script.")
   }
@@ -127,20 +127,17 @@ gpg_data <- function(x,
     barplot(agg_data$headcount,
       names.arg = agg_data$period,
       las = 2,
-      ylab = "Reporting period",
+      ylab = "Month as of",
       xlab = "Headcount"
     )
   }
 
 
   # Calculate the latest reporting year
-  # This values are required to add to the introduction text
-  # (eg. as of 31 March 2023)
-  start_latest_year <- max(as.numeric(stringr::str_sub(x$period, 1, 4)))
-  latest_fy <- paste0(
-    start_latest_year, "/",
-    as.numeric(stringr::str_sub(start_latest_year, 3, 4)) + 1
-  )
+  reporting_latest_year <- as.character(max(as.numeric(
+    stringr::str_sub(x$period, 10, 14)
+  )))
+
 
 
   # data frame: aggregate headcount by period
@@ -154,9 +151,8 @@ gpg_data <- function(x,
 
   # Extract the values
   reporting_headcount <-
-    agg_data$headcount[agg_data$period == latest_fy]
+    agg_data$headcount[agg_data$period == paste0("31 March ", reporting_latest_year)]
 
-  ending_fy <- as.character(start_latest_year + 1)
 
   # data frame: aggregate headcount by gender by period
   df_hdcnt_gender <- x |>
@@ -281,7 +277,7 @@ gpg_data <- function(x,
       df_hrrate_dir = df_hrrate_dir,
       df_quartile = df_quartile,
       reporting_headcount = reporting_headcount,
-      ending_fy = ending_fy
+      reporting_latest_year = reporting_latest_year
     ),
     class = "gpg_data"
   )

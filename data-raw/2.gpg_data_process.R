@@ -18,8 +18,8 @@ process_file <- function(filepath) {
   # Determine the financial year from the filename
   fy_pattern <- "FY(\\d{2})(\\d{2})"
   fy_matches <- regmatches(filepath, regexec(fy_pattern, filepath))[[1]]
-  # reporting period
-  financial_year <- paste0("20", fy_matches[2], "/", fy_matches[3])
+  # Snapshot as of
+  reporting_year <- paste0("31 March 20", fy_matches[3])
 
   # Create three data frames and add the financial year (reporting period)
   if (stringr::str_detect(filepath, "\\.xlsx$")) {
@@ -27,7 +27,7 @@ process_file <- function(filepath) {
       afc = read_excel(filepath, skip = 8, col_names = TRUE) |>
         select(2:7) |>
         janitor::clean_names() |>
-        mutate(period = financial_year)
+        mutate(period = reporting_year)
     )
     # staff list information as csv
   } else if (stringr::str_detect(filepath, "\\.csv$")) {
@@ -41,7 +41,7 @@ process_file <- function(filepath) {
           pay_scale
         ) |>
         mutate(
-          period = financial_year,
+          period = reporting_year,
           employee_number = as.character(employee_number)
         )
     )

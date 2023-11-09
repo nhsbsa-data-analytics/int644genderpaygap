@@ -12,15 +12,16 @@ mod_paygap_ui <- function(id) {
   tagList(
     includeMarkdown("inst/app/www/assets/markdown/03_gender_pay_gap_1.md"),
     nhs_card_tabstop(
+      heading = "Mean and median gender pay gap",
       nhs_grid_2_col(
         highcharter::highchartOutput(
           outputId = ns("paygap_all_mean"),
-          height = "280px"
+          height = "300px"
         ),
         # chart 3: Overall gender pay gap
         highcharter::highchartOutput(
           outputId = ns("paygap_all_median"),
-          height = "280px"
+          height = "300px"
         )
       )
     ),
@@ -28,10 +29,11 @@ mod_paygap_ui <- function(id) {
     br(),
     includeMarkdown("inst/app/www/assets/markdown/03_gender_pay_gap_2.md"),
     nhs_card_tabstop(
+      heading = "Mean and median gender pay gap by AfC pay bands and directorate",
       nhs_grid_3_col(
         nhs_selectInput(
           inputId = ns("period"),
-          label = "Reporting period",
+          label = "Snapshot as of",
           choices = unique(nhsbsaGPG::gpg_class$df_hrrate_afc$period),
           full_width = TRUE,
           selected = max(unique(nhsbsaGPG::gpg_class$df_hrrate_afc$period))
@@ -57,7 +59,7 @@ mod_paygap_ui <- function(id) {
       # chart 4: Pay gap by period, AfC, directorate
       highcharter::highchartOutput(
         outputId = ns("paygap_afc_directorate"),
-        height = "400px"
+        height = "500px"
       ),
       mod_nhs_download_ui(id = ns("download_paygap_afc_directorate"))
     )
@@ -87,7 +89,7 @@ mod_paygap_server <- function(id) {
 
       plt |>
         highcharter::hc_tooltip(
-          headerFormat = '<span style="font-size: 10px">{point.key}</span><br/>',
+          headerFormat = '<span style="font-size: 12px">{point.key}</span><br/>',
           pointFormat = '<span style="color:{point.color}">
           \u25CF</span> {series.name}: <b>{point.y} %</b><br/>
           \u25CF</span> Mean men per hour: £{point.mean_rate_men} <br/>
@@ -106,7 +108,7 @@ mod_paygap_server <- function(id) {
 
       plt |>
         highcharter::hc_tooltip(
-          headerFormat = '<span style="font-size: 10px">{point.key}</span><br/>',
+          headerFormat = '<span style="font-size: 12px">{point.key}</span><br/>',
           pointFormat = '<span style="color:{point.color}">
           \u25CF</span> {series.name}: <b>{point.y} %</b><br/>
           \u25CF</span> Median men per hour: £{point.median_rate_men} <br/>
@@ -180,8 +182,8 @@ mod_paygap_server <- function(id) {
         high = "rate_men",
         xaxis_category = input$factor,
         yaxis_title = switch(input$stats,
-                             "mean_paygap" = "Mean hour pay (£)",
-                             "median_paygap" = "Median hour pay (£)")
+                             "mean_paygap" = "Mean hourly pay (£)",
+                             "median_paygap" = "Median hourly pay (£)")
       )
 
       plt |>
@@ -203,7 +205,7 @@ mod_paygap_server <- function(id) {
     })
 
     df_paygap_all_download <- df_paygap_all |>
-      dplyr::select(`Reporting period` = period,
+      dplyr::select(`Snapshot as of` = period,
                     `Men's mean hourly pay` = mean_rate_men,
                     `Women's mean hourly pay` = mean_rate_women,
                     `Mean gender pay gap (%)` = mean_paygap,
@@ -231,7 +233,7 @@ mod_paygap_server <- function(id) {
       dplyr::mutate(
         dplyr::mutate(dplyr::across(where(is.double), \(x) round(x, digits = 1)))
       ) |>
-      dplyr::select(`Reporting period` = period,
+      dplyr::select(`Snapshot as of` = period,
         Breakdown = breakdown,
         `Sub breakdown` = sub_breakdown,
         `Men's mean hourly pay` = mean_rate_men,

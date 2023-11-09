@@ -24,21 +24,23 @@ app_ui <- function(request) {
           fluidRow(
             id = "mainTabs",
             column(
-              width = 11,
-              shinyWidgets::pickerInput(
-                inputId = "content_main",
-                label = "Content:",
-                choices = c(
-                  "Introduction",
-                  "Gender profile",
-                  "Gender pay gap",
-                  "Pay quartile",
-                  "Action"
-                ),
-                selected = "Introduction",
-                width = "fit",
-                inline = TRUE
-              ),
+                   width = 2,
+                   shinyWidgets::pickerInput(
+                     inputId = "content_main",
+                     label = "Content:",
+                     choices = c(
+                       "Introduction",
+                       "Gender profile",
+                       "Gender pay gap",
+                       "Pay quartile",
+                       "Action"
+                     ),
+                     selected = "Introduction",
+                     width = "fit",
+                     inline = TRUE
+                   )),
+            column(
+              width = 10,
               tags$div(id = "introduction"),
               mod_introduction_ui("introduction"),
               hr(),

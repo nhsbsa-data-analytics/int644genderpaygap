@@ -34,7 +34,7 @@ Once initiated, the class has six slots:
 \code{df_hrrate_afc}: data frame contains mean, median hourly rate by AFC band
 \code{df_hrrate_dir}: data frame contains mean, median hourly rate by directorate
 \code{df_quartile}: data frame contains quartile
-\code{ending_fy}: a character vector containing ending reporting period
+\code{ending_fy}: a character vector containing ending reporting month
 (e.g. 31 March 2023). This uses for introduction paragraph
 }
 \examples{
