@@ -11,20 +11,19 @@ A data frame with gender pay gap information
 gpg_class
 }
 \description{
-A S3 class containing aggregated data frames. It covers from as of March 2019
+A S3 class containing aggregated data frames. 
 \itemize{
-  \item df_hdcnt. overall headcount 
+  \item df_hdcnt. overall headcount
   \item df_hdcnt_gender. overall headcount by gender
-  \item df_hdcnt_afc. headcount by gender and AfC 
+  \item df_hdcnt_afc. headcount by gender and AfC
   \item df_hdcnt_dir. headcount by gender and directorate
-  \item df_hrrate Mean & median men and women hourly pay to calculate gender
+  \item df_hrrate Mean and median men and women hourly pay to calculate gender
   pay gap
-  \item df_hrrate_afc Mean & median hourly pay by AfC & paygap
-  \item df_hrrate_dir Mean & median hourly pay by directorate & paygap
+  \item df_hrrate_afc Mean and median hourly pay by AfC & paygap
+  \item df_hrrate_dir Mean and median hourly pay by directorate & paygap
   \item df_quartile Quartile pay split by gender
   \item reporting_headcount Reporting headcount
-  \item reporting_latest_year Reporting year  
-  
+  \item reporting_latest_year Reporting year#'
 }
 }
 \keyword{R3}
