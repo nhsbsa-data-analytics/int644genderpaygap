@@ -506,7 +506,7 @@ gpg_column <- function(x, xvar = "period", yvar, yaxis_title, export_filename) {
 #'
 #' @export
 #' @param x Input {df_hrrate_afc} or {df_hrrate_dir} data frame.
-#' @param low dumbbell chart low value 
+#' @param low dumbbell chart low value
 #' @param high dumbbell chart high value
 #' @param xaxis_category either AfC band or directorate
 #' @param yaxis_title Y axis title
