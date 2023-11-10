@@ -90,7 +90,7 @@ gpg_trend <- function(x,
             contextButton = list(
               text = "Export chart",
               menuItems = list("downloadPNG",
-                               "downloadSVG",
+                               "downloadJPEG",
                                "label")
             )
           )
@@ -186,7 +186,7 @@ gpg_pyramid <- function(x, xvar, yvar, yaxis_title, export_filename) {
             contextButton = list(
               text = "Export chart",
               menuItems = list("downloadPNG",
-                               "downloadSVG",
+                               "downloadJPEG",
                                "label")
             )
           )
@@ -292,7 +292,7 @@ gpg_stack <- function(x, xvar, yvar, groupvar, yaxis_title, export_filename) {
             contextButton = list(
               text = "Export chart",
               menuItems = list("downloadPNG",
-                               "downloadSVG",
+                               "downloadJPEG",
                                "label")
             )
           )
@@ -389,7 +389,7 @@ gpg_bar <- function(x, xvar, yvar, yaxis_title, export_filename) {
             contextButton = list(
               text = "Export chart",
               menuItems = list("downloadPNG",
-                               "downloadSVG",
+                               "downloadJPEG",
                                "label")
             )
           )
@@ -471,7 +471,7 @@ gpg_column <- function(x, xvar = "period", yvar, yaxis_title, export_filename) {
             contextButton = list(
               text = "Export chart",
               menuItems = list("downloadPNG",
-                               "downloadSVG",
+                               "downloadJPEG",
                                "label")
             )
           )
@@ -558,7 +558,7 @@ gpg_dumbbell <- function(x, low, high, xaxis_category, yaxis_title,
             contextButton = list(
               text = "Export chart",
               menuItems = list("downloadPNG",
-                               "downloadSVG",
+                               "downloadJPEG",
                                "label")
             )
           )

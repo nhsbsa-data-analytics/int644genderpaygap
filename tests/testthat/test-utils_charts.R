@@ -82,7 +82,8 @@ testthat::test_that("gpg_trend function runs without errors", {
     series_names = c("Men", "Women"),
     yaxis_title = "Men and Women employee headcount",
     yaxis_label = "number",
-    colpalette = "gender"
+    colpalette = "gender",
+    export_filename = "gpg_trend"
   ))
 })
 
@@ -95,7 +96,8 @@ testthat::test_that("gpg_trend outputs a highchart, htmlwidget class", {
       series_names = c("Men", "Women"),
       yaxis_title = "Men and Women employee headcount",
       yaxis_label = "number",
-      colpalette = c("DarkBlue", "Green")
+      colpalette = c("DarkBlue", "Green"),
+      export_filename = "gpg_trend"
     )
   ), c("highchart", "htmlwidget"))
 })
@@ -122,7 +124,8 @@ testthat::test_that("gpg_trend function runs with paygap dataframe", {
     series_names = c("Mean gender pay gap", "Median gender pay gap"),
     yaxis_title = "Gender pay gap in hourly pay",
     yaxis_label = "percentage",
-    colpalette = c("Purple", "WarmYellow")
+    colpalette = c("Purple", "WarmYellow"),
+    export_filename = "gpg_trend"
   ))
 })
 
@@ -130,14 +133,16 @@ testthat::test_that("gpg_trend function runs with paygap dataframe", {
 testthat::test_that("gpg_pyramid function runs without error", {
   expect_silent(gpg_pyramid(z,
     xvar = "afc_band", yvar = "headcount",
-    yaxis_title = "Headcount"
+    yaxis_title = "Headcount",
+    export_filename = "gpg_pyramid"
   ))
 })
 
 testthat::test_that("gpg_stack function runs without error", {
   expect_silent(gpg_stack(quartile_test,
     xvar = "quartile", yvar = "percent",
-    groupvar = "gender", yaxis_title = "Men and women in pay quartile"
+    groupvar = "gender", yaxis_title = "Men and women in pay quartile",
+    export_filename = "gpg_stack"
   ))
 })
 
@@ -145,7 +150,8 @@ testthat::test_that("gpg_stack function runs without error", {
 testthat::test_that("gpg_stack function runs with error", {
   expect_error(gpg_stack(quartile_test,
     xvar = "quartile", yvar = "percent",
-    groupvar = NA, yaxis_title = "Men and women in pay quartile"
+    groupvar = NA, yaxis_title = "Men and women in pay quartile",
+    export_filename = "gpg_stack"
   ))
 })
 
@@ -153,14 +159,16 @@ testthat::test_that("gpg_stack function runs with error", {
 testthat::test_that("gpg_bar function runs without error with AfC paygap", {
   expect_silent(gpg_bar(paygap_afc,
     xvar = "afc_band", yvar = "mean_paygap",
-    yaxis_title = "Mean pay gap"
+    yaxis_title = "Mean pay gap",
+    export_filename = "gpg_bar"
   ))
 })
 
 testthat::test_that("gpg_bar function runs without error with directorate", {
   expect_silent(gpg_bar(paygap_dir,
     xvar = "directorate", yvar = "mean_paygap",
-    yaxis_title = "Mean pay gap"
+    yaxis_title = "Mean pay gap",
+    export_filename = "gpg_bar"
   ))
 })
 
@@ -168,6 +176,7 @@ testthat::test_that("gpg_bar function runs without error with directorate", {
 testthat::test_that("gpg_column function runs without error", {
   expect_silent(gpg_column(paygap_all,
     yvar = "mean_paygap",
-    yaxis_title = "Mean pay gap"
+    yaxis_title = "Mean pay gap",
+    export_filename = "gpg_column"
   ))
 })

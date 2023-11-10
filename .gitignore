@@ -25,3 +25,4 @@ review/tests/_snaps/*
 !review/temp/.gitkeep
 # Any docx files
 *.[dD][oO][cC][xX]
+*.tmp
