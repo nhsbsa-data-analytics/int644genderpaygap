@@ -5,7 +5,7 @@
 \title{Highcharter bar chart to create pyramid chart. This chart
 shows gender pay gap information by AFC band in NHSBSA}
 \usage{
-gpg_pyramid(x, xvar, yvar, yaxis_title)
+gpg_pyramid(x, xvar, yvar, yaxis_title, export_filename)
 }
 \arguments{
 \item{x}{Input data frame from \code{gpg_data} S3 class object.}

@@ -4,7 +4,7 @@
 \alias{gpg_column}
 \title{Highcharter column chart. This chart will show columns vertically}
 \usage{
-gpg_column(x, xvar = "period", yvar, yaxis_title)
+gpg_column(x, xvar = "period", yvar, yaxis_title, export_filename)
 }
 \arguments{
 \item{x}{Input paygap data frame.}

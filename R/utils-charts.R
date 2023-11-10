@@ -22,7 +22,8 @@ gpg_trend <- function(x,
                       series_names,
                       yaxis_title,
                       yaxis_label,
-                      colpalette) {
+                      colpalette,
+                      export_filename) {
   out <- tryCatch(
     expr = {
       # Input data frame convert to list
@@ -81,7 +82,19 @@ gpg_trend <- function(x,
           itemMarginTop = 5,
           y = 0
         ) |>
-        highcharter::hc_credits(enabled = TRUE)
+        highcharter::hc_credits(enabled = TRUE) |>
+        highcharter::hc_exporting(
+          enabled = TRUE,
+          filename = export_filename,
+          buttons = list(
+            contextButton = list(
+              text = "Export chart",
+              menuItems = list("downloadPNG",
+                               "downloadSVG",
+                               "label")
+            )
+          )
+        )
 
       return(plt)
     },
@@ -114,7 +127,7 @@ gpg_trend <- function(x,
 #' @param yvar headcount by number or percentage
 #' @param yaxis_title Y axis title
 
-gpg_pyramid <- function(x, xvar, yvar, yaxis_title) {
+gpg_pyramid <- function(x, xvar, yvar, yaxis_title, export_filename) {
   out <- tryCatch(
     expr = {
       data <- x
@@ -165,7 +178,19 @@ gpg_pyramid <- function(x, xvar, yvar, yaxis_title) {
             )
           )
         ) |>
-        highcharter::hc_credits(enabled = TRUE)
+        highcharter::hc_credits(enabled = TRUE) |>
+        highcharter::hc_exporting(
+          enabled = TRUE,
+          filename = export_filename,
+          buttons = list(
+            contextButton = list(
+              text = "Export chart",
+              menuItems = list("downloadPNG",
+                               "downloadSVG",
+                               "label")
+            )
+          )
+        )
 
 
       return(plt)
@@ -201,7 +226,7 @@ gpg_pyramid <- function(x, xvar, yvar, yaxis_title) {
 #' @param groupvar group by variable
 #' @param yaxis_title Y axis title
 
-gpg_stack <- function(x, xvar, yvar, groupvar, yaxis_title) {
+gpg_stack <- function(x, xvar, yvar, groupvar, yaxis_title, export_filename) {
   out <- tryCatch(
     expr = {
       data <- x
@@ -259,7 +284,19 @@ gpg_stack <- function(x, xvar, yvar, groupvar, yaxis_title) {
             )
           )
         ) |>
-        highcharter::hc_tooltip(enabled = FALSE)
+        highcharter::hc_tooltip(enabled = FALSE) |>
+        highcharter::hc_exporting(
+          enabled = TRUE,
+          filename = export_filename,
+          buttons = list(
+            contextButton = list(
+              text = "Export chart",
+              menuItems = list("downloadPNG",
+                               "downloadSVG",
+                               "label")
+            )
+          )
+        )
 
       return(plt)
     },
@@ -288,7 +325,7 @@ gpg_stack <- function(x, xvar, yvar, groupvar, yaxis_title) {
 #' @param yvar AfC band, directorate
 #' @param yaxis_title Y axis title
 
-gpg_bar <- function(x, xvar, yvar, yaxis_title) {
+gpg_bar <- function(x, xvar, yvar, yaxis_title, export_filename) {
   out <- tryCatch(
     expr = {
       data <- x
@@ -344,7 +381,19 @@ gpg_bar <- function(x, xvar, yvar, yaxis_title) {
           \u25CF</span> {series.name}: <b>{point.y} %</b><br/>',
           footerFormat = ""
         ) |>
-        highcharter::hc_credits(enabled = TRUE)
+        highcharter::hc_credits(enabled = TRUE) |>
+        highcharter::hc_exporting(
+          enabled = TRUE,
+          filename = export_filename,
+          buttons = list(
+            contextButton = list(
+              text = "Export chart",
+              menuItems = list("downloadPNG",
+                               "downloadSVG",
+                               "label")
+            )
+          )
+        )
 
       return(plt)
     },
@@ -374,7 +423,7 @@ gpg_bar <- function(x, xvar, yvar, yaxis_title) {
 #' @param yvar e.g. mean_paygap, median_paygap
 #' @param yaxis_title Y axis title
 
-gpg_column <- function(x, xvar = "period", yvar, yaxis_title) {
+gpg_column <- function(x, xvar = "period", yvar, yaxis_title, export_filename) {
   out <- tryCatch(
     expr = {
       data <- x
@@ -413,6 +462,19 @@ gpg_column <- function(x, xvar = "period", yvar, yaxis_title) {
           )),
           pointPadding = 0.1,
           groupPadding = 0
+        ) |>
+        highcharter::hc_credits(enabled = TRUE) |>
+        highcharter::hc_exporting(
+          enabled = TRUE,
+          filename = export_filename,
+          buttons = list(
+            contextButton = list(
+              text = "Export chart",
+              menuItems = list("downloadPNG",
+                               "downloadSVG",
+                               "label")
+            )
+          )
         )
 
       return(plt)
@@ -443,7 +505,8 @@ gpg_column <- function(x, xvar = "period", yvar, yaxis_title) {
 #' @param yvar e.g. mean_paygap, median_paygap
 #' @param yaxis_title Y axis title
 
-gpg_dumbbell <- function(x, low, high, xaxis_category, yaxis_title) {
+gpg_dumbbell <- function(x, low, high, xaxis_category, yaxis_title,
+                         export_filename) {
   out <- tryCatch(
     expr = {
       data <- x
@@ -487,7 +550,19 @@ gpg_dumbbell <- function(x, low, high, xaxis_category, yaxis_title) {
         highcharter::hc_scrollbar(enabled = FALSE) |>
         highcharter::hc_legend(enabled = FALSE) |>
         nhsbsaR::theme_nhsbsa_highchart() |>
-        highcharter::hc_credits(enabled = TRUE)
+        highcharter::hc_credits(enabled = TRUE) |>
+        highcharter::hc_exporting(
+          enabled = TRUE,
+          filename = export_filename,
+          buttons = list(
+            contextButton = list(
+              text = "Export chart",
+              menuItems = list("downloadPNG",
+                               "downloadSVG",
+                               "label")
+            )
+          )
+        )
 
       return(plt)
     },

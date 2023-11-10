@@ -82,7 +82,8 @@ mod_headcount_server <- function(id) {
         series_names = c("Women", "Men"),
         yaxis_title = "Headcount",
         yaxis_label = "number",
-        colpalette = c("AquaGreen", "Purple")
+        colpalette = c("AquaGreen", "Purple"),
+        export_filename = "headcount_by_gender"
       )
 
       plt |>
@@ -164,7 +165,10 @@ mod_headcount_server <- function(id) {
     output$headcount_breakdown <- highcharter::renderHighchart({
       plt <- gpg_pyramid(
         x = df_hdcnt_breakdown(), xvar = xvar(),
-        yvar = yvar(), yaxis_title = yaxis_title()
+        yvar = yvar(), yaxis_title = yaxis_title(),
+        export_filename = switch(input$factor,
+                                 "afc_band" = "headcount_afc_band",
+                                 "directorate" = "headcount_directorate")
       )
 
       plt |>

@@ -49,7 +49,8 @@ mod_quartile_server <- function(id) {
                        xvar = "quartile",
                        yvar = "percent",
                        groupvar = "gender",
-                       yaxis_title = "% of men and women in each pay quartile")
+                       yaxis_title = "% of men and women in each pay quartile",
+                       export_filename = "men_women_pay_quartile")
 
     })
 

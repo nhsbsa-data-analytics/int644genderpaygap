@@ -12,7 +12,8 @@ gpg_trend(
   series_names,
   yaxis_title,
   yaxis_label,
-  colpalette
+  colpalette,
+  export_filename
 )
 }
 \arguments{

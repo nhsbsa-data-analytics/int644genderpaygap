@@ -5,7 +5,7 @@
 \title{Highcharter column chart to create stacked column chart. This chart
 shows proportion of males and females in each quartile pay band.}
 \usage{
-gpg_stack(x, xvar, yvar, groupvar, yaxis_title)
+gpg_stack(x, xvar, yvar, groupvar, yaxis_title, export_filename)
 }
 \arguments{
 \item{x}{Input quartile data frame.}

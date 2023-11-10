@@ -4,7 +4,7 @@
 \alias{gpg_bar}
 \title{Highcharter bar chart. This chart will show columns horizontally.}
 \usage{
-gpg_bar(x, xvar, yvar, yaxis_title)
+gpg_bar(x, xvar, yvar, yaxis_title, export_filename)
 }
 \arguments{
 \item{x}{Input df_hrrate_afc or df_hrrate_dir data frame.}

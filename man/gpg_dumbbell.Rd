@@ -4,7 +4,7 @@
 \alias{gpg_dumbbell}
 \title{Highcharter dumbbell chart.}
 \usage{
-gpg_dumbbell(x, low, high, xaxis_category, yaxis_title)
+gpg_dumbbell(x, low, high, xaxis_category, yaxis_title, export_filename)
 }
 \arguments{
 \item{x}{Input {df_hrrate_afc} or {df_hrrate_dir} data frame.}

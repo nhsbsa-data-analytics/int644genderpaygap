@@ -84,7 +84,8 @@ mod_paygap_server <- function(id) {
         x = df_paygap_all,
         xvar = "period",
         yvar = "mean_paygap",
-        yaxis_title = "Mean gender pay gap (%)"
+        yaxis_title = "Mean gender pay gap (%)",
+        export_filename = "mean_gender_pay_gap"
       )
 
       plt |>
@@ -103,7 +104,8 @@ mod_paygap_server <- function(id) {
         x = df_paygap_all,
         xvar = "period",
         yvar = "median_paygap",
-        yaxis_title = "Median gender pay gap (%)"
+        yaxis_title = "Median gender pay gap (%)",
+        export_filename = "median_gender_pay_gap"
       )
 
       plt |>
@@ -183,7 +185,10 @@ mod_paygap_server <- function(id) {
         xaxis_category = input$factor,
         yaxis_title = switch(input$stats,
                              "mean_paygap" = "Mean hourly pay (£)",
-                             "median_paygap" = "Median hourly pay (£)")
+                             "median_paygap" = "Median hourly pay (£)"),
+        export_filename = switch(input$factor,
+                                 "afc_band" = "AfC band pay gap",
+                                 "directorate" = "Directorate pay gap")
       )
 
       plt |>
