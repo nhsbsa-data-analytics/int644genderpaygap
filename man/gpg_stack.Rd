@@ -17,6 +17,8 @@ gpg_stack(x, xvar, yvar, groupvar, yaxis_title, export_filename)
 \item{groupvar}{group by variable}
 
 \item{yaxis_title}{Y axis title}
+
+\item{export_filename}{filename for export chart image}
 }
 \value{
 Returns a highchart or htmlwidget object.

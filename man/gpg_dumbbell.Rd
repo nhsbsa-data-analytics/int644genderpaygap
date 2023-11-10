@@ -9,11 +9,15 @@ gpg_dumbbell(x, low, high, xaxis_category, yaxis_title, export_filename)
 \arguments{
 \item{x}{Input {df_hrrate_afc} or {df_hrrate_dir} data frame.}
 
+\item{low}{dumbbell chart low value}
+
+\item{high}{dumbbell chart high value}
+
+\item{xaxis_category}{either AfC band or directorate}
+
 \item{yaxis_title}{Y axis title}
 
-\item{xvar}{"period" default}
-
-\item{yvar}{e.g. mean_paygap, median_paygap}
+\item{export_filename}{filename for export chart image}
 }
 \value{
 Returns a highchart or htmlwidget object.

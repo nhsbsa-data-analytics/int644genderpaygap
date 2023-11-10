@@ -15,6 +15,8 @@ gpg_pyramid(x, xvar, yvar, yaxis_title, export_filename)
 \item{yvar}{headcount by number or percentage}
 
 \item{yaxis_title}{Y axis title}
+
+\item{export_filename}{filename for export chart image}
 }
 \value{
 Returns a highchart or htmlwidget object.

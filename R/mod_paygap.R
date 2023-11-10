@@ -93,8 +93,8 @@ mod_paygap_server <- function(id) {
           headerFormat = '<span style="font-size: 12px">{point.key}</span><br/>',
           pointFormat = '<span style="color:{point.color}">
           \u25CF</span> {series.name}: <b>{point.y} %</b><br/>
-          \u25CF</span> Mean men per hour: £{point.mean_rate_men} <br/>
-          \u25CF</span> Mean women per hour: £{point.mean_rate_women}',
+          \u25CF</span> Mean men per hour: &#163;{point.mean_rate_men} <br/>
+          \u25CF</span> Mean women per hour: &#163;{point.mean_rate_women}',
           footerFormat = ""
         )
     })
@@ -113,8 +113,8 @@ mod_paygap_server <- function(id) {
           headerFormat = '<span style="font-size: 12px">{point.key}</span><br/>',
           pointFormat = '<span style="color:{point.color}">
           \u25CF</span> {series.name}: <b>{point.y} %</b><br/>
-          \u25CF</span> Median men per hour: £{point.median_rate_men} <br/>
-          \u25CF</span> Median women per hour: £{point.median_rate_women}',
+          \u25CF</span> Median men per hour: &#163;{point.median_rate_men} <br/>
+          \u25CF</span> Median women per hour: &#163;{point.median_rate_women}',
           footerFormat = ""
         )
     })
@@ -184,8 +184,8 @@ mod_paygap_server <- function(id) {
         high = "rate_men",
         xaxis_category = input$factor,
         yaxis_title = switch(input$stats,
-                             "mean_paygap" = "Mean hourly pay (£)",
-                             "median_paygap" = "Median hourly pay (£)"),
+                             "mean_paygap" = "Mean hourly pay (&#163;)",
+                             "median_paygap" = "Median hourly pay (&#163;)"),
         export_filename = switch(input$factor,
                                  "afc_band" = "AfC band pay gap",
                                  "directorate" = "Directorate pay gap")
@@ -203,8 +203,8 @@ mod_paygap_server <- function(id) {
           pointFormat = paste0(
             "<b>{point.tooltip_text}</b> <br><br>",
             "<b>", tooltip_title(), " {point.paygap:,.1f}%</b><br>",
-            "<b>Women:</b> £{point.rate_women:,.1f} per hour  <br>",
-            "<b>Men:</b> £{point.rate_men:,.1f} per hour"
+            "<b>Women:</b> &#163;{point.rate_women:,.1f} per hour  <br>",
+            "<b>Men:</b> &#163;{point.rate_men:,.1f} per hour"
           )
         )
     })

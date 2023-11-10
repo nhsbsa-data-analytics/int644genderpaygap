@@ -14,6 +14,8 @@ gpg_column(x, xvar = "period", yvar, yaxis_title, export_filename)
 \item{yvar}{e.g. mean_paygap, median_paygap}
 
 \item{yaxis_title}{Y axis title}
+
+\item{export_filename}{filename for export chart image}
 }
 \value{
 Returns a highchart or htmlwidget object.

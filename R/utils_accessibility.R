@@ -133,7 +133,6 @@ nhs_card_tabstop <- function(heading, ..., tabindex = 0) {
 #' accessible_radio_button
 #'
 #' @param ... radio content
-#'
 #' @noRd
 #'
 accessible_radio_button <- function(inputId, label, choices = NULL, selected = NULL,

@@ -23,12 +23,11 @@ Imports:
     futile.logger (>= 1.4.3),
     stringr,
     htmlwidgets,
-    markdown,
     shinyWidgets,
-    ggplot2
+    ggplot2,
+    janitor
 Suggests:
     pkgload,
-    testthat (>= 3.0.0),
     usethis,
     tidyr,
     graphics,
@@ -36,14 +35,11 @@ Suggests:
     knitr,
     officedown,
     officer,
-    pkgload,
     purrr,
     markdown,
     rmarkdown,
     rprojroot,
     testthat,
-    tidyr,
-    usethis,
     withr,
     xml2
 Remotes:

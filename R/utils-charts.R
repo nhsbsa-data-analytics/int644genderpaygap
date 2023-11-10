@@ -14,6 +14,7 @@
 #' @param yaxis_title Y axis title
 #' @param yaxis_label Indication of percentage or number
 #' @param colpalette custom palette
+#' @param export_filename filename for export chart image
 #'
 #'
 gpg_trend <- function(x,
@@ -126,6 +127,7 @@ gpg_trend <- function(x,
 #' @param xvar This can be either afc_band or directorate
 #' @param yvar headcount by number or percentage
 #' @param yaxis_title Y axis title
+#' @param export_filename filename for export chart image
 
 gpg_pyramid <- function(x, xvar, yvar, yaxis_title, export_filename) {
   out <- tryCatch(
@@ -225,6 +227,7 @@ gpg_pyramid <- function(x, xvar, yvar, yaxis_title, export_filename) {
 #' @param yvar headcount/mean hourly/median hourly pay
 #' @param groupvar group by variable
 #' @param yaxis_title Y axis title
+#' @param export_filename filename for export chart image
 
 gpg_stack <- function(x, xvar, yvar, groupvar, yaxis_title, export_filename) {
   out <- tryCatch(
@@ -324,6 +327,7 @@ gpg_stack <- function(x, xvar, yvar, groupvar, yaxis_title, export_filename) {
 #' @param xvar e.g. mean_paygap, median_paygap
 #' @param yvar AfC band, directorate
 #' @param yaxis_title Y axis title
+#' @param export_filename filename for export chart image
 
 gpg_bar <- function(x, xvar, yvar, yaxis_title, export_filename) {
   out <- tryCatch(
@@ -422,6 +426,7 @@ gpg_bar <- function(x, xvar, yvar, yaxis_title, export_filename) {
 #' @param xvar "period" default
 #' @param yvar e.g. mean_paygap, median_paygap
 #' @param yaxis_title Y axis title
+#' @param export_filename filename for export chart image
 
 gpg_column <- function(x, xvar = "period", yvar, yaxis_title, export_filename) {
   out <- tryCatch(
@@ -501,9 +506,11 @@ gpg_column <- function(x, xvar = "period", yvar, yaxis_title, export_filename) {
 #'
 #' @export
 #' @param x Input {df_hrrate_afc} or {df_hrrate_dir} data frame.
-#' @param xvar "period" default
-#' @param yvar e.g. mean_paygap, median_paygap
+#' @param low dumbbell chart low value 
+#' @param high dumbbell chart high value
+#' @param xaxis_category either AfC band or directorate
 #' @param yaxis_title Y axis title
+#' @param export_filename filename for export chart image
 
 gpg_dumbbell <- function(x, low, high, xaxis_category, yaxis_title,
                          export_filename) {

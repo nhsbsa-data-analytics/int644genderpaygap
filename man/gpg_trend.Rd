@@ -30,6 +30,8 @@ gpg_trend(
 \item{yaxis_label}{Indication of percentage or number}
 
 \item{colpalette}{custom palette}
+
+\item{export_filename}{filename for export chart image}
 }
 \value{
 Returns a highchart or htmlwidget object.
