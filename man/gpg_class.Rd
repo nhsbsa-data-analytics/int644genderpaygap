@@ -11,7 +11,7 @@ A data frame with gender pay gap information
 gpg_class
 }
 \description{
-A S3 class containing aggregated data frames. 
+A S3 class containing aggregated data frames.
 \itemize{
   \item df_hdcnt. overall headcount
   \item df_hdcnt_gender. overall headcount by gender

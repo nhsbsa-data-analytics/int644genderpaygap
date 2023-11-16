@@ -16,7 +16,7 @@ mod_radio_button_ui <- function(id, label = "", choices = c(), selected = NULL) 
     tags$div(
       style = "position:absolute; bottom:10px; left:20px; z-index: 9999;",
       tags$div(
-        accessible_radio_button(
+        accessible_radio_buttons(
           inputId = ns("toggle"),
           label = label,
           inline = TRUE,
