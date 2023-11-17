@@ -178,6 +178,29 @@ gpg_pyramid <- function(x, xvar, yvar, yaxis_title, export_filename) {
               # Disables turning the series off
               legendItemClick = htmlwidgets::JS("function () { return false; }")
             )
+          ),
+          bar = list(
+            pointPadding = 0,
+            groupPadding = 0.13,
+            dataLabels = list(
+              enabled = TRUE,
+              formatter = highcharter::JS(
+                sprintf(
+                  "function() {
+                    if ('%s' === 'perc') {
+                    return Highcharts.numberFormat(Math.abs(this.y), 1) + '%%';
+                  } else {  return Highcharts.numberFormat(Math.abs(this.y),0);}
+                  }", yvar
+                )
+              ),
+              inside = FALSE,
+              y = -5,
+              color = "#231f20",
+              style = list(
+                textOutline = FALSE,
+                fontWeight = "bold"
+              )
+            )
           )
         ) |>
         highcharter::hc_credits(enabled = TRUE) |>
