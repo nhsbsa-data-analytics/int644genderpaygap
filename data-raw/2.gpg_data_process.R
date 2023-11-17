@@ -34,10 +34,11 @@ process_file <- function(filepath) {
     list(
       staff = read.csv(filepath, header = TRUE) |>
         janitor::clean_names() |>
-        filter(primary == "Y") |>
+        filter(primary == "Y") |> #required, few employee with two entry, keep primary
         select(
           employee_number,
           org_l3,
+          org_l5,
           pay_scale
         ) |>
         mutate(
@@ -63,6 +64,10 @@ staff <- map(dfs, "staff") |>
 # After that, add lookup
 lookup <- read.csv("./data-raw/afc_band_lookup.csv", header = TRUE)
 
+lookup_directorate <- read.csv("./data-raw/directorate_lookup.csv", header = TRUE) |>
+  janitor::clean_names() |>
+  mutate_all(str_trim)
+
 afc_staff <- afc |>
   left_join(staff,
     by = c("period", "employee_number")
@@ -71,17 +76,14 @@ afc_staff <- afc |>
     by = "pay_scale"
   ) |>
   select(-employee_number) |>
-  # Data quality error July 2013 Archive employee org
-  # is wrong, manually edited
   mutate(
-    org_l3 = ifelse(org_l3 == "July 2013 Archive",
-      "914 BSA Finance, Commercial and Estates L3", org_l3
-    ),
-    directorate = stringr::str_replace_all(org_l3, c("^914 BSA " = "", " L3" = "")),
-    directorate = stringr::str_trim(directorate),
     headcount = 1,
     gender = ifelse(gender == "Female", "Women", "Men")
   ) |>
+  # mutate_all(str_trim) |>
+  # Join directorate lookup
+  left_join(lookup_directorate |> distinct(),
+            by = c("org_l3", "org_l5")) |>
   select(period, gender, headcount, hourly_rate, quartile, afc_band, directorate)
 
 # create gpg_class
