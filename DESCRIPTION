@@ -17,6 +17,8 @@ Imports:
     htmltools,
     magrittr,
     nhsbsaR,
+    officedown,
+    officer,
     shiny,
     shinyjs,
     dplyr (>= 1.1.2),
