@@ -75,29 +75,29 @@ md_to_word <- function(md_dir = "inst/app/www/assets/markdown",
     docx_file = tempfile(),
     styles_rmd = styles_rmd
   )
-  
+
   # Get paths of md files
   md_files <- Sys.glob(file.path(md_dir, "*.md"))
-  
+
   # Combine them into one rmarkdown file
   all_md <- purrr::map(md_files, readLines) # List of md content
-  
+
   # Keep only parent folder and file name
   md_files <- file.path(
     rev(strsplit(dirname(md_files), "/")[[1]])[[1]],
     basename(md_files)
   )
-  
+
   all_md <- purrr::map2(all_md, md_files, \(x, y) c(y, "", x, "")) # Add file marker
   all_md <- purrr::reduce(all_md, c)                     # All content in one vector
   writeLines(all_md, file.path(tempdir(), "all_md.rmd"))
-  
+
   # Check and rename if existing review.docx is present
   docx_path <- file.path(rv_dir, docx_file)
   if (file.exists(docx_path)) {
     file.rename(docx_path, file.path(rv_dir, paste0("prev-", docx_file)))
   }
-  
+
   # Create Word document
   rmarkdown::render(
     file.path(tempdir(), "all_md.rmd"),
@@ -110,7 +110,7 @@ md_to_word <- function(md_dir = "inst/app/www/assets/markdown",
     output_file = docx_file,
     quiet = TRUE
   )
-  
+
   # Return path of generated Word doc
   docx_path
 }
@@ -156,7 +156,7 @@ style_map <- function(doc, t1, t2 = NULL,
   # End Exclude Linting
   smap         <- list()
   num_blank    <- 0
-  
+
   for (i in seq_along(doc)) {
     doc$officer_cursor$which <- i
     num_chars <- 0
@@ -196,7 +196,7 @@ style_map <- function(doc, t1, t2 = NULL,
       } else {
         match_found <- TRUE
       }
-      
+
       if (match_found) {
         style_data <- list(
           num_chars - nchar(xml2::xml_text(first_child)) + 1,
@@ -213,8 +213,8 @@ style_map <- function(doc, t1, t2 = NULL,
           prev_index <- length(smap[[as.character(i - num_blank)]])
           new_index <- prev_index + 1
           if (
-            style_data[[1]] ==
-            smap[[as.character(i - num_blank)]][[prev_index]][[2]] + 1) {
+              style_data[[1]] ==
+                smap[[as.character(i - num_blank)]][[prev_index]][[2]] + 1) {
             smap[[as.character(i - num_blank)]][[prev_index]][[2]] <-
               style_data[[2]]
           } else {
@@ -226,7 +226,7 @@ style_map <- function(doc, t1, t2 = NULL,
       }
     }
   }
-  
+
   smap %>% purrr::map(unique)
 }
 
@@ -277,7 +277,7 @@ word_to_md <- function(md_flag = "markdown/",
     code_map = style_map(doc, "r", "rPr", "rStyle", "VerbatimChar"),
     chyp_map = style_map(doc, "hyperlink", "r", "rPr", NULL, "rStyle", "VerbatimChar")
   )
-  
+
   # This will find the rows to use for each md file
   breaks <- doc_df %>%
     dplyr::filter(startsWith(.data$text, md_flag)) %>%
@@ -288,7 +288,7 @@ word_to_md <- function(md_flag = "markdown/",
       .keep   = "none"
     ) %>%
     tidyr::replace_na(list(end = nrow(doc_df)))
-  
+
   # Iterate over the markdown filenames. The content for each file is transformed
   # to apply styling and hyperlinks and then written to md_out_dir
   purrr::pwalk(
@@ -297,7 +297,7 @@ word_to_md <- function(md_flag = "markdown/",
       # Each file has content from row number start to end
       doc_df <- doc_df %>%
         dplyr::filter(dplyr::between(.data$doc_index, begin, end))
-      
+
       # Apply any bold styling
       for (row in dplyr::intersect(names(maps$bold_map), begin:end)) {
         offset <- 0
@@ -306,7 +306,7 @@ word_to_md <- function(md_flag = "markdown/",
           rownum <- as.integer(row)
           start  <- style_data[[1]] + offset
           stop   <- style_data[[2]] + offset
-          
+
           bold_applied <- doc_df %>%
             dplyr::filter(.data$doc_index == rownum) %>%
             dplyr::mutate(
@@ -319,7 +319,7 @@ word_to_md <- function(md_flag = "markdown/",
               )
             ) %>%
             dplyr::pull(.data$text)
-          
+
           doc_df <- doc_df %>%
             dplyr::mutate(
               text = replace(
@@ -328,7 +328,7 @@ word_to_md <- function(md_flag = "markdown/",
                 bold_applied
               )
             )
-          
+
           # Add offsets to remaining maps
           for (m in 2:5) {
             if (row %in% names(maps[[m]])) {
@@ -340,11 +340,11 @@ word_to_md <- function(md_flag = "markdown/",
               }
             }
           }
-          
+
           offset <- offset + increment
         }
       }
-      
+
       # Apply any italics styling
       for (row in dplyr::intersect(names(maps$ital_map), begin:end)) {
         offset <- 0
@@ -353,7 +353,7 @@ word_to_md <- function(md_flag = "markdown/",
           rownum <- as.integer(row)
           start  <- style_data[[1]] + offset
           stop   <- style_data[[2]] + offset
-          
+
           ital_applied <- doc_df %>%
             dplyr::filter(.data$doc_index == rownum) %>%
             dplyr::mutate(
@@ -366,7 +366,7 @@ word_to_md <- function(md_flag = "markdown/",
               )
             ) %>%
             dplyr::pull(.data$text)
-          
+
           doc_df <- doc_df %>%
             dplyr::mutate(
               text = replace(
@@ -375,7 +375,7 @@ word_to_md <- function(md_flag = "markdown/",
                 ital_applied
               )
             )
-          
+
           # Add offsets to remaining maps
           for (m in 3:5) {
             if (row %in% names(maps[[m]])) {
@@ -387,11 +387,11 @@ word_to_md <- function(md_flag = "markdown/",
               }
             }
           }
-          
+
           offset <- offset + increment
         }
       }
-      
+
       # Add any hyperlinks
       for (row in dplyr::intersect(names(maps$hypl_map), begin:end)) {
         offset <- 0
@@ -416,7 +416,7 @@ word_to_md <- function(md_flag = "markdown/",
           } else {
             url
           }
-          
+
           hypl_applied <- doc_df %>%
             dplyr::filter(.data$doc_index == rownum) %>%
             dplyr::mutate(
@@ -431,7 +431,7 @@ word_to_md <- function(md_flag = "markdown/",
               )
             ) %>%
             dplyr::pull(.data$text)
-          
+
           doc_df <- doc_df %>%
             dplyr::mutate(
               text = replace(
@@ -440,7 +440,7 @@ word_to_md <- function(md_flag = "markdown/",
                 hypl_applied
               )
             )
-          
+
           # Add offsets to remaining maps
           for (m in 4:5) {
             if (row %in% names(maps[[m]])) {
@@ -454,11 +454,9 @@ word_to_md <- function(md_flag = "markdown/",
               }
             }
           }
-          
           offset <- offset + increment + nchar(url)
         }
       }
-      
       # Apply any code (monospace font) styling
       for (row in dplyr::intersect(names(maps$code_map), begin:end)) {
         offset <- 0
@@ -467,7 +465,7 @@ word_to_md <- function(md_flag = "markdown/",
           rownum <- as.integer(row)
           start  <- style_data[[1]] + offset
           stop   <- style_data[[2]] + offset
-          
+
           code_applied <- doc_df %>%
             dplyr::filter(.data$doc_index == rownum) %>%
             dplyr::mutate(
@@ -480,7 +478,6 @@ word_to_md <- function(md_flag = "markdown/",
               )
             ) %>%
             dplyr::pull(.data$text)
-          
           doc_df <- doc_df %>%
             dplyr::mutate(
               text = replace(
@@ -489,7 +486,7 @@ word_to_md <- function(md_flag = "markdown/",
                 code_applied
               )
             )
-          
+
           # Add offsets to remaining maps
           for (m in 5:5) {
             if (row %in% names(maps[[m]])) {
@@ -501,11 +498,11 @@ word_to_md <- function(md_flag = "markdown/",
               }
             }
           }
-          
+
           offset <- offset + increment
         }
       }
-      
+
       # Add any code (monospace font) hyperlinks
       for (row in dplyr::intersect(names(maps$chyp_map), begin:end)) {
         offset <- 0
@@ -525,7 +522,6 @@ word_to_md <- function(md_flag = "markdown/",
                 dplyr::pull(.data$target)
             )
           )
-          
           chyp_applied <- doc_df %>%
             dplyr::filter(.data$doc_index == rownum) %>%
             dplyr::mutate(
@@ -540,7 +536,7 @@ word_to_md <- function(md_flag = "markdown/",
               )
             ) %>%
             dplyr::pull(.data$text)
-          
+
           doc_df <- doc_df %>%
             dplyr::mutate(
               text = replace(
@@ -549,18 +545,16 @@ word_to_md <- function(md_flag = "markdown/",
                 chyp_applied
               )
             )
-          
+
           offset <- offset + increment + nchar(url)
         }
       }
-      
       # Numbered lists need special treatment, the XML is very convoluted...
       numbering_xml <- file.path(
         doc$package_dir,
         "word",
         "numbering.xml"
       ) %>% xml2::read_xml()
-      
       num_ids_alt_1 <- numbering_xml %>%
         xml2::xml_find_all("//w:num[w:abstractNumId/@w:val='99411']") %>%
         xml2::xml_attr("numId") %>%
@@ -570,7 +564,6 @@ word_to_md <- function(md_flag = "markdown/",
         xml2::xml_attr("numId") %>%
         as.numeric()
       num_ids <- c(num_ids_alt_1, num_ids_alt_2)
-      
       # Add heading, bullet and list markup and find where to add blank lines
       doc_df <- doc_df %>%
         dplyr::mutate(
@@ -607,23 +600,22 @@ word_to_md <- function(md_flag = "markdown/",
           )
         ) %>%
         dplyr::ungroup()
-      
       # Get the element indices which need a blank line afterward
       needs_blank_after <- which(doc_df$blank_after) +
         seq_len(length(which(doc_df$blank_after))) - 1
-      
+
       # Iterate over the indices and add a new blank row after each
       purrr::walk(
         needs_blank_after,
         \(x) doc_df <<- dplyr::add_row(doc_df, text = "", .after = x)
       )
-      
+
       # Write the markdown file
       dir.create(md_out_dir, showWarnings = FALSE)
       writeLines(doc_df$text, file.path(md_out_dir, basename(md_file)))
     }
   )
-  
+
   # Unless disabled, create initial snapshot files if there is no or an empty
   # _snaps dir
   if (first_run_snaps) {
@@ -640,13 +632,12 @@ word_to_md <- function(md_flag = "markdown/",
           i = "Aborting writing snapshot files"
         ))
       }
-      
+
       return(invisible())
     }
-    
     review_md_dir()
   }
-  
+
   invisible()
 }
 
@@ -672,11 +663,11 @@ word_to_md <- function(md_flag = "markdown/",
 #' )}
 review_md <- function(path, snaps_dir = "inst/review/tests") {
   withr::local_options(list(warn = 1))
-  
+
   snap_dir <- file.path(snaps_dir, "_snaps")
   snapshotter <- testthat::local_snapshotter(snap_dir = snap_dir)
   snapshotter$start_file("review_md", "test")
-  
+
   name <- basename(path)
   lab <- rlang::quo_label(rlang::enquo(path))
   msg <- utils::capture.output({
@@ -692,7 +683,6 @@ review_md <- function(path, snaps_dir = "inst/review/tests") {
   if (!identical(msg, character(0))) {
     message(gsub("tests/testthat", snaps_dir, msg))
   }
-  
   tryCatch({
     testthat::expect(
       equal,
@@ -705,9 +695,8 @@ review_md <- function(path, snaps_dir = "inst/review/tests") {
     )
   },
   error = \(e) message(gsub("Error", "Warning", e)))
-  
   snapshotter$end_file()
-  
+
   invisible()
 }
 
@@ -739,7 +728,7 @@ review_md <- function(path, snaps_dir = "inst/review/tests") {
 #' )}
 review_md_dir <- function(md_dir = "inst/review/temp", snaps_dir = "inst/review/tests") {
   md_files <- Sys.glob(file.path(md_dir, "*.md"))
-  
+
   purrr::walk(
     md_files,
     \(x) {
@@ -786,26 +775,26 @@ review_md_dir <- function(md_dir = "inst/review/temp", snaps_dir = "inst/review/
 #' )}
 review_md_diff <- function(snap_dir = "review_md/", snaps_dir = "inst/review/tests") {
   rlang::check_installed(c("shiny", "diffviewer"), "to use review_md_diff()")
-  
+
   changed <- testthat:::snapshot_meta(snap_dir, snaps_dir)
   if (nrow(changed) == 0) {
     rlang::inform("No snapshots to update")
     return(invisible())
   }
-  
+
   name <- changed$name
   old_path <- changed$cur
   new_path <- changed$new
-  
+
   stopifnot(
     length(name) == length(old_path),
     length(old_path) == length(new_path)
   )
-  
+
   n <- length(name)
   case_index <- stats::setNames(seq_along(name), name)
   handled <- rep(FALSE, n)
-  
+
   ui <- shiny::fluidPage(
     style = "margin: 0.5em",
     shiny::fluidRow(
@@ -834,7 +823,6 @@ review_md_diff <- function(snap_dir = "review_md/", snaps_dir = "inst/review/tes
     output$diff <- diffviewer::visual_diff_render({
       diffviewer::visual_diff(old_path[[i()]], new_path[[i()]])
     })
-    
     # Handle buttons - after clicking update move input$cases to next case,
     # and remove current case (for accept/reject). If no cases left, close app
     shiny::observeEvent(input$reject, {
@@ -856,11 +844,10 @@ review_md_diff <- function(snap_dir = "review_md/", snaps_dir = "inst/review/tes
       shiny::stopApp()
       return()
     })
-    
     update_cases <- function() {
       handled[[i()]] <<- TRUE
       i <- next_case()
-      
+
       shiny::updateSelectInput(
         session,
         "cases",
@@ -874,14 +861,14 @@ review_md_diff <- function(snap_dir = "review_md/", snaps_dir = "inst/review/tes
         shiny::stopApp()
         return()
       }
-      
+
       # Find next case;
       remaining <- case_index[!handled]
       next_cases <- which(remaining > i())
       if (length(next_cases) == 0) remaining[[1]] else remaining[[next_cases[[1]]]]
     }
   }
-  
+
   rlang::inform(c(
     "Starting Shiny app for snapshot review",
     i = "Use Ctrl + C to quit"
@@ -890,7 +877,7 @@ review_md_diff <- function(snap_dir = "review_md/", snaps_dir = "inst/review/tes
     shiny::shinyApp(ui, server),
     quiet = TRUE
   )
-  
+
   invisible()
 }
 
@@ -920,6 +907,6 @@ update_md <- function(md_tmp_dir = "inst/review/temp",
                       md_dir = "inst/app/www/assets/markdown") {
   md_files <- Sys.glob(file.path(md_tmp_dir, "*.md"))
   file.rename(md_files, file.path(md_dir, basename(md_files)))
-  
+
   invisible()
 }

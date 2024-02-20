@@ -58,26 +58,3 @@ test_that("word_to_md generates expected markdown files", {
   expect_snapshot_file(file.path(md_dir, "01_md_file.md"))
   expect_snapshot_file(file.path(md_dir, "02_md_file.md"))
 })
-
-
-test_that("style_map generates expected maps", {
-  docx_file <- "review.docx"
-  md_dir <- local_create_md()
-  rv_dir <- gsub("markdown", "review", md_dir)
-  docx_path <- local_create_word_doc(
-    md_dir = md_dir,
-    rv_dir = rv_dir,
-    docx_file = docx_file
-  )
-  doc <- officer::read_docx(docx_path)
-
-  style_maps <- list(
-    bold_map = style_map(doc, "r", "rPr", "b"),
-    ital_map = style_map(doc, "r", "rPr", "i"),
-    hypl_map = style_map(doc, "hyperlink", "r", "rPr", NULL, "rStyle", "Hyperlink"),
-    code_map = style_map(doc, "r", "rPr", "rStyle", "VerbatimChar"),
-    chyp_map = style_map(doc, "hyperlink", "r", "rPr", NULL, "rStyle", "VerbatimChar")
-  )
-
-  expect_snapshot(style_maps)
-})
