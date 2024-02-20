@@ -4,4 +4,4 @@ The NHSBSA uses NHS Agenda for Change (AfC) pay bands. Bands differ based on res
 
 The NHSBSA has eight directorates, ranging in headcount size. 
 
-The chart shows employee counts and gender percentages for each pay band and directorate. They also compare this year to the previous five years. All directorates except 'Digital, Data & Technology' have a greater percentage of women than men.
+The chart shows employee counts and gender percentages for each pay band and directorate. They also compare this year to the previous five years. All directorates but one have a greater percentage of women than men.

@@ -26,3 +26,4 @@ review/tests/_snaps/*
 # Any docx files
 *.[dD][oO][cC][xX]
 *.tmp
+inst/doc
