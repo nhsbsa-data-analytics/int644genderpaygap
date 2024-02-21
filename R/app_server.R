@@ -16,7 +16,8 @@ app_server <- function(input, output, session) {
       "Gender profile" = "headcount",
       "Gender pay gap" = "paygap",
       "Pay quartile" = "quartile",
-      "Action" = "gpg_action"
+      "Action" = "gpg_action",
+      "Summary" = "summary"
     )
 
     if (input$content_main == "Introduction") {
@@ -49,6 +50,13 @@ app_server <- function(input, output, session) {
   })
 
   observeEvent(input$top_action_intro, {
+    # jump to the top of the screen
+    shinyjs::runjs("window.scrollTo(0, 0)")
+
+    updateSelectInput(session, inputId = "content_main", selected = "Introduction")
+  })
+
+  observeEvent(input$top_action_summary, {
     # jump to the top of the screen
     shinyjs::runjs("window.scrollTo(0, 0)")
 

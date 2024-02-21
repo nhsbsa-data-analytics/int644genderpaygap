@@ -33,7 +33,8 @@ app_ui <- function(request) {
                        "Gender profile",
                        "Gender pay gap",
                        "Pay quartile",
-                       "Action"
+                       "Action",
+                       "Summary"
                      ),
                      selected = "Introduction",
                      width = "fit",
@@ -64,7 +65,10 @@ app_ui <- function(request) {
               mod_action_ui("action"),
               accessible_action_link("top_action_intro", "Go to top page"),
               hr(),
-              br()
+              br(),
+              tags$div(id = "summary"),
+              mod_summary_ui("summary"),
+              accessible_action_link("top_action_summary", "Go to top page"),
             )
           )
         )
