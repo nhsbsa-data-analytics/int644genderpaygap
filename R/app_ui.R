@@ -42,6 +42,7 @@ app_ui <- function(request) {
                    )),
             column(
               width = 10,
+              tags$h1("Gender Pay Gap report 2023"),
               tags$div(id = "introduction"),
               mod_introduction_ui("introduction"),
               hr(),

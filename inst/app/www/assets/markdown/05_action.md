@@ -4,7 +4,7 @@
 
 The NHSBSA is committed to addressing our gender pay gap and achieving equal representation between men and women across all pay bands. We are undertaking a wide range of actions, many of which are aimed at increasing the representation of women in senior roles within our organisation. During the last year significant progress has been made in the following areas:
 
--   Embedding our <a href="https://www.nhsbsa.nhs.uk/sites/default/files/2022-07/Diversity%20and%20Inclusion%20Strategy%20%281%29.pdf" target="_blank">**Diversity and Inclusion Strategy 2022-25**</a> which includes key objectives specifically to address the under-representation of women in our leadership community.
+-   Embedding our <a href="https://www.nhsbsa.nhs.uk/our-policies/diversity-and-inclusion" target="_blank">**Diversity and Inclusion Strategy 2022-25**</a> which includes key objectives specifically to address the under-representation of women in our leadership community.
 
 -   We have introduced mandatory gender diverse recruitment panels for all recruitment processes, requiring all shortlisting and interview panels to have a gender balance. This follows a successful pilot where it was demonstrated that diverse recruitment panels reduce recruitment bias towards male applicants. This contributed to improving the proportion of successful female candidates by over 10%.
 
