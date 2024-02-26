@@ -7,7 +7,7 @@
 nhs_footer(
   a11y_statement_url = "#",
   email = "dall@nhsbsa.nhs.uk",
-  github_url = "https://github.com/nhsbsa-data-analytics"
+  github_url = "https://github.com/nhsbsa-data-analytics/int644genderpaygap"
 )
 }
 \arguments{
