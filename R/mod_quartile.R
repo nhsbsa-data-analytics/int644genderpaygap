@@ -12,7 +12,7 @@ mod_quartile_ui <- function(id) {
   tagList(
     includeMarkdown("inst/app/www/assets/markdown/04_quartile.md"),
     nhs_card_tabstop(
-      heading = "Proportion of men and women in each pay quartile",
+      heading = "Proportion of men and women in each pay quartile at NHSBSA",
       nhs_selectInput(
         inputId = ns("period"),
         label = "Snapshot as of",

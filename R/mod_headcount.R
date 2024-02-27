@@ -13,7 +13,7 @@ mod_headcount_ui <- function(id) {
     includeMarkdown("inst/app/www/assets/markdown/02_headcount_1.md"),
     # chart 1: five year headcount trend split by gender
     nhs_card_tabstop(
-      heading = "Gender breakdown of workforce",
+      heading = "Gender breakdown of NHSBSA workforce",
       highcharter::highchartOutput(
         outputId = ns("headcount_all"),
         height = "240px"
@@ -23,7 +23,7 @@ mod_headcount_ui <- function(id) {
     includeMarkdown("inst/app/www/assets/markdown/02_headcount_2.md"),
     # chart 2: headcount split by gender AfC
     nhs_card_tabstop(
-      heading = "Gender by AfC pay bands and directorate",
+      heading = "Gender by AfC pay bands and directorate in NHSBSA",
       nhs_grid_2_col(
         nhs_selectInput(
           inputId = ns("period"),

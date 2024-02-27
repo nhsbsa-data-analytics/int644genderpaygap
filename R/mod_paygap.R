@@ -12,7 +12,7 @@ mod_paygap_ui <- function(id) {
   tagList(
     includeMarkdown("inst/app/www/assets/markdown/03_gender_pay_gap_1.md"),
     nhs_card_tabstop(
-      heading = "Mean and median gender pay gap",
+      heading = "Mean and median NHSBSA gender pay gap",
       nhs_grid_2_col(
         highcharter::highchartOutput(
           outputId = ns("paygap_all_mean"),
@@ -29,7 +29,7 @@ mod_paygap_ui <- function(id) {
     br(),
     includeMarkdown("inst/app/www/assets/markdown/03_gender_pay_gap_2.md"),
     nhs_card_tabstop(
-      heading = "Mean and median gender pay gap by AfC pay bands and directorate",
+      heading = "Mean and median NHSBSA gender pay gap by AfC pay bands and directorate",
       nhs_grid_3_col(
         nhs_selectInput(
           inputId = ns("period"),

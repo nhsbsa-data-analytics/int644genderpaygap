@@ -34,7 +34,7 @@ The NHSBSA is committed to addressing our gender pay gap and achieving equal rep
 
 -   Developing and retaining our people, enhancing potential, and attracting diverse external talent which forms part of our talent management strategy. We are refreshing our appraisal and PDP process with input from our Women’s Colleague Network. Additionally, we are working collaboratively with external organisations and others to offer opportunities to participate in external talent programmes.
 
--   Assessing our menopause support by continuing participating in the 'Menopause Friendly Workplace' accreditation scheme, which will help us identify any further support we need to put in place for colleagues
+-   Assessing our menopause support by continuing participating in the 'Menopause Friendly Workplace' accreditation scheme, which will help us identify any further support we need to put in place for colleagues.
 
 -   Supporting our Women’s Colleague Network, empowering them to work on areas and issues they identify for action. This is done in collaboration with the Colleague Experience and Social Impact Team and other colleague networks, and ensuring their voice is maximised.
 
