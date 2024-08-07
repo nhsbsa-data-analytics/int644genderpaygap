@@ -5,7 +5,8 @@
 \title{nhs_footer}
 \usage{
 nhs_footer(
-  a11y_statement_url = "#",
+  a11y_statement_url =
+    "https://www.nhsbsa.nhs.uk/accessibility-statement-nhsbsa-gender-pay-gap-website",
   email = "dall@nhsbsa.nhs.uk",
   github_url = "https://github.com/nhsbsa-data-analytics/int644genderpaygap"
 )

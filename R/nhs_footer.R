@@ -12,7 +12,7 @@
 #'
 #' @examples
 #' nhs_footer()
-nhs_footer <- function(a11y_statement_url = "#",
+nhs_footer <- function(a11y_statement_url = "https://www.nhsbsa.nhs.uk/accessibility-statement-nhsbsa-gender-pay-gap-website",
                        email = "dall@nhsbsa.nhs.uk",
                        github_url = "https://github.com/nhsbsa-data-analytics/int644genderpaygap") {
   tagList(
@@ -40,7 +40,7 @@ nhs_footer <- function(a11y_statement_url = "#",
               a(
                 class = "nhsuk-footer__list-item-link",
                 style = "text-decoration: underline;",
-                href = paste0("mailto:@", email),
+                href = paste0("mailto:", email),
                 target = "_blank",
                 "Contact us"
               )

@@ -23,47 +23,6 @@ html {
   line-height: 1.2;
 }
 
-/* Scrolly stuff */
-
-
-/* Fix accessibility issue with scrolly contrast (increase gap between sections 
-and prevent them fading in / out) */
-.scrolly-section {
-  margin-bottom: 30vh;
-  opacity: 1;
-  margin-right: 30px;
-}
-
-.scrolly-sections .scrolly-section:last-child {
-    margin-bottom: 20vh;
-}
-
-.scrolly-graph {
-  margin-left: 0px;
-}
-
-/* Tippy stuff */
-
-.tippy {
-  text-decoration: underline;
-}
-
-.tippy-content{
-	background: #f0f4f5 none repeat scroll 0% 0%;
-	text-align: left;
-	font-size: 12pt;
-}
-
-.tippy-tooltip{
-    color: #212b32;
-    background-color: #f0f4f5 !important;
-    border: 1px solid #425563;
-    border-radius: 0;
-}
-
-.tippy-backdrop {
-  background-color: #f0f4f5;
-}
 
 /* Custom classes to help with accessibility */
 
@@ -114,4 +73,23 @@ and prevent them fading in / out) */
 
 .navbar-default .navbar-nav>li>a {
     color: #717465;
+}
+
+/* Accessibility PickerInput contrast issue */
+
+.bootstrap-select .dropdown-toggle .filter-option {
+  opacity: 1 !important; 
+  color: #425563 !important; 
+}
+
+/* Adjusting opacity and color of the dropdown menu */
+.bootstrap-select .dropdown-menu {
+  opacity: 1 !important; 
+  color: #425563 !important; 
+}
+
+/* Override opacity for the specific select element */
+#content_main {
+  opacity: 1 !important;
+  color: #425563 !important;
 }
