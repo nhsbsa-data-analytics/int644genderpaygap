@@ -34,7 +34,7 @@ process_file <- function(filepath) {
     list(
       staff = read.csv(filepath, header = TRUE) |>
         janitor::clean_names() |>
-        filter(primary == "Y") |> #required, few employee with two entry, keep primary
+        filter(primary == "Y") |> #required, few employee with two entry, keep primary only
         select(
           employee_number,
           org_l3,
@@ -93,6 +93,7 @@ gpg_class <- gpg_data(afc_staff)
 usethis::use_data(gpg_class, overwrite = TRUE)
 
 # delete all the files in data_temp as they only stay in azure storage
+# NOTE 2024/10/08: We cannot delete Azure storage, therfore, keep original in GPG folder. 
 
 # Specify the folder path
 folder_path <- "./data_temp"

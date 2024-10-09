@@ -1,0 +1,19 @@
+Extract files from ESR BI reporting tool:
+
+Open ESR Business Intelligent Reporting 
+Catalog - select NHS Staff List in MY FOLDER area
+
+Open NHS Staff List and change criteria for the latest reporting year (i.e. 31/03/2024).
+
+
+ESR BI Report parameters
+
+Snapshot Date – End of previous financial year (Prompt will default to this date for each year)
+Gender – Select Male and Female
+Payroll – 914 Monthly BSA (Eliminates Hosted staff not required for report)
+Employee Person Type – Employee
+
+All other parameters can be left as is.
+
+
+Sometimes, new pay_scale appears and it makes afc_band NA. in that case, you will need to update directorate_lookup.csv file or afc_band_lookup.csv file.
