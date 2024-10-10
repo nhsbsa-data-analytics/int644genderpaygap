@@ -93,7 +93,7 @@ gpg_class <- gpg_data(afc_staff)
 usethis::use_data(gpg_class, overwrite = TRUE)
 
 # delete all the files in data_temp as they only stay in azure storage
-# NOTE 2024/10/08: We cannot delete Azure storage, therfore, keep original in GPG folder. 
+# NOTE 2024/10/08: We cannot delete Azure storage, therefore, keep original in GPG folder.
 
 # Specify the folder path
 folder_path <- "./data_temp"
