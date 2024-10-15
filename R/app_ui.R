@@ -7,15 +7,21 @@
 app_ui <- function(request) {
   tagList(
     shinyjs::useShinyjs(),
-    # Leave this function for adding external resources
+    # JavaScript to remove the title attribute and add an aria-label
+    tags$script(HTML(
+      "setTimeout(function() {
+          // Remove title and add aria-label to the pickerInput button
+          $('button[data-id=\"content_main\"]').removeAttr('title').attr('aria-label', 'Select content section for the report');
+        }, 500); // Delay to ensure the button is rendered"
+    )),
     golem_add_external_resources(),
     tagList(
       tags$html(lang = "en"),
       bootstrapLib(),
-      a(id = "skiplink", "Skip to Main Content", href = "#maincontent"),
+      a(id = "skiplink", "Skip to Main Content", href = "#maincontent", class = "sr-only"),
       nhs_header(),
       br(),
-      div(id = "maincontent"),
+      div(id = "maincontent", tabindex = "-1"),
       div(
         class = "nhsuk-width-container",
         div(
@@ -24,25 +30,26 @@ app_ui <- function(request) {
           fluidRow(
             id = "mainTabs",
             column(
-                   width = 2,
-                   shinyWidgets::pickerInput(
-                     inputId = "content_main",
-                     label = "Content:",
-                     choices = c(
-                       "Introduction",
-                       "Gender profile",
-                       "Gender pay gap",
-                       "Pay quartile",
-                       "Action",
-                       "Summary"
-                     ),
-                     selected = "Introduction",
-                     width = "fit",
-                     inline = TRUE
-                   )),
+              width = 2,
+              shinyWidgets::pickerInput(
+                inputId = "content_main",
+                label = "Content:",
+                choices = c(
+                  "Introduction",
+                  "Gender profile",
+                  "Gender pay gap",
+                  "Pay quartile",
+                  "Action",
+                  "Summary"
+                ),
+                selected = "Introduction",
+                width = "fit",
+                inline = TRUE
+              )
+            ),
             column(
               width = 10,
-              tags$h1("Gender Pay Gap report 2023"),
+              tags$h1("Gender Pay Gap report 2024"),
               tags$div(id = "introduction"),
               mod_introduction_ui("introduction"),
               hr(),
