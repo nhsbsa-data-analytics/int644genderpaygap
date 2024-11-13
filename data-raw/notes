@@ -17,3 +17,11 @@ All other parameters can be left as is.
 
 
 Sometimes, new pay_scale appears and it makes afc_band NA. in that case, you will need to update directorate_lookup.csv file or afc_band_lookup.csv file.
+
+2024/11/01
+Matt Pantton provided directorate lookup (not sure this is useful as it looks like manual changes applied to this from ESR extract)
+
+using directorate_lookup & Matt's headcount file, add if new L5 is added and also split operations to two groups
+
+Keep original file in GPG folder
+

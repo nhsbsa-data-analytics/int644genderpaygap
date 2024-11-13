@@ -83,19 +83,19 @@ gpg_trend <- function(x,
           itemMarginTop = 5,
           y = 0
         ) |>
-        highcharter::hc_credits(enabled = TRUE) |>
-        highcharter::hc_exporting(
-          enabled = TRUE,
-          filename = export_filename,
-          buttons = list(
-            contextButton = list(
-              text = "Export chart",
-              menuItems = list("downloadPNG",
-                               "downloadJPEG",
-                               "label")
-            )
-          )
-        )
+        highcharter::hc_credits(enabled = TRUE) #|>
+        # highcharter::hc_exporting(
+        #   enabled = TRUE,
+        #   filename = export_filename,
+        #   buttons = list(
+        #     contextButton = list(
+        #       text = "Export chart",
+        #       menuItems = list("downloadPNG",
+        #                        "downloadJPEG",
+        #                        "label")
+        #     )
+        #   )
+        # )
 
       return(plt)
     },
@@ -203,19 +203,19 @@ gpg_pyramid <- function(x, xvar, yvar, yaxis_title, export_filename) {
             )
           )
         ) |>
-        highcharter::hc_credits(enabled = TRUE) |>
-        highcharter::hc_exporting(
-          enabled = TRUE,
-          filename = export_filename,
-          buttons = list(
-            contextButton = list(
-              text = "Export chart",
-              menuItems = list("downloadPNG",
-                               "downloadJPEG",
-                               "label")
-            )
-          )
-        )
+        highcharter::hc_credits(enabled = TRUE) #|>
+        # highcharter::hc_exporting(
+        #   enabled = TRUE,
+        #   filename = export_filename,
+        #   buttons = list(
+        #     contextButton = list(
+        #       text = "Export chart",
+        #       menuItems = list("downloadPNG",
+        #                        "downloadJPEG",
+        #                        "label")
+        #     )
+        #   )
+        # )
 
 
       return(plt)
@@ -310,19 +310,19 @@ gpg_stack <- function(x, xvar, yvar, groupvar, yaxis_title, export_filename) {
             )
           )
         ) |>
-        highcharter::hc_tooltip(enabled = FALSE) |>
-        highcharter::hc_exporting(
-          enabled = TRUE,
-          filename = export_filename,
-          buttons = list(
-            contextButton = list(
-              text = "Export chart",
-              menuItems = list("downloadPNG",
-                               "downloadJPEG",
-                               "label")
-            )
-          )
-        )
+        highcharter::hc_tooltip(enabled = FALSE) # |>
+        # highcharter::hc_exporting(
+        #   enabled = TRUE,
+        #   filename = export_filename,
+        #   buttons = list(
+        #     contextButton = list(
+        #       text = "Export chart",
+        #       menuItems = list("downloadPNG",
+        #                        "downloadJPEG",
+        #                        "label")
+        #     )
+        #   )
+        # )
 
       return(plt)
     },
@@ -408,19 +408,19 @@ gpg_bar <- function(x, xvar, yvar, yaxis_title, export_filename) {
           \u25CF</span> {series.name}: <b>{point.y} %</b><br/>',
           footerFormat = ""
         ) |>
-        highcharter::hc_credits(enabled = TRUE) |>
-        highcharter::hc_exporting(
-          enabled = TRUE,
-          filename = export_filename,
-          buttons = list(
-            contextButton = list(
-              text = "Export chart",
-              menuItems = list("downloadPNG",
-                               "downloadJPEG",
-                               "label")
-            )
-          )
-        )
+        highcharter::hc_credits(enabled = TRUE) #|>
+        # highcharter::hc_exporting(
+        #   enabled = TRUE,
+        #   filename = export_filename,
+        #   buttons = list(
+        #     contextButton = list(
+        #       text = "Export chart",
+        #       menuItems = list("downloadPNG",
+        #                        "downloadJPEG",
+        #                        "label")
+        #     )
+        #   )
+        # )
 
       return(plt)
     },
@@ -491,19 +491,19 @@ gpg_column <- function(x, xvar = "period", yvar, yaxis_title, export_filename) {
           pointPadding = 0.1,
           groupPadding = 0
         ) |>
-        highcharter::hc_credits(enabled = TRUE) |>
-        highcharter::hc_exporting(
-          enabled = TRUE,
-          filename = export_filename,
-          buttons = list(
-            contextButton = list(
-              text = "Export chart",
-              menuItems = list("downloadPNG",
-                               "downloadJPEG",
-                               "label")
-            )
-          )
-        )
+        highcharter::hc_credits(enabled = TRUE) # |>
+        # highcharter::hc_exporting(
+        #   enabled = TRUE,
+        #   filename = export_filename,
+        #   buttons = list(
+        #     contextButton = list(
+        #       text = "Export chart",
+        #       menuItems = list("downloadPNG",
+        #                        "downloadJPEG",
+        #                        "label")
+        #     )
+        #   )
+        # )
 
       return(plt)
     },
@@ -580,19 +580,19 @@ gpg_dumbbell <- function(x, low, high, xaxis_category, yaxis_title,
         highcharter::hc_scrollbar(enabled = FALSE) |>
         highcharter::hc_legend(enabled = FALSE) |>
         nhsbsaR::theme_nhsbsa_highchart() |>
-        highcharter::hc_credits(enabled = TRUE) |>
-        highcharter::hc_exporting(
-          enabled = TRUE,
-          filename = export_filename,
-          buttons = list(
-            contextButton = list(
-              text = "Export chart",
-              menuItems = list("downloadPNG",
-                               "downloadJPEG",
-                               "label")
-            )
-          )
-        )
+        highcharter::hc_credits(enabled = TRUE) # |>
+        # highcharter::hc_exporting(
+        #   enabled = TRUE,
+        #   filename = export_filename,
+        #   buttons = list(
+        #     contextButton = list(
+        #       text = "Export chart",
+        #       menuItems = list("downloadPNG",
+        #                        "downloadJPEG",
+        #                        "label")
+        #     )
+        #   )
+        # )
 
       return(plt)
     },

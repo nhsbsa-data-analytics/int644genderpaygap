@@ -19,6 +19,7 @@ rsconnect
 *.[rR][dD][aA]?
 data/*
 data_temp/*
+rda_archive/*
 /doc/
 /Meta/
 inst/review/*

@@ -18,7 +18,7 @@ app_ui <- function(request) {
     tagList(
       tags$html(lang = "en"),
       bootstrapLib(),
-      a(id = "skiplink", "Skip to Main Content", href = "#maincontent", class = "sr-only"),
+      a(id = "skiplink", "Skip to Main Content", href = "#maincontent"),
       nhs_header(),
       br(),
       div(id = "maincontent", tabindex = "-1"),
