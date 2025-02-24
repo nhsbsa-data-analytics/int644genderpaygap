@@ -1,5 +1,6 @@
 ### Mean and median gender pay gap by AfC band and directorate
 
-The chart illustrates the gender pay gap across various AfC bands. It shows that in Bands 2 to 4, the pay gap is small. In Bands 5 and 8D, women’s earnings are higher than those of men. Band 9, however, presents an 9.8% pay gap favouring men. This is likely to be due to the length of service and very low numbers within that band.
+The chart illustrates the gender pay gap across various AfC bands and directorates, with an option to view either mean or median hourly pay. In bands 2 to 4, the pay gap is negligible regardless of the metric. Band 9 presents a notable pay gap favouring men, with a mean gap of 10% and a larger median gap of 13%. However, as this band contains a very small headcount of colleagues, findings should be interpreted with caution.
 
-In non-AfC pay bands, women represent 57% of the workforce. Yet, they are more commonly found in roles associated with lower pay when grouped by hourly earnings. In contrast, roles such as NHS Executive and Senior Manager positions are more frequently held by men. This pattern is a factor in the gender pay gap within non-AfC pay band. However, compared to March 2023, there has been a 0.6% reduction in the mean pay gap and a 4.2% reduction in the median pay gap, reflecting progress toward narrowing the disparity. We have a number of programmes aimed at women's development including leadership development. These have contributed to an increase representation of women at more senior roles.
+In non-AfC pay bands, women represent 57% of the workforce. Yet, they are more commonly found in roles associated with lower pay when grouped by hourly earnings.
+

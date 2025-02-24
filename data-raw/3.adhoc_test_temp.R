@@ -1,4 +1,4 @@
-# Addhoc analysis 
+# Adhoc analysis
 
 # Load necessary libraries
 library(ggplot2)
@@ -18,7 +18,7 @@ process_file <- function(filepath) {
   fy_matches <- regmatches(filepath, regexec(fy_pattern, filepath))[[1]]
   # Snapshot as of
   reporting_year <- paste0("31 March 20", fy_matches[3])
-  
+
   # Create three data frames and add the financial year (reporting period)
   if (stringr::str_detect(filepath, "\\.xlsx$")) {
     list(
@@ -57,11 +57,11 @@ afc <- map(dfs, "afc") |>
 
 ############## GPG mean gap analysis
 
-male_2023 <- afc |> filter(period == '31 March 2023', gender == 'Male') |> pull(hourly_rate)
-female_2023 <- afc |> filter(period == '31 March 2023', gender == 'Female') |> pull(hourly_rate)
+male_2023 <- afc |> filter(period == "31 March 2023", gender == "Male") |> pull(hourly_rate)
+female_2023 <- afc |> filter(period == "31 March 2023", gender == "Female") |> pull(hourly_rate)
 
-male_2024 <- afc |> filter(period == '31 March 2024', gender == 'Male')|> pull(hourly_rate)
-female_2024 <- afc |> filter(period == '31 March 2024', gender == 'Female')|> pull(hourly_rate)
+male_2024 <- afc |> filter(period == "31 March 2024", gender == "Male")|> pull(hourly_rate)
+female_2024 <- afc |> filter(period == "31 March 2024", gender == "Female")|> pull(hourly_rate)
 
 # Function to calculate Mean GPG
 calculate_mean_gpg <- function(male_mean, female_mean) {
@@ -96,14 +96,14 @@ p_value <- mean(abs(perm_diffs) >= abs(observed_diff))
 cat("Observed Mean GPG Change (%):", observed_diff, "\n")
 cat("Permutation Test p-value for Mean GPG:", p_value, "\n") # 0.6817
 
-### Result: The change in mean GPG is not statistically significant, meaning the observed shift is negligible and consistent with random variability.
+### Result: The change in mean GPG is not statistically significant,
+### meaning the observed shift is negligible and consistent with random variability.
 
-####################### GPG median gap analysis 
+####################### GPG median gap analysis
 
-bootstrap_median_gpg_difference <- function(group1_2023, 
-                                            group2_2023, 
-                                            group1_2024, 
-                                            group2_2024, n = 10000) {
+bootstrap_median_gpg_diff <- function(group1_2023, group2_2023, 
+                                          group1_2024,
+                                          group2_2024, n = 10000) {
   set.seed(42)
   diffs <- replicate(n, {
     male_median_2023 <- median(sample(group1_2023, length(group1_2023), replace = TRUE))
@@ -127,9 +127,6 @@ cat("Median GPG 2023 (%):", median_gpg_2023, "\n")
 cat("Median GPG 2024 (%):", median_gpg_2024, "\n")
 
 # Bootstrap CI for Median GPG difference
-median_gpg_ci <- bootstrap_median_gpg_difference(male_2023, female_2023, male_2024, female_2024)
+median_gpg_ci <- bootstrap_median_gpg_diff(male_2023, female_2023, male_2024, female_2024)
 
 cat("Bootstrap CI for Change in Median GPG (%):", median_gpg_ci, "\n")
-
-
-
