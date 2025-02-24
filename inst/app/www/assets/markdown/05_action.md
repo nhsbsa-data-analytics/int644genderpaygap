@@ -39,3 +39,5 @@ The NHSBSA is committed to addressing our gender pay gap and achieving equal rep
 -   Working on our approach to social mobility, embedding best practice and intersectionality throughout this approach and engaging colleagues within that to empower them and to create change and opportunity.
 
 -   Working together with women’s charities to ensure an open door to opportunities, to share skills and knowledge to enable women in our communities to achieve their aspirations; and to inspire through story telling and sharing of experiences. 
+
+-   Due to the specific way the gender pay gap is calculated, statistically the best way to address our gender pay gap would be to employ more men into the lower graded roles. Whilst this is not an area for direct action, we are working with the Talent Acquisition team to ensure any role advertising is as gender-neutral as possible. 
