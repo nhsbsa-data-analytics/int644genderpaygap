@@ -86,7 +86,7 @@ afc_staff <- afc |>
             by = c("org_l3", "org_l5")) |>
   select(period, gender, headcount, hourly_rate, quartile, afc_band, directorate) |> 
   # Filter to make sure five years show
-  filter(period != "31 March 2019")
+  filter(!period  %in% c("31 March 2019", "31 March 2020"))
 
 # create gpg_class
 gpg_class <- gpg_data(afc_staff)
