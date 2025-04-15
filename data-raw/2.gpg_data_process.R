@@ -75,7 +75,7 @@ afc_staff <- afc |>
   left_join(lookup,
     by = "pay_scale"
   ) |>
-  select(-employee_number) |>
+  # select(-employee_number) |>
   mutate(
     headcount = 1,
     gender = ifelse(gender == "Female", "Women", "Men")
@@ -84,7 +84,9 @@ afc_staff <- afc |>
   # Join directorate lookup
   left_join(lookup_directorate |> distinct(),
             by = c("org_l3", "org_l5")) |>
-  select(period, gender, headcount, hourly_rate, quartile, afc_band, directorate)
+  select(period, gender, headcount, hourly_rate, quartile, afc_band, directorate) |> 
+  # Filter to make sure five years show
+  filter(period != "31 March 2019")
 
 # create gpg_class
 gpg_class <- gpg_data(afc_staff)
@@ -94,21 +96,23 @@ usethis::use_data(gpg_class, overwrite = TRUE)
 
 # delete all the files in data_temp as they only stay in azure storage
 # NOTE 2024/10/08: We cannot delete Azure storage, therefore, keep original in GPG folder.
+# NOTE 2025/04/15: Three new directorate added two DDAT (914 BSA DDaT Data Services L5, 914 BSA DDaT & Data Management L5)
+# 914 BSA P&CS Environment and Sustainability L5
 
 # Specify the folder path
-folder_path <- "./data_temp"
-
-# List all files in the directory
-files_to_delete <- list.files(path = folder_path, full.names = TRUE)
-
-# Remove all files
-result <- file.remove(files_to_delete)
-
-# Check if all files were deleted successfully
-if (all(result)) {
-  cat("All files deleted successfully.\n")
-} else {
-  cat("Some files could not be deleted.\n")
-}
+# folder_path <- "./data_temp"
+# 
+# # List all files in the directory
+# files_to_delete <- list.files(path = folder_path, full.names = TRUE)
+# 
+# # Remove all files
+# result <- file.remove(files_to_delete)
+# 
+# # Check if all files were deleted successfully
+# if (all(result)) {
+#   cat("All files deleted successfully.\n")
+# } else {
+#   cat("Some files could not be deleted.\n")
+# }
 
 rm(dfs, afc, staff)
