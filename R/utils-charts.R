@@ -478,7 +478,8 @@ gpg_dumbbell <- function(x, low, high, xaxis_category, yaxis_title,
     expr = {
       data <- x
       category_text <- data[[xaxis_category]]
-      yaxis_max_value <- ifelse(xaxis_category == "afc_band", 60, 90)
+      # yaxis_max_value <- ifelse(xaxis_category == "afc_band", 70, 90)
+      yaxis_max_value <- 70
       plt <- highcharter::highchart() |>
         highcharter::hc_add_series(
           data = data,
@@ -531,3 +532,4 @@ gpg_dumbbell <- function(x, low, high, xaxis_category, yaxis_title,
     finally = {}
   )
 }
+
