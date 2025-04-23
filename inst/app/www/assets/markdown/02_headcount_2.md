@@ -4,6 +4,6 @@ The NHSBSA uses NHS Agenda for Change (AfC) pay bands. Bands differ based on res
 
 The NHSBSA has nine directorates, ranging in headcount size. Operations is now reported through separate directorates, Citizens Services and NHS Workforce Services. Previously these directorates were combined. For information based on the previous directorate reporting approach, please refer to the earlier <a href="https://nhsbsadata.shinyapps.io/NHSBSA-gender-pay-gap-report-2022-23/" target="_blank">NHSBSA Gender Pay Gap Report 2023.</a>
 
-The chart shows colleague counts and gender percentages for each pay band and directorate. It also shows breakdown for the previous five years. The majority of our workforce are concentrated in the lower pay bands, with 70% of colleagues being in pay bands 2-5. 
+The chart shows colleague counts and gender percentages for each pay band and directorate. It also shows breakdown for the previous four years. The majority of our workforce are concentrated in the lower pay bands, with 70% of colleagues being in pay bands 2-5. 
 
-Filtering by directorate shows that eight of the nine directorates have a greater percentage of women overall than men in March 2024. The exception is Digital, Data and Technology, as in previous years.
+Filtering by directorate shows that eight of the nine directorates have a greater percentage of women overall than men in March 2025. The exception is Digital, Data and Technology, as in previous years.
