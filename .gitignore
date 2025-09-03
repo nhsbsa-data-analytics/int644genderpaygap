@@ -28,3 +28,4 @@ inst/review/*
 *.[dD][oO][cC][xX]
 *.tmp
 inst/doc
+.Rproj

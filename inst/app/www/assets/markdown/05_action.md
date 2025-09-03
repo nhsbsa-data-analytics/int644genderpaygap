@@ -2,42 +2,49 @@
 
 ### Addressing the gender pay gap
 
-The NHSBSA is committed to addressing our gender pay gap and achieving equal representation between men and women across all pay bands. We are undertaking a wide range of actions, many of which are aimed at increasing the representation of women in senior roles within our organisation. During the last year significant progress has been made in the following areas:
+The NHSBSA remains committed to addressing our gender pay gap, ensuring we are representative of the communities in which we live, work and serve, across all pay bands. We continue to undertake a wide range of initiatives, with a strong focus on increasing the presence of women in senior roles within our organisation.
 
--   Continuing our work to achieve the aims of our  <a href="https://www.nhsbsa.nhs.uk/sites/default/files/2022-07/Diversity%20and%20Inclusion%20Strategy%20%281%29.pdf" target="_blank">**Diversity and Inclusion Strategy 2022-25 (PDF format)**</a> which includes key objectives specifically to address the under-representation of women in our leadership community.
+During the last year significant progress has been made in the following areas: 
 
--   Mandatory gender diverse recruitment processes for all recruitment processes have continued and this approach is now embedded across our organisation. This requires all shortlisting and interview panels to have a gender balance.  There has been a continued increase in the application, shortlisting and appointment percentages again this year for women applicants a trend we have seen since the introduction of this measure.
+#### Strategic Initiatives
 
--   Our third cohort of bespoke Reciprocal Mentoring for Inclusion Programme launched this year. The programme has ringfenced seats for women to focus on sharing their experiences. The learning coming from this programme has led to other work such as the pre employment programme which was piloted with the Newcastle Womens Swahili group, raising aspirations, knowledge and skill and moving the women within this group closer to meaningful employment. The programme continues to increase cultural intelligence and has a significant impact on the partners.
+-   Advancing the <a href="https://www.nhsbsa.nhs.uk/sites/default/files/2022-07/Diversity%20and%20Inclusion%20Strategy%20%281%29.pdf" target="_blank">**Diversity and Inclusion Strategy 2022-25 (PDF format)**</a>, which included targeted objectives to address under-representation of women in leadership.
 
--   Our Women’s Colleague Network has been key to the wider engagement of our colleagues in our inclusion agenda. The network provides peer support, networking and development opportunities, and  is a space for the members to share their experiences to help shape the work of the organisation. Over the last year, the network has celebrated International Women's Day, hosting a panel discussion with colleagues sharing their personal and professional journeys, which was inspiring and empowering. They have provided insight and input to policy creation and have reviewed their development needs, leading to a series of development sessions for the network members.  We have also facilitated attendance at the Health and Care Women Leaders conference for a number of network members. The network have supported charities Smart Works and Womens Aid, through fundraising, donations and skills sharing over the last year. All of the great work undertaken in that space helps to break down barriers and increase knowledge and awareness which ultimately influences organisational change.
+-   Embedding mandatory gender-diverse recruitment processes, ensuring all shortlisting and interview panels maintain a gender balance. 
 
--   A series of workshops aimed at women in the workplace has provided invaluable development, covering topics requested by network members, such as working with your inner critic, procrastination, having challenging conversations and how to be successful through application and interview skills. This has been a mix of internally and externally delivered workshops and has been very successful.
-
--   We have continued to deliver menopause support for colleagues and are accredited  as a ‘Menopause Friendly Workplace’. We have both female and male ‘Menopause Champions’  providing support to colleagues across the organisation and work with all of our colleague networks and the wider organisation to raise awareness amongst colleagues and managers.  
-
--   Work on socio-economic inclusion is underway. We have collected workforce data on socio-economic background, and we are analysing that information currently to understand the intersectional aspects of this including where gender and various socio-economic background intersect. This will help us to identify any barriers and issues that are faced by this group.
-
--   We have maintained both our enei Gold Standard Employer TIDE  accreditation and our Carer Confident accreditation with Employers for Carers. These accreditations provide an opportunity for us to benchmark our work against best practice and create action plans to continuously evolve and improve our work. 
+-   Launching the third cohort of the Reciprocal Mentoring for Inclusion Programme, with dedicated seats for women to share experiences and drive improved knowledge and awareness, influencing organisational culture. 
 
 
+#### Engagement and Development
 
-### Going forwards we will continue to build on this progress by focusing on:
+-   Empowering the Women’s Colleague Network to provide input on organisation policy, process and programmes of work; to offer peer support, opportunities to access development, networking and skills building.
 
--   Continued engagement in our in-house Reciprocal Mentoring for Inclusion Programme with ringfenced partnerships for women.
+-   Celebrating International Women’s Day with inspiring fireside discussions and continuing to support charities such as Smart Works and Bloody Good Period.  
 
--   Maximising development opportunities for colleagues, including utilising our volunteering offer to encourage skills sharing and personal development. We will continue to support Womens Network members to attend external events such as the Health and Care Womens Network Leadership conference, and other events.
+-   A series of development sessions hosted by “Quiet the Hive” were delivered to our women’s network, topics like overcoming our inner critic, managing procrastination, and mastering interview skills were the focus of this series.
 
--   We will review our accreditations to ensure they continue to meet the needs of our organisation and our colleagues, taking an intersectional approach, seeing colleagues as individuals and embedding this into our approach.
+-   Attendance at the Health and Care Women Leaders conference was funded once again for network members to have the opportunity to attend, network and share learnings.
 
--   Continuing to empower our Women’s Colleague Network, supporting their voice to be heard and amplified. We will work closely with the members on a development programme specifically for women taking account of their needs and objectives to ensure it is fit for purpose. .
+#### Accreditations and Benchmarking 
 
--   Ongoing review of our HR policies to ensure they are as accessible, inclusive, and engaging as possible. Signposting to supporting guidance for colleagues and managers experiencing challenges related to health conditions, caring responsibilities and parenting and increasing awareness of workplace support through programmes of work such as managers induction, managers essentials and cultural competency training.
+-   We have maintained our enei Gold Standard Employer TIDE award, Disability Confident Leader status and Carer Confident accreditations to benchmark and evolve our practices. 
 
--   Revalidating our Carer Confident accreditation and  updating our approach to colleagues who are carers to ensure they are supported and can work flexibly in their roles within our organisation. We are maintaining our Employers for Carers accreditation ensuring we embrace best practice in this area.
+-   We’ve also maintained accreditation as a ‘Menopause Friendly Workplace’ with both male and female champions supporting colleagues. 
 
--   Working on our approach to social mobility, embedding best practice and intersectionality throughout this approach and engaging colleagues within that to empower them and to create change and opportunity.
+### Our Future Focus
 
--   Working together with women’s charities to ensure an open door to opportunities, to share skills and knowledge to enable women in our communities to achieve their aspirations; and to inspire through story telling and sharing of experiences. 
+-   This year, we will launch our refreshed Diversity, Inclusion and Social Mobility Strategy, outlining our key objectives for the next 4 years, with a focus on women’s inclusion, in particular development, progression and leadership.
 
--   Due to the specific way the gender pay gap is calculated, statistically the best way to address our gender pay gap would be to employ more men into the lower graded roles. Whilst this is not an area for direct action, we are working with the Talent Acquisition team to ensure any role advertising is as gender-neutral as possible. 
+-   We will continue engagement in the Reciprocal Mentoring for Inclusion Programme with dedicated partnerships for women. 
+
+-   We will maximise development opportunities with a clear development offer for women, addressing their needs and supporting career progression aspirations and using volunteering and external events as a tool to support this. 
+
+-   We will continue to empower the Women’s Colleague Network through a supportive, collaborative approach, enabling a space to bring women’s voices, experiences, feedback and input to the organisation’s work and colleague experience.
+
+-   Continue to embed Inclusion Impact Analysis work into our people policies to ensure they are inclusive, accessible and reflect best practice relating to health, parenting, and caring responsibilities. 
+
+-   Revalidation of both Disability Confident and Carer Confident accreditation; ensuring best practice is embedded into our people focused, intersectional approaches, enhancing support for colleagues with disabilities or health conditions, who are neurodivergent and who have caring duties. 
+
+-   Advancing our social mobility initiatives with an intersectional lens, focusing on engagement and empowerment to build a strong base. 
+
+-   Collaboration with women’s charities to share skills, inspire communities, and create opportunities, seeking to create positive social impact through this work.

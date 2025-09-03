@@ -93,6 +93,7 @@ gpg_class <- gpg_data(afc_staff)
 
 # Keep three main data frame and it will be used to create S3 class
 usethis::use_data(gpg_class, overwrite = TRUE)
+usethis::use_data(afc_staff, overwrite = TRUE)
 
 # delete all the files in data_temp as they only stay in azure storage
 # NOTE 2024/10/08: We cannot delete Azure storage, therefore, keep original in GPG folder.
